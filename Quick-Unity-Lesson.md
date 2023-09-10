@@ -26,8 +26,8 @@ Manual incase you wanna learn specifics: [LINK](https://docs.unity3d.com/Manual/
 
 - One class per '*.cs' file. Please.
 
-- Naming convention: camelCase for variables, CamelCaps for functions.
-    - No Hungarian Notation, like for example `m_XXXXXX`
+- Naming convention: camelCase for private variables, CamelCaps for functions, classes, and public variables.
+    - No prefixes on private variable names, like for example, `m_XXXXXX`
 
 - Public variables can be edited in the Inspector, while Private variables are hidden.
     - Unhide Private variables by starting the declaration with `[SerializeField]`
