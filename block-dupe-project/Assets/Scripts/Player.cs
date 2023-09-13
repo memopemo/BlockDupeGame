@@ -21,11 +21,11 @@ public class Player : MonoBehaviour
         // Vertical Movement
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            rigidBody.AddForce(Vector2.up * jumpHeight * 18.5f, ForceMode2D.Impulse);
+            rigidBody.AddForce(Vector2.up * jumpHeight * 20f, ForceMode2D.Impulse);
         }
         if(Input.GetKeyUp(KeyCode.Space) && rigidBody.velocity.y > 0)
         {
-            rigidBody.AddForce(Vector2.down * jumpHeight * 18.5f / 4, ForceMode2D.Impulse);
+            rigidBody.AddForce(Vector2.down * jumpHeight * 20f/ 9, ForceMode2D.Impulse);
         }
     }
 
