@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: DuckWalk
   m_EditorClassIdentifier: 
   StateName: 
-  AnimationFrames: []
-  Looping: 0
+  AnimationFrames:
+  - SpriteShown: {fileID: -873501039, guid: 8a9a80047443704468538252b34c4daa, type: 3}
+    HoldForTicks: 4
+  - SpriteShown: {fileID: -1633980601, guid: 8a9a80047443704468538252b34c4daa, type: 3}
+    HoldForTicks: 4
+  Looping: 1
   LoopStart: 0
-  LoopEnd: 0
+  LoopEnd: 1

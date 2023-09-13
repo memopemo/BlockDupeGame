@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: LandHard
   m_EditorClassIdentifier: 
   StateName: 
-  AnimationFrames: []
+  AnimationFrames:
+  - SpriteShown: {fileID: 2033187143, guid: 8a9a80047443704468538252b34c4daa, type: 3}
+    HoldForTicks: 3
+  - SpriteShown: {fileID: 1459037932, guid: 8a9a80047443704468538252b34c4daa, type: 3}
+    HoldForTicks: 3
   Looping: 0
   LoopStart: 0
   LoopEnd: 0
