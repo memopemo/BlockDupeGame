@@ -8,7 +8,7 @@ namespace Animator2D
     public class Animator2D : MonoBehaviour
     {
         public AnimationData[] animations;
-        [SerializeField] private int currentAnimation;
+        public int currentAnimation;
         private int currentFrameTick;
         private int currentAnimationFrame;
         public void Start()
@@ -53,6 +53,24 @@ namespace Animator2D
             GetComponent<SpriteRenderer>().sprite = animations[currentAnimation].AnimationFrames[currentAnimationFrame].SpriteShown;
         }
 
+        public void SetAnimation(int animationIndex, int frame = 0)
+        {
+            if(animationIndex == currentAnimation) return;
+            if(animations.GetUpperBound(0) < animationIndex)
+            {
+                Debug.LogWarning("i: "+ animationIndex + " is not in range of animations: " + animations.GetUpperBound(0));
+                return;
+            }
+            if(animations[animationIndex].AnimationFrames.Count < frame)
+            {
+                Debug.LogWarning("frame count: "+ animationIndex + " is not in range of frames: " + animations[animationIndex].AnimationFrames.Count);
+                return;
+            }
+
+            currentAnimation = animationIndex;
+            currentAnimationFrame = frame;
+            currentFrameTick = 0;
+        }
     }
 
     [System.Serializable]

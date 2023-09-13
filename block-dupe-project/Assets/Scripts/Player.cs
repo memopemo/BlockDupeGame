@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Animator2D;
 
 public class Player : MonoBehaviour
 {
     Rigidbody2D rigidBody;
+    enum AnimationNames {Idle, Run, Jump, Fall, Duck};
+    
     [SerializeField] int jumpHeight;
     [SerializeField] int runSpeed;
-
     [SerializeField] int maxSpeed;
     bool direction;
+    Animator2D.Animator2D animator2D;
     
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        animator2D = GetComponent<Animator2D.Animator2D>();
     }
     void Update(){
         // Vertical Movement
@@ -23,9 +27,19 @@ public class Player : MonoBehaviour
         {
             rigidBody.AddForce(Vector2.up * jumpHeight * 20f, ForceMode2D.Impulse);
         }
-        if(Input.GetKeyUp(KeyCode.Space) && rigidBody.velocity.y > 0)
+        if(Input.GetKeyUp(KeyCode.Space) && rigidBody.velocity.y > 3)
         {
             rigidBody.AddForce(Vector2.down * jumpHeight * 20f/ 9, ForceMode2D.Impulse);
+        }
+
+        //Animation, (Yes, I should probably make a state machine)
+        if(Input.GetAxisRaw("Horizontal") != 0)
+        {
+            animator2D.SetAnimation((int)AnimationNames.Run);
+        }
+        else
+        {
+            animator2D.SetAnimation((int)AnimationNames.Idle);
         }
     }
 

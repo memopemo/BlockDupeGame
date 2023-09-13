@@ -6,9 +6,11 @@ public class CameraFocus : MonoBehaviour
 {
     [SerializeField] BoxCollider2D bounds;
     [SerializeField] Transform target;
+    [SerializeField] Vector2 offset;
     [SerializeField] bool isSideScroller;
     [SerializeField] bool isVerticalScroller;
     [SerializeField] float distance;
+    
     [SerializeField] bool hasParralax;
     [SerializeField] float followSpeed;
     const float ORTHO_CAMERA_DISTANCE = 10;
@@ -28,7 +30,7 @@ public class CameraFocus : MonoBehaviour
 
         _camera.orthographicSize = Mathf.Lerp(_camera.orthographicSize, distance, Time.deltaTime * followSpeed);
 
-        transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime * followSpeed);
+        transform.position = Vector3.Lerp(transform.position, target.position+(Vector3)offset, Time.deltaTime * followSpeed);
 
         transform.position = new Vector3(isVerticalScroller ? 0 : transform.position.x, isSideScroller ? 0 : transform.position.y, hasParralax ? distance * -1.75f : -ORTHO_CAMERA_DISTANCE);
 
