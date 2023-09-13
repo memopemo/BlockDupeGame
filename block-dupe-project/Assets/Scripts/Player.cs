@@ -7,7 +7,29 @@ using Animator2D;
 public class Player : MonoBehaviour
 {
     Rigidbody2D rigidBody;
-    enum AnimationNames {Idle, Run, Jump, Fall, Duck};
+    public static class State {
+        public const byte Idle = 0, Run = 1, Skid = 2, 
+        Jump = 3, Fall = 4, Land = 5, 
+        Duck=6, DuckIdle=7,DuckWalk=8, UnDuck=9, 
+        Lift=10, Throw=11, 
+        CarryIdle=12, CarryRun=13, CarrySkid=14,
+        CarryJump=15, CarryFall=16, CarryLand=17, CarryBounce=18,
+        CarryDuck=19, CarryUnDuck=20, Duplicate=21, MidairDuplicate=22, MidairThrow=23,
+        WallRun=24, MidairWall=25, CarryWallRun=26, CarryMidairWall=27, 
+        SpeedThrown=28, MetalThrown=29, 
+        NotAliveYet=30, DeadObj=31, DeadClone=32;
+        };
+    
+    public enum _State:int {Idle, Run, Skid, 
+        Jump, Fall, Land, 
+        Duck, DuckIdle,DuckWalk, UnDuck, 
+        Lift, Throw, 
+        CarryIdle, CarryRun, CarrySkid,
+        CarryJump, CarryFall, CarryLand, CarryBounce,
+        CarryDuck, CarryUnDuck, Duplicate, MidairDuplicate, MidairThrow,
+        WallRun, MidairWall, CarryWallRun, CarryMidairWall, 
+        SpeedThrown, MetalThrown, 
+        NotAliveYet, DeadObj, DeadClone}
     
     [SerializeField] int jumpHeight;
     [SerializeField] int runSpeed;
@@ -35,12 +57,16 @@ public class Player : MonoBehaviour
         //Animation, (Yes, I should probably make a state machine)
         if(Input.GetAxisRaw("Horizontal") != 0)
         {
-            animator2D.SetAnimation((int)AnimationNames.Run);
+            animator2D.SetAnimation(State.Run);
         }
         else
         {
-            animator2D.SetAnimation((int)AnimationNames.Idle);
+            animator2D.SetAnimation(State.Idle);
         }
+    }
+    public void OnAnimationEnd()
+    {
+        
     }
 
     // Update is called once per frame
