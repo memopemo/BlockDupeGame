@@ -15,25 +15,13 @@ MonoBehaviour:
   StateName: Idle
   AnimationFrames:
   - SpriteShown: {fileID: -640597711, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
-    OnFrameReached:
-      m_PersistentCalls:
-        m_Calls: []
+    HoldForTicks: 4
   - SpriteShown: {fileID: -1319364957, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
-    OnFrameReached:
-      m_PersistentCalls:
-        m_Calls: []
+    HoldForTicks: 4
   - SpriteShown: {fileID: 279037934, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
-    OnFrameReached:
-      m_PersistentCalls:
-        m_Calls: []
+    HoldForTicks: 4
   - SpriteShown: {fileID: -1227219659, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
-    OnFrameReached:
-      m_PersistentCalls:
-        m_Calls: []
+    HoldForTicks: 4
   Looping: 1
   LoopStart: 0
   LoopEnd: 3
