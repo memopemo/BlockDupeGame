@@ -17,10 +17,7 @@ public class Player : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         // Vertical Movement
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -30,19 +27,23 @@ public class Player : MonoBehaviour
         {
             rigidBody.AddForce(Vector2.down * jumpHeight * 18.5f / 4, ForceMode2D.Impulse);
         }
+    }
 
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         // Horizontal Movement
         if(Input.GetAxisRaw("Horizontal") != 0)
         {
             if(Mathf.Abs(rigidBody.velocity.x) < runSpeed)
             {
-                rigidBody.AddForce(Vector2.right * Input.GetAxisRaw("Horizontal") * runSpeed);
+                rigidBody.AddForce(Vector2.right * Input.GetAxisRaw("Horizontal") * 10 * runSpeed);
             }
         }
         else if(rigidBody.velocity.x != 0)
         {
             // add opposing force to our velocity until its zero.
-            rigidBody.AddForce(Vector2.left * rigidBody.velocity.x * 0.9f); 
+            rigidBody.AddForce(Vector2.left * rigidBody.velocity.x * 10); 
         }
 
         if(Input.GetAxisRaw("Horizontal") != 0){
