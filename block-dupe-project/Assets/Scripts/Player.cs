@@ -17,20 +17,11 @@ public class Player : MonoBehaviour
         CarryDuck=19, CarryUnDuck=20, Duplicate=21, MidairDuplicate=22, MidairThrow=23,
         WallRun=24, MidairWall=25, CarryWallRun=26, CarryMidairWall=27, 
         SpeedThrown=28, MetalThrown=29, 
-        NotAliveYet=30, DeadObj=31, DeadClone=32;
+        NotAliveYet=30, DeadObj=31, DeadClone=32,
+        IdleLookingUp=33, CarryIdleLookingUp=34;
         };
     
-    public enum _State:int {Idle, Run, Skid, 
-        Jump, Fall, Land, 
-        Duck, DuckIdle,DuckWalk, UnDuck, 
-        Lift, Throw, 
-        CarryIdle, CarryRun, CarrySkid,
-        CarryJump, CarryFall, CarryLand, CarryBounce,
-        CarryDuck, CarryUnDuck, Duplicate, MidairDuplicate, MidairThrow,
-        WallRun, MidairWall, CarryWallRun, CarryMidairWall, 
-        SpeedThrown, MetalThrown, 
-        NotAliveYet, DeadObj, DeadClone}
-    
+    [SerializeField] LayerMask ground;
     [SerializeField] int jumpHeight;
     [SerializeField] int runSpeed;
     [SerializeField] int maxSpeed;
@@ -45,24 +36,84 @@ public class Player : MonoBehaviour
     }
     void Update(){
         // Vertical Movement
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             rigidBody.AddForce(Vector2.up * jumpHeight * 20f, ForceMode2D.Impulse);
+
         }
-        if(Input.GetKeyUp(KeyCode.Space) && rigidBody.velocity.y > 3)
-        {
-            rigidBody.AddForce(Vector2.down * jumpHeight * 20f/ 9, ForceMode2D.Impulse);
-        }
+        print(
+            "B" + (IsGrounded() ? "1 " : "0 ") +
+            "L" + (IsTouchingLeftWall() ? "1 " : "0 ") +
+            "R" + (IsTouchingRightWall() ? "1 " : "0 ") +
+            "T" + (IsTouchingCeiling() ? "1 " : "0 ") 
+        );
 
         //Animation, (Yes, I should probably make a state machine)
+        
+        if(Input.GetAxisRaw("Vertical") < 0 && IsGrounded())
+        {
+            GetComponent<BoxCollider2D>().size = Vector2.one * 0.95f;
+            GetComponent<BoxCollider2D>().offset = Vector2.down * 0.45f;
+            if(Input.GetAxisRaw("Horizontal") != 0)
+            {
+                animator2D.SetAnimation(State.DuckWalk);
+            }
+            else if(animator2D.currentAnimation == State.DuckWalk)
+            {
+                animator2D.SetAnimation(State.DuckIdle,2);
+            }
+            else
+            {
+                animator2D.SetAnimation(State.DuckIdle);
+            }
+            return;
+        }
+        if(!IsGrounded())
+        {
+            if(IsTouchingRightWall() && direction || IsTouchingLeftWall() && !direction)
+            {
+                animator2D.SetAnimation(State.MidairWall);
+            }
+            else
+            {
+                if(rigidBody.velocity.y > 0)
+                {
+                    animator2D.SetAnimation(State.Jump);
+                }
+                else
+                {
+                    animator2D.SetAnimation(State.Fall);
+                }
+            }
+            return;
+        }
+        if(Input.GetAxisRaw("Vertical") > 0 && IsGrounded() && Input.GetAxisRaw("Horizontal") == 0)
+        {
+            animator2D.SetAnimation(State.IdleLookingUp);
+            
+            return;
+        }
         if(Input.GetAxisRaw("Horizontal") != 0)
         {
-            animator2D.SetAnimation(State.Run);
+            if(IsTouchingRightWall() && direction|| IsTouchingLeftWall() && !direction)
+            {
+                animator2D.SetAnimation(State.WallRun);
+            }
+            else
+            {
+                animator2D.SetAnimation(State.Run);
+            }
+            
         }
         else
         {
             animator2D.SetAnimation(State.Idle);
         }
+        GetComponent<BoxCollider2D>().size = new Vector2(0.95f, 1.31f);
+        GetComponent<BoxCollider2D>().offset = Vector2.down * 0.25f;
+        
+        
+
     }
     public void OnAnimationEnd()
     {
@@ -88,6 +139,7 @@ public class Player : MonoBehaviour
 
         if(Input.GetAxisRaw("Horizontal") != 0){
             transform.localScale = new Vector3 (Mathf.Sign(Input.GetAxisRaw("Horizontal")), 1, 1);
+            direction = Input.GetAxisRaw("Horizontal") > 0;
         }
 
         
@@ -99,5 +151,41 @@ public class Player : MonoBehaviour
                 Mathf.Clamp(rigidBody.velocity.y, -maxSpeed, maxSpeed)
                 );
         }
+    }
+    public bool IsGrounded()
+    {
+        var col = Physics2D.BoxCast(transform.position+Vector3.down*0.125f, GetComponent<Collider2D>().bounds.size, 0, Vector2.down, 0.5f, ground);
+        if(col) Debug.DrawLine(transform.position,col.point);
+        return col;
+    }
+    public bool IsTouchingLeftWall()
+    {
+        return Physics2D.BoxCast((Vector2)transform.position + GetComponent<Collider2D>().offset, GetComponent<Collider2D>().bounds.size, 0, Vector2.left, 0.1f, ground);
+    }
+    public bool IsTouchingRightWall()
+    {
+        return Physics2D.BoxCast((Vector2)transform.position + GetComponent<Collider2D>().offset, GetComponent<Collider2D>().bounds.size, 0, Vector2.right, 0.1f, ground);
+    }
+    public bool IsTouchingCeiling()
+    {
+        return Physics2D.BoxCast((Vector2)transform.position + GetComponent<Collider2D>().offset, GetComponent<Collider2D>().bounds.size, 0, Vector2.up, 0.1f, ground);
+    }
+    public bool HasSpaceToLift(BoxCollider2D collider)
+    {
+        return Physics2D.BoxCast((Vector2)transform.position + GetComponent<Collider2D>().offset  + Vector2.up, collider.bounds.size, 0, Vector2.zero, 0, ground);
+    }
+ 
+    //Drawing Box Checks
+    public void OnDrawGizmos()
+    {
+        Vector2 pos = (Vector2)transform.position + GetComponent<Collider2D>().offset;
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireCube(pos + Vector2.down * 0.5f, GetComponent<Collider2D>().bounds.size);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(pos + Vector2.left * 0.1f, GetComponent<Collider2D>().bounds.size);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(pos + Vector2.right * 0.1f, GetComponent<Collider2D>().bounds.size);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(pos + Vector2.up * 0.1f, GetComponent<Collider2D>().bounds.size);
     }
 }

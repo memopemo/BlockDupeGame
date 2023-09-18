@@ -15,19 +15,19 @@ MonoBehaviour:
   StateName: 
   AnimationFrames:
   - SpriteShown: {fileID: -1089753984, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
+    HoldForTicks: 3
   - SpriteShown: {fileID: 833044540, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
+    HoldForTicks: 3
   - SpriteShown: {fileID: 957545404, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
+    HoldForTicks: 3
   - SpriteShown: {fileID: 923617456, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
+    HoldForTicks: 3
   - SpriteShown: {fileID: 1055366250, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
+    HoldForTicks: 3
   - SpriteShown: {fileID: -975667055, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
+    HoldForTicks: 3
   - SpriteShown: {fileID: -1186071623, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
+    HoldForTicks: 3
   Looping: 1
   LoopStart: 1
   LoopEnd: 6

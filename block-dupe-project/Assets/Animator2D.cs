@@ -66,9 +66,9 @@ namespace Animator2D
                 Debug.LogWarning("frame count: "+ animationIndex + " is not in range of frames: " + animations[animationIndex].AnimationFrames.Count);
                 return;
             }
-
             currentAnimation = animationIndex;
             currentAnimationFrame = frame;
+            GetComponent<SpriteRenderer>().sprite = animations[currentAnimation].AnimationFrames[frame].SpriteShown;
             currentFrameTick = 0;
         }
     }
