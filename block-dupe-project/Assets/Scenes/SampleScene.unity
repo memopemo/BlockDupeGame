@@ -532,8 +532,9 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.4920454, y: 0.50114673}
-  - {x: 0.48409057, y: 0.50114673}
+  - {x: -5.815433, y: 2.8190794}
+  - {x: 0.008005142, y: 2.6619318}
+  - {x: 1.3484046, y: 1.1690257}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -579,14 +580,14 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -7446525381728463068, guid: 29d920366b758c848b3c771f105cae32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_DrawMode: 2
+  m_Size: {x: 2.6500537, y: 2.1982534}
   m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
+  m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
@@ -599,7 +600,7 @@ Transform:
   m_GameObject: {fileID: 220245828}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2326887, y: 0.17404419, z: 0}
+  m_LocalPosition: {x: 11.8271, y: -0.8382, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -835,9 +836,9 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
-  jumpHeight: 20
+  jumpHeight: 22
   runSpeed: 8
-  maxSpeed: 20
+  maxSpeed: 22
 --- !u!4 &357897747
 Transform:
   m_ObjectHideFlags: 0
