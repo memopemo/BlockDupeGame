@@ -19,7 +19,7 @@ This increases the amount of duplicates that can be in a room at once.
 
 ## Midair Duplication
 This allows the player to make a duplicate while airborne, allowing the player to "fly" by repeatedly duplicating in midair and throwing those duplicates.
-zzxzxczxc
+
 ## Hold While Jumping
 This allows the player to jump while holding an object
 - This is sort of a "restriction" thats lifted from the player when obtained in order to create challenges that require stacking or something.
@@ -27,7 +27,7 @@ This allows the player to jump while holding an object
 ## Remote Duplication
 This allows the player to set a point where the duplicate will spawn, move somewhere else and then release it. Examples of use-cases would be for retrying before knowing you take damage, going to press a button that locks you out when held down, meaning you have to be inside the space and outside of the space at the same time.
 
-## Speed Throw
+## Straight Shot
 This allows the player to charge up and throw their duplicate in a straight line until they collide with a wall. When combined with the metal slam, it allows many blocks in a row to be broken all at once.
 
 ## Phantom Duplication
@@ -38,6 +38,9 @@ This allows the player to move regularly in water. Otherwise, their jumping abil
 
 ## Sticky Duplicates
 This allows the player to create dead duplicates (meaning they will never be alive) and throw them with the "Speed Throw" powerup to stick them to walls as platforms.
+
+## Grapple Dupes
+This allows the player to make a rope of clones that attach to grapple blocks. The length is determined by the number of clones the player can make, and by default goes straight up, but can be aimed diagonally.
 
 ## More???
 Im not sure what other powers there can be. They must be both helpful to explore or keys to be used with obstacles, and be used for puzzle solving.
@@ -65,13 +68,62 @@ Simple jumping platforming that may or may not require abilities.
 
 # Controls
 The player can walk, jump, duplicate, lift objects, and throw.
-| Button | Action               |
-|--------|----------------------|
-| A      | Jump                 |
-| B      | Duplicate/Throw/Lift |
-| Pause  | Pauses Game          |
-| Map    | Shows the map        |
+| Button                   | Action                                                         |
+|--------                  |----------------------                                          |
+| A                        | Jump                                                           |
+| B(Tap)                   | Duplicate/Throw/Lift                                           |
+| B(Hold and Release)      | (Create Remote Point / Create Dupe At Point ) / Throw Straight |
+| B(Hold Down and Release) | Create Metal Dupe or if not, regular B(Hold and Release)       |
+| B(Hold Up and Release)   | Create Dupe Grapple (also works with diagonal up)              |
+| Pause                    | Pause Game                                                     |
+| Map                      | Shows the map                                                  |
+
+Powers that are always on:
+- Midair Duplication
+- Hold While Jumping
+- Phantom Duplication
+    When throwing, there is a short period where the player can go through phantom blocks.
+- Water Bubble
+    Appears when in water
+- Sticky Dupes
+    If the player hits a sticky wall, give control back to the original clone that threw and stick the clone to the wall.
+    OR (alternate implementation) if a raycast in the direction we throw will hit a sticky wall, allow the sticky clone to hit the wall and keep the clone alive.
 
 
 # Attacking
 The player can attack by throwing things, including their old clones.
+The player can also stomp on enemies that are stompable.
+
+
+# Health
+The player can initially take 3 hits before dying. 
+
+
+# Goodies
+These are things the player is rewarded with, other than the way forward to the next item or boss at dead ends, or after completing a challenge.
+
+## Save Station
+These save your game, and are where you return to after you die.
+
+## Health Refill Station
+These refill all of your health.
+
+## Dupe Packs
+See [Dupe Packs](#duplication-pack)
+
+## Extra Metal Dupes
+These give you more ammunition to metal dupe.
+
+## Extra Remote Dupes
+These give you more ammunition to remote dupe.
+
+## Health Packs
+These give the player more health to withstand attacks.
+
+# Setting
+Abandoned Mars base
+
+# Map Regions
+These are the main map split into 5 areas with a common theme between individual rooms. Main method of travelling between them is a (???)
+
+
