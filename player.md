@@ -76,7 +76,7 @@ This allows the player to throw duplicates that can go through special walls tem
 
 - Upon throwing, they will enter a phantom thrown state where collision with anything marked as phantom is disabled. 
 
-- While airborne, if the player is currently intersecting with collision marked as phantom, their velocity stays the same, and they are kept in the phantom thrown state until they exit.
+- While airborne, if the player is currently intersecting with collision marked as phantom, their velocity stays the same, and they are kept in the phantom thrown state until they exit, which they will exit a phantom state.
 
 - As a failsafe, touching a wall will immediately bounce them in the opposite direction they were thrown in, ensuring that they will not get stuck inside the phantom blocks.
 
@@ -101,19 +101,44 @@ This allows the player to make a rope of clones that attach to grapple blocks. T
 
 - Upon releasing the B button while swinging, the player will be launched left or right depending on their momentum at the time of release. 
 
-- If the end of the rope does NOT attach to any grapple block efore the max number of clones to make is reached, then it retracts and removes clones until theres none left, then finally giving control back to the player.
+- If the end of the rope does NOT attach to any grapple block before the max number of clones to make is reached, then it retracts and removes clones until theres none left, then finally giving control back to the player.
 
 
 # Heirarchy of States
 
-## Alive
-- Throwing
+- Sticked
+## Can Be (Metal and maybe Electrified) or Not
+- Clone Struggling Idle (Normal, Remote Dupe)
+- Clone Struggling Run (Normal, Remote Dupe)
+- Clone Struggling Jump (Normal, Remote Dupe)
+- Clone Struggling Fall (Normal, Remote Dupe)
+- Clone
+- Lift
+- Throw Struggling Idle (Normal, Straight Shot)
+- Throw Struggling Run (Normal, Straight Shot)
+- Throw Struggling Jump (Normal, Straight Shot)
+- Throw Struggling Fall (Normal, Straight Shot)
+- Throw On Ground (Side, Up, Down, Diagonal Up)
+- Throw Midair (Side, Up, Down, Diagonal Up)
+- Launch Grapple
+- Retract Grapple
+- Swing Grapple
 - Dying
-- Cloning Hold
-- Cloning Release
-- 
 
-## Dead
+### Can Be Carry Or Not (Plus upper level of being metal and maybe electrified)
+- Idle (Normal, Duck)
+- Look Up
+- Running (Normal, Duck)
+- Jumping
+- Falling
+- Landing
+- Wall Bump On Ground 
+- Wall Bump Midair 
+- Run Against Wall
 
+### Dead (Plus upper level of being metal and maybe electrified)
+- Dead (Normal, Metal)
+- Unalive (Normal, Metal)
+- Thrown (Normal, or any combination of Straight, Metal, and Phantom)
 
 
