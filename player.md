@@ -105,40 +105,59 @@ This allows the player to make a rope of clones that attach to grapple blocks. T
 
 
 # Heirarchy of States
+("visual" means that one or more states have the exact same mechanical function as another state, 
+and that the only thing that changes between them is that they look different, or have signify different outcomes.)
 
-- Sticked
 ## Can Be (Metal and maybe Electrified) or Not
-- Clone Struggling Idle (Normal, Remote Dupe)
-- Clone Struggling Run (Normal, Remote Dupe)
-- Clone Struggling Jump (Normal, Remote Dupe)
-- Clone Struggling Fall (Normal, Remote Dupe)
-- Clone
-- Lift
-- Throw Struggling Idle (Normal, Straight Shot)
-- Throw Struggling Run (Normal, Straight Shot)
-- Throw Struggling Jump (Normal, Straight Shot)
-- Throw Struggling Fall (Normal, Straight Shot)
-- Throw On Ground (Side, Up, Down, Diagonal Up)
-- Throw Midair (Side, Up, Down, Diagonal Up)
+- Clone Struggling Idle (Normal, Remote Dupe) (differences are visual) (visual)
+- Clone Struggling Run (Normal, Remote Dupe) (differences are visual) (visual)
+- Clone Struggling Jump (Normal, Remote Dupe) (differences are visual) (visual)
+- Clone Struggling Fall (Normal, Remote Dupe) (differences are visual) (visual)
+- Clone (visual)
+- Lift (visual)
+- Throw Struggling Idle (Normal, Straight Shot) (differences are visual) (visual)
+- Throw Struggling Run (Normal, Straight Shot) (differences are visual) (visual)
+- Throw Struggling Jump (Normal, Straight Shot) (differences are visual) (visual) 
+- Throw Struggling Fall (Normal, Straight Shot) (differences are visual) (visual)
+- Throw On Ground (Side, Up, Down, Diagonal Up) (visual)
+- Throw Midair (Side, Up, Down, Diagonal Up) (visual)
 - Launch Grapple
 - Retract Grapple
 - Swing Grapple
-- Dying
+- Dying (visual)
 
 ### Can Be Carry Or Not (Plus upper level of being metal and maybe electrified)
 - Idle (Normal, Duck)
-- Look Up
+- Look Up (visual)
 - Running (Normal, Duck)
 - Jumping
-- Falling
-- Landing
-- Wall Bump On Ground 
-- Wall Bump Midair 
-- Run Against Wall
+- Falling (visual)
+- Landing (visual)
+- Wall Bump On Ground (visual)
+- Wall Bump Midair (visual)
+- Run Against Wall (visual)
 
 ### Dead (Plus upper level of being metal and maybe electrified)
-- Dead (Normal, Metal)
-- Unalive (Normal, Metal)
-- Thrown (Normal, or any combination of Straight, Metal, and Phantom)
+- Dead (Normal, Metal) (visual)
+- Held (Normal, Metal) (visual)
+- Thrown (Normal, or any combination of Straight, Metal, and Phantom) (visual)
+- Sticked (visual)
 
+Boolean redundancy Ideas:
+Metal
+Electrified
 
+However, Electrified is intrinsically related to Metal in that you can only be electrified if you are metal.
+Maybe it can be an integer? 0 = not metal, 1 = metal, 2 = electrified.
+
+Mechanically Different States:
+Idle
+Run
+Jump
+Duck (shrinks player size)
+Carry (grows player)
+Dead
+Throw
+Launch Grapple
+Retract Grapple
+Swing Grapple
