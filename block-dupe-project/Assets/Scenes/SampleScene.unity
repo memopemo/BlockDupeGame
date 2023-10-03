@@ -812,6 +812,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 357897747}
+  - component: {fileID: 357897752}
   - component: {fileID: 357897745}
   - component: {fileID: 357897748}
   - component: {fileID: 357897749}
@@ -831,7 +832,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357897744}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc63babbc38f4c342b6cf1bd88b1b9e5, type: 3}
   m_Name: 
@@ -845,6 +846,15 @@ MonoBehaviour:
   jumpHeight: 22
   runSpeed: 8
   maxSpeed: 22
+  normalBox:
+    size: {x: 0.95, y: 1.31}
+    offset: {x: 0, y: -0.25}
+  duckBox:
+    size: {x: 0.95, y: 0.95}
+    offset: {x: 0, y: -0.45}
+  carryBox:
+    size: {x: 0.95, y: 1.31}
+    offset: {x: 0, y: 0}
 --- !u!4 &357897747
 Transform:
   m_ObjectHideFlags: 0
@@ -947,26 +957,26 @@ MonoBehaviour:
   animations:
   - {fileID: 11400000, guid: 7ac04e506edfcef47b255aef758129ed, type: 2}
   - {fileID: 11400000, guid: e62296876df20414da1452bfe225b987, type: 2}
-  - {fileID: 11400000, guid: eed8304e16fdbfd45ade9e951f11ce9b, type: 2}
   - {fileID: 11400000, guid: 48c3a03b839c54a42b870f5a2471e0fc, type: 2}
   - {fileID: 11400000, guid: 071a531057736cc4c8b4f66dc612b6ee, type: 2}
-  - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
+  - {fileID: 11400000, guid: eed8304e16fdbfd45ade9e951f11ce9b, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: 2e9feda6be7047143b3f01d494ca0718, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
+  - {fileID: 11400000, guid: c7d3c43ab66fa9c4abde4c541bc80481, type: 2}
+  - {fileID: 11400000, guid: cd3c0446b2fa28048864323b46e2fcae, type: 2}
+  - {fileID: 11400000, guid: 15567e51621ed9a48ad3c3cc40c1b708, type: 2}
+  - {fileID: 11400000, guid: a8cbcc7eede3b054da8b4c970c7e7562, type: 2}
+  - {fileID: 11400000, guid: a57f1d79b4b1486449a0eb44f24b7a81, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
-  - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
-  - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
-  - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
-  - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
-  - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
-  - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
+  - {fileID: 11400000, guid: 2e9feda6be7047143b3f01d494ca0718, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: 61c4475d26e008b4eb03500f63f401b3, type: 2}
@@ -977,6 +987,63 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 7ac04e506edfcef47b255aef758129ed, type: 2}
+  - {fileID: 11400000, guid: 61c4475d26e008b4eb03500f63f401b3, type: 2}
+  - {fileID: 11400000, guid: f56d886d661b4794b973931f4241693d, type: 2}
+  - {fileID: 11400000, guid: f56d886d661b4794b973931f4241693d, type: 2}
+  - {fileID: 11400000, guid: eed8304e16fdbfd45ade9e951f11ce9b, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: c4002dfc2efd5ac4db83c48a1f422ead, type: 2}
+  - {fileID: 11400000, guid: 8e0bcc4df09191f44a83a8a6176e5eae, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   currentAnimation: 0
@@ -1032,6 +1099,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &357897752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357897744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84aa7294b659bc247a1072d3d1d14a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidBody: {fileID: 0}
+  ground:
+    serializedVersion: 2
+    m_Bits: 192
+  wall:
+    serializedVersion: 2
+    m_Bits: 64
+  direction: 0
+  animator2D: {fileID: 0}
+  boxCollider: {fileID: 0}
+  normalBox:
+    size: {x: 0.95, y: 1.31}
+    offset: {x: 0, y: -0.25}
+  duckBox:
+    size: {x: 0.95, y: 0.95}
+    offset: {x: 0, y: -0.45}
+  carryBox:
+    size: {x: 0.95, y: 2.31}
+    offset: {x: 0, y: -0.25}
+  carryDuckBox:
+    size: {x: 0.95, y: 1.95}
+    offset: {x: 0, y: -0.25}
+  carryingObj: 0
 --- !u!1 &378746136
 GameObject:
   m_ObjectHideFlags: 0

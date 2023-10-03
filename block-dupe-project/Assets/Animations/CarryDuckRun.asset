@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 202b6f55e7c40294b923d7103e469216, type: 3}
-  m_Name: LandHard
+  m_Name: CarryDuckRun
   m_EditorClassIdentifier: 
   StateName: 
   AnimationFrames:
-  - SpriteShown: {fileID: 2033187143, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 3
-  - SpriteShown: {fileID: 1459037932, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 3
+  - SpriteShown: {fileID: 1867717180, guid: 8a9a80047443704468538252b34c4daa, type: 3}
+    HoldForTicks: 4
+  - SpriteShown: {fileID: 1259133351, guid: 8a9a80047443704468538252b34c4daa, type: 3}
+    HoldForTicks: 4
   Looping: 0
   LoopStart: 0
   LoopEnd: 0

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Animator2D;
 
-[CreateAssetMenu(fileName = "Anim2D", menuName = "Animation2D/AnimationData", order = 1)]
+[CreateAssetMenu(fileName = "Anim2D", menuName = "AnimationData", order = 1)]
 public class AnimationData: ScriptableObject
 {
     public string StateName;

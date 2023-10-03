@@ -151,9 +151,7 @@ However, Electrified is intrinsically related to Metal in that you can only be e
 Maybe it can be an integer? 0 = not metal, 1 = metal, 2 = electrified.
 
 Mechanically Different States:
-Idle
-Run
-Jump
+Movement
 Duck (shrinks player size)
 Carry (grows player)
 Dead
