@@ -36,6 +36,7 @@ public class PlayerStateManager : MonoBehaviour
      public CollisionBox carryDuckBox;
 
      public bool carryingObj;
+     public Liftable nearestLiftableObj; //May be null.
      
      public DefaultPlayerState defaultPlayerState = new DefaultPlayerState();
      //... add more states here.
@@ -58,6 +59,15 @@ public class PlayerStateManager : MonoBehaviour
                transform.localScale = new Vector3 (Mathf.Sign(Input.GetAxisRaw("Horizontal")), 1, 1);
                direction = Input.GetAxisRaw("Horizontal") > 0;
           }
+          nearestLiftableObj = null;
+          foreach (Collider2D x in Physics2D.OverlapBoxAll((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size * 2f, 0))
+          {
+               if (x.GetComponent<Liftable>() != null)
+               {
+                    nearestLiftableObj = x.GetComponent<Liftable>();
+                    break;
+               }
+          }
      }
      void FixedUpdate()
      {
@@ -69,6 +79,16 @@ public class PlayerStateManager : MonoBehaviour
           currentState = newState;
           currentState.OnEnter(this);
      }
+
+     public void Lift()
+     {
+          
+     }
+     public void Clone()
+     {
+
+     }
+
      public bool IsGrounded()
      {
         // if(col) Debug.DrawLine((Vector2)transform.position + GetComponent<Collider2D>().offset, col.point, Color.magenta);
@@ -117,6 +137,7 @@ public class PlayerStateManager : MonoBehaviour
         Gizmos.DrawWireCube(pos + Vector2.right * 0.1f, GetComponent<Collider2D>().bounds.size);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(pos + Vector2.up * 0.1f, GetComponent<Collider2D>().bounds.size);
+        Gizmos.DrawWireCube(pos, GetComponent<Collider2D>().bounds.size*2f);
     }
 
 }

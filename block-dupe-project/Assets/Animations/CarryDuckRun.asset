@@ -18,6 +18,6 @@ MonoBehaviour:
     HoldForTicks: 4
   - SpriteShown: {fileID: 1259133351, guid: 8a9a80047443704468538252b34c4daa, type: 3}
     HoldForTicks: 4
-  Looping: 0
+  Looping: 1
   LoopStart: 0
-  LoopEnd: 0
+  LoopEnd: 1
