@@ -30,7 +30,7 @@ public class DefaultPlayerState : IPlayerState
         Vector2 velocity = manager.rigidBody.velocity;
 
         // Vertical Movement
-        if (Input.GetKeyDown(KeyCode.Space) && manager.IsGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && manager.IsGrounded() && !(currentSubState == SubStates.Duck || currentSubState == SubStates.CarryDuck))
         {
             manager.rigidBody.AddForce(20f * jumpHeight * Vector2.up, ForceMode2D.Impulse);
         }
@@ -91,14 +91,13 @@ public class DefaultPlayerState : IPlayerState
         switch (currentSubState)
         {
             case SubStates.Normal:
-                if (joyInput.y < 0)
+                if (joyInput.y < 0 && manager.IsGrounded())
                 {
-                    
                     manager.duckBox?.SetCollisionBox(manager.boxCollider);
                     currentSubState = SubStates.Duck;
                     break;
                 }
-                if (joyInput.x != 0 && manager.IsTouchingRightWall() && manager.direction || manager.IsTouchingLeftWall() && !manager.direction)
+                if (joyInput.x != 0 && ((manager.IsTouchingRightWall() && manager.direction) || (manager.IsTouchingLeftWall() && !manager.direction)))
                 {
                     currentSubState = SubStates.Wall;
                     break;
@@ -135,7 +134,7 @@ public class DefaultPlayerState : IPlayerState
                 }
                 break;
             case SubStates.Duck:
-                if (joyInput.y >= 0)
+                if (joyInput.y >= 0 && !manager.IsTouchingCeiling())
                 {
                     manager.normalBox.SetCollisionBox(manager.boxCollider);
                     currentSubState = SubStates.Normal;
@@ -175,7 +174,7 @@ public class DefaultPlayerState : IPlayerState
                 }
                 if (movementState == MovementState.Idle) 
                 {
-                    manager.animator2D.SetAnimation(PlayerStateManager.Animations.Idle);
+                    currentSubState = SubStates.Normal;
                 }
                 else
                 {
