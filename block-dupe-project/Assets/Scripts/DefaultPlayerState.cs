@@ -30,6 +30,7 @@ public class DefaultPlayerState : IPlayerState
         Vector2 velocity = manager.rigidBody.velocity;
 
         // Vertical Movement
+        Debug.Log(manager.IsGrounded());
         if (Input.GetKeyDown(KeyCode.Space) && manager.IsGrounded() && !(currentSubState == SubStates.Duck || currentSubState == SubStates.CarryDuck))
         {
             manager.rigidBody.AddForce(20f * jumpHeight * Vector2.up, ForceMode2D.Impulse);
@@ -138,6 +139,7 @@ public class DefaultPlayerState : IPlayerState
                 {
                     manager.normalBox.SetCollisionBox(manager.boxCollider);
                     currentSubState = SubStates.Normal;
+                    Debug.Log("yup");
                     break;
                 }
                 if (movementState == MovementState.Running)
@@ -154,7 +156,7 @@ public class DefaultPlayerState : IPlayerState
                 {
                     currentSubState = SubStates.Carry;
                     manager.carryBox.SetCollisionBox(manager.boxCollider);
-                    manager.carryingObj = true;
+                    manager.Clone();
                 }
                 manager.animator2D.SetAnimation(PlayerStateManager.Animations.CloneStruggleIdle + (int)movementState);
                 break;
@@ -163,7 +165,7 @@ public class DefaultPlayerState : IPlayerState
                 {
                     manager.normalBox.SetCollisionBox(manager.boxCollider);
                     currentSubState = SubStates.Normal;
-                    manager.carryingObj = false;
+                    manager.ThrowHeldObject();
                 }
                 manager.animator2D.SetAnimation(PlayerStateManager.Animations.ThrowStruggleIdle + (int)movementState);
                 break;

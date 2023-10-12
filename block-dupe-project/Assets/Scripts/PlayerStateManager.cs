@@ -34,11 +34,15 @@ public class PlayerStateManager : MonoBehaviour
      public CollisionBox duckBox;
      public CollisionBox carryBox;
      public CollisionBox carryDuckBox;
+     public CollisionBox unaliveBox;
 
-     public bool carryingObj;
      public Liftable nearestLiftableObj; //May be null.
+     public Liftable carryingObj;
      
-     public DefaultPlayerState defaultPlayerState = new DefaultPlayerState();
+     public DefaultPlayerState defaultPlayerState = new();
+     public DeadPlayerState deadPlayerState = new();
+
+     public HeldPlayerState heldPlayerState = new();
      //... add more states here.
      
 
@@ -47,7 +51,10 @@ public class PlayerStateManager : MonoBehaviour
           rigidBody = GetComponent<Rigidbody2D>();
           animator2D = GetComponent<Animator2D.Animator2D>();
           boxCollider = GetComponent<BoxCollider2D>();
-          currentState = defaultPlayerState;
+          if(currentState == null)
+          {
+               currentState = defaultPlayerState;
+          }      
      }
 
      void Update()
@@ -59,13 +66,22 @@ public class PlayerStateManager : MonoBehaviour
                transform.localScale = new Vector3 (Mathf.Sign(Input.GetAxisRaw("Horizontal")), 1, 1);
                direction = Input.GetAxisRaw("Horizontal") > 0;
           }
-          nearestLiftableObj = null;
-          foreach (Collider2D x in Physics2D.OverlapBoxAll((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size * 2f, 0))
+
+          if(carryingObj)
           {
-               if (x.GetComponent<Liftable>() != null)
+               nearestLiftableObj = null;
+               carryingObj.transform.SetLocalPositionAndRotation(Vector2.zero, transform.GetChild(0).rotation);
+          }
+          //sue me
+          else if(!nearestLiftableObj)
+          {
+               foreach (Collider2D x in Physics2D.OverlapBoxAll((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size * 2f, 0))
                {
-                    nearestLiftableObj = x.GetComponent<Liftable>();
-                    break;
+                    if (x.GetComponent<Liftable>() != null)
+                    {
+                         nearestLiftableObj = x.GetComponent<Liftable>();
+                         break;
+                    }
                }
           }
      }
@@ -82,11 +98,56 @@ public class PlayerStateManager : MonoBehaviour
 
      public void Lift()
      {
-          
+          if(nearestLiftableObj)
+          {
+               nearestLiftableObj.OnBeingLifted();
+               nearestLiftableObj.transform.SetParent(transform.GetChild(0));
+               carryingObj = nearestLiftableObj;
+          }
      }
      public void Clone()
      {
+          // create the clone at the "lift point"
+          var newClone = Instantiate(gameObject, transform.GetChild(0).position, transform.rotation, transform.GetChild(0));
+          newClone.GetComponent<PlayerStateManager>().Init(); // init clone
 
+          //lift clone, set nearestLiftableObject so the function knows who to lift.
+          nearestLiftableObj = newClone.GetComponent<Liftable>(); 
+          Lift();
+         
+     }
+     public void Init()
+     {
+          //it has not been initialized, so we need to override the state ourself.
+          currentState = heldPlayerState;
+          heldPlayerState.OnEnter(this);     
+     }
+     public void ThrowHeldObject()
+     {
+          var carryRB = carryingObj.GetComponent<Rigidbody2D>();
+          if(carryRB)
+          {
+               carryRB.velocity = GetThrowVector();
+          }
+          if(carryingObj.GetComponent<PlayerStateManager>())
+          {
+               //we die, clone lives!
+               ChangeState(deadPlayerState);
+               carryingObj.GetComponent<PlayerStateManager>().ChangeState(defaultPlayerState);
+          }
+          carryingObj.OnBeingThrown();
+          carryingObj.transform.parent = null;
+          carryingObj = null;
+          
+          
+     }
+     public Vector2 GetThrowVector()
+     {
+          float flip = transform.localScale.x; // this is so it matches the direction of the player. ([<-] -1 or 1 [->])
+
+          //TODO: add throw direction change based on holding up, or down.
+          return new Vector2(flip, 1)*15;
+          
      }
 
      public bool IsGrounded()
