@@ -12,12 +12,14 @@ public class HeldPlayerState : IPlayerState
 
     public void OnEnter(PlayerStateManager manager)
     {
-        manager.normalBox.SetCollisionBox(manager.boxCollider);
+        manager.unaliveBox.SetCollisionBox(manager.boxCollider);
+        manager.rigidBody.bodyType = RigidbodyType2D.Static;
     }
 
     public void OnExit(PlayerStateManager manager)
     {
-        
+        manager.normalBox.SetCollisionBox(manager.boxCollider);
+        manager.rigidBody.bodyType = RigidbodyType2D.Dynamic;
     }
 
     public void UpdateState(PlayerStateManager manager)

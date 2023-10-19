@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,15 +6,61 @@ using UnityEngine;
 public class CloneManager : MonoBehaviour
 {
     public PlayerStateManager currentlyControlledPlayer;
+    private CameraFocus cameraFocus;
+    public int AllowedClones;
+    public Queue<PlayerStateManager> AllClones;
     // Start is called before the first frame update
     void Start()
     {
-        currentlyControlledPlayer = FindFirstObjectByType<PlayerStateManager>();
+        cameraFocus = FindFirstObjectByType<CameraFocus>();
+        FindDefaultPlayer();
+        if(AllowedClones < 3) AllowedClones = 3;
+        AllClones = new Queue<PlayerStateManager>(AllowedClones);
+        AllClones.Enqueue(currentlyControlledPlayer);
+        InvokeRepeating(nameof(CheckExcessClones), 0.1f, 0.1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(currentlyControlledPlayer.currentState is not DefaultPlayerState)
+        {
+            FindDefaultPlayer();
+        }
+
+        if(cameraFocus.target != currentlyControlledPlayer.transform)
+        {
+            cameraFocus.SetTarget(currentlyControlledPlayer.transform);
+        }
+    }
+    void CheckExcessClones()
+    {
+        print(AllClones.Count);
+        if(!CanCreateClone())
+        {
+            
+            //could play a poof animation here
+            Destroy(AllClones.Dequeue().gameObject);
+        }
+    }
+
+    void FindDefaultPlayer()
+    {
+        foreach (PlayerStateManager canidate in FindObjectsOfType<PlayerStateManager>())
+        {
+            if (canidate.currentState is DefaultPlayerState)
+            {
+                currentlyControlledPlayer = canidate;
+            }
+        }
+    }
+    
+    public bool CanCreateClone()
+    {
+        return AllClones.Count <= AllowedClones;
+    }
+    public void CreateClone(PlayerStateManager newClone)
+    {
+        AllClones.Enqueue(newClone);
     }
 }

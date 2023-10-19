@@ -437,8 +437,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
-  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
-  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: bb8b431906bedfe4abe7bf31f8e21460, type: 2}
+  - {fileID: 11400000, guid: 4d12a320cbc1e8e4fbb8160adb2b33fe, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
@@ -533,9 +533,9 @@ MonoBehaviour:
     offset: {x: 0, y: 0.25}
   carryDuckBox:
     size: {x: 0.95, y: 1.95}
-    offset: {x: 0, y: -0.25}
+    offset: {x: 0, y: 0.25}
   unaliveBox:
-    size: {x: 0.95, y: 0.95}
+    size: {x: 0.98, y: 0.98}
     offset: {x: 0, y: 0}
   nearestLiftableObj: {fileID: 0}
   carryingObj: {fileID: 0}

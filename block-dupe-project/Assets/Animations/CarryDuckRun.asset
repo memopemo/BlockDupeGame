@@ -21,3 +21,4 @@ MonoBehaviour:
   Looping: 1
   LoopStart: 0
   LoopEnd: 1
+  HeldItemPosition: {x: 0, y: 1}

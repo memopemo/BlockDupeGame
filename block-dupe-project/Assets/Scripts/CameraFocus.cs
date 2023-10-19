@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraFocus : MonoBehaviour
 {
     [SerializeField] BoxCollider2D bounds;
-    [SerializeField] Transform target;
+    public Transform target;
     [SerializeField] Vector2 offset;
     [SerializeField] bool isSideScroller;
     [SerializeField] bool isVerticalScroller;
@@ -46,7 +46,6 @@ public class CameraFocus : MonoBehaviour
             playerLookAhead = Mathf.SmoothDamp(playerLookAhead, 0, ref lookaheadVelocity, followSpeed);
         }
 
-
         transform.position = Vector3.Lerp(transform.position, target.position + (Vector3)offset + Vector3.right * playerLookAhead, Time.deltaTime * followSpeed);
 
         transform.position = new Vector3(isVerticalScroller ? 0 : transform.position.x, isSideScroller ? 0 : transform.position.y, hasParralax ? distance * -1.75f : -ORTHO_CAMERA_DISTANCE);
@@ -56,11 +55,6 @@ public class CameraFocus : MonoBehaviour
             Vector2 _closest = bounds.ClosestPoint(transform.position);
             transform.position = new Vector3(_closest.x, _closest.y, transform.position.z);
         }
-        
-        
-
-        
-        
     }
     public void OnDrawGizmos()
     {
