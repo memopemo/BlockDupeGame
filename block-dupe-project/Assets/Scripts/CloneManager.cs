@@ -23,7 +23,7 @@ public class CloneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentlyControlledPlayer.currentState is not DefaultPlayerState)
+        if(currentlyControlledPlayer == null || currentlyControlledPlayer.currentState is not DefaultPlayerState)
         {
             FindDefaultPlayer();
         }
@@ -35,7 +35,6 @@ public class CloneManager : MonoBehaviour
     }
     void CheckExcessClones()
     {
-        print(AllClones.Count);
         if(!CanCreateClone())
         {
             
@@ -48,6 +47,7 @@ public class CloneManager : MonoBehaviour
     {
         foreach (PlayerStateManager canidate in FindObjectsOfType<PlayerStateManager>())
         {
+            print(canidate.currentState);
             if (canidate.currentState is DefaultPlayerState)
             {
                 currentlyControlledPlayer = canidate;

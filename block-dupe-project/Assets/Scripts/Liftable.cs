@@ -1,13 +1,11 @@
 using UnityEngine;
-[RequireComponent(typeof(Collider2D))]
 public class Liftable : MonoBehaviour 
 {
     bool lifted;
     Vector2Int StraightVector;
-    Collider2D collider2D;
+
     public void Start()
     {
-        collider2D = GetComponent<Collider2D>();
     }
     public virtual void Update()
     {
@@ -22,12 +20,18 @@ public class Liftable : MonoBehaviour
     public virtual void OnBeingLifted()
     {
         lifted = true;
-        collider2D.isTrigger = true;
+        foreach(var c in GetComponents<Collider2D>())
+        {
+            c.isTrigger = true;
+        }
     }
     public virtual void OnBeingThrown()
     {
         lifted = false;
-        collider2D.isTrigger = false;
+        foreach(var c in GetComponents<Collider2D>())
+        {
+            c.isTrigger = false;
+        }
     }
     public virtual void OnBeingStraightThrown(Vector2Int StraightVector)
     {

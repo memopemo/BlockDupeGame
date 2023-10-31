@@ -1,47 +1,80 @@
 using UnityEngine;
-using Unity;
-using Unity.VisualScripting;
 
 public class DefaultPlayerState : IPlayerState
 {
     int jumpHeight = 22;
     int runSpeed = 8;
     int maxSpeed = 22;
+    int coyoteTime;
+    bool coyoteTimeEnable;
     int landingTimer; //negative = falling, positive = landing, 0 = not used.
 
-    public enum SubStates { Normal, Carry, Duck, CloneStruggle, ThrowStruggle, Wall, LookUp, CarryDuck, CarryWall, CarryLookUp};
+    public IPlayerSubstate currentSubState;
+    public NormalPlayerSubstate normalPlayerSubstate;
+    public DuckPlayerSubstate duckPlayerSubstate;
+    public WallPlayerSubstate wallPlayerSubstate;
+    public LookUpPlayerSubstate lookUpPlayerSubstate;
+    public CloneStrugglePlayerSubstate cloneStruggleSubstate;
+
     public enum MovementState { Idle, Running, Jumping, Falling, Landing };
-    public SubStates currentSubState;
     public MovementState movementState;
+
     public bool isThrowStruggleForStraightShot;
 
+    public void ChangeSubstate(IPlayerSubstate newSubstate)
+    {
+        currentSubState = newSubstate;
+    }
+    public void OnEnter(PlayerStateManager manager)
+    {
+        normalPlayerSubstate = new NormalPlayerSubstate();
+        duckPlayerSubstate = new DuckPlayerSubstate();
+        wallPlayerSubstate = new WallPlayerSubstate();
+        lookUpPlayerSubstate = new LookUpPlayerSubstate();
+        cloneStruggleSubstate = new CloneStrugglePlayerSubstate();
+        currentSubState = normalPlayerSubstate;
+    }
 
-    public void OnEnter(PlayerStateManager manager){}
-
-    public void OnExit(PlayerStateManager manager){}
+    public void OnExit(PlayerStateManager manager)
+    {
+        manager.rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
 
     public void UpdateState(PlayerStateManager manager)
     {
+        //vars
         Vector2 joyInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 velocity = manager.rigidBody.velocity;
+        bool IsGrounded = manager.IsGrounded();
+        MovementState previousMovementState = movementState;
 
-        // Vertical Movement
-        if (Input.GetKeyDown(KeyCode.Space) && manager.IsGrounded() && !(currentSubState == SubStates.Duck || currentSubState == SubStates.CarryDuck))
+        //grounded y position does not change.
+        /* manager.rigidBody.constraints = IsGrounded
+            ? RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionY
+            : RigidbodyConstraints2D.FreezeRotation; */
+
+        //update coyoteTime
+        if (coyoteTimeEnable)
         {
+            coyoteTime += 1;
+        }
+        else
+        {
+            coyoteTime = 0;
+        }
+
+        // Jump
+        if (Input.GetKeyDown(KeyCode.Space) && (IsGrounded || (coyoteTime > 0 && coyoteTime <= 15)))
+        {
+            //Debug.Log("Jump!");
+            manager.rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
             manager.rigidBody.AddForce(20f * jumpHeight * Vector2.up, ForceMode2D.Impulse);
         }
 
         // Cloning / Throwing
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) && ((!manager.carryingObj && !manager.HasSpaceToLift(manager.boxCollider)) || manager.carryingObj))
         {
-            if (!manager.carryingObj && !manager.HasSpaceToLift(manager.boxCollider))
-            {
-                currentSubState = SubStates.CloneStruggle;
-            }
-            else if (manager.carryingObj)
-            {
-                currentSubState = SubStates.ThrowStruggle;
-            }
+            ChangeSubstate(cloneStruggleSubstate);
         }
 
         //direction
@@ -51,7 +84,19 @@ public class DefaultPlayerState : IPlayerState
             manager.direction = Input.GetAxisRaw("Horizontal") > 0;
         }
 
-        //update carrying object if any
+        
+
+        manager.nearestLiftableObj = null;
+        foreach (Collider2D x in Physics2D.OverlapBoxAll((Vector2)manager.transform.position + manager.boxCollider.offset, manager.boxCollider.bounds.size * 2f, 0))
+        {
+            if (x.GetComponent<Liftable>() != null && (!x.TryGetComponent(out PlayerStateManager a) || a != manager)) //is liftable but not us.=
+            {
+                manager.nearestLiftableObj = x.GetComponent<Liftable>();
+                break;
+            }
+        }
+
+        //update carrying object if any (also nulls nearest liftable object)
         if (manager.carryingObj)
         {
             manager.nearestLiftableObj = null;
@@ -59,26 +104,12 @@ public class DefaultPlayerState : IPlayerState
             manager.transform.GetChild(0).localPosition = manager.animator2D.animations[manager.animator2D.currentAnimation].HeldItemPosition;
         }
 
-        //else look for a liftable object within a vicinity of the player.
-        else if (!manager.nearestLiftableObj)
-        {
-            foreach (Collider2D x in Physics2D.OverlapBoxAll((Vector2)manager.transform.position + manager.boxCollider.offset, manager.boxCollider.bounds.size * 2f, 0))
-            {
-                if (x.GetComponent<Liftable>() != null)
-                {
-                    manager.nearestLiftableObj = x.GetComponent<Liftable>();
-                    break;
-                }
-            }
-        }
-
         //Get Movement State of Player
-        if (manager.IsGrounded())
+        if (IsGrounded)
         {
             movementState = joyInput.x != 0 ? MovementState.Running : MovementState.Idle;
-            //not working for some reason
-            //Detect if landing timer is negative, then set landing timer to 1, causing it to increment for 30 frames while being in the landing state. 
-            //Then, by setting to
+
+            //Detect if landing timer is negative, then set landing timer to 1, causing it to increment for 10 frames while being in the landing state. 
             if (landingTimer != 0)
             {
                 movementState = MovementState.Landing;
@@ -109,157 +140,18 @@ public class DefaultPlayerState : IPlayerState
             }
         }
 
-        //dammit...
-        bool isAgainstWall = IsAgainstWall(manager);
-
-        switch (currentSubState)
+        //if we switch from running to falling or coyoteTime is already enabled...
+        if ((previousMovementState == MovementState.Running && movementState == MovementState.Falling) || coyoteTimeEnable)
         {
-            case SubStates.Normal:
-                if (joyInput.y < 0 && manager.IsGrounded())
-                {
-                    manager.duckBox?.SetCollisionBox(manager.boxCollider);
-                    currentSubState = SubStates.Duck;
-                    break;
-                }
-                if (joyInput.x != 0 && isAgainstWall)
-                {
-                    currentSubState = SubStates.Wall;
-                    break;
-                }
-                if (joyInput.y > 0 && movementState == MovementState.Idle)
-                {
-                    currentSubState = SubStates.LookUp;
-                }
-                manager.animator2D.SetAnimation(PlayerStateManager.Animations.Idle + (int)movementState);
-                break;
-
-            case SubStates.Carry:
-                if (joyInput.y < 0 && manager.IsGrounded())
-                {
-                    manager.carryDuckBox?.SetCollisionBox(manager.boxCollider);
-                    currentSubState = SubStates.CarryDuck;
-                    break;
-                }
-                if (joyInput.x != 0 && IsAgainstWall(manager))
-                {
-                    currentSubState = SubStates.CarryWall;
-                    break;
-                }
-                manager.animator2D.SetAnimation(PlayerStateManager.Animations.CarryIdle + (int)movementState);
-                break;
-            case SubStates.CarryDuck:
-                if (joyInput.y >= 0 && !manager.IsTouchingCeiling())
-                {
-                    manager.carryBox.SetCollisionBox(manager.boxCollider);
-                    currentSubState = SubStates.Carry;
-                    break;
-                }
-                if (movementState == MovementState.Running)
-                {
-                    manager.animator2D.SetAnimation(PlayerStateManager.Animations.CarryDuckRun);
-                }
-                else
-                {
-                    manager.animator2D.SetAnimation(PlayerStateManager.Animations.CarryDuckIdle);
-                }
-                break;
-            case SubStates.Duck:
-                if (joyInput.y >= 0 && !manager.IsTouchingCeiling())
-                {
-                    manager.normalBox.SetCollisionBox(manager.boxCollider);
-                    currentSubState = SubStates.Normal;
-                    break;
-                }
-                if (movementState == MovementState.Running)
-                {
-                    manager.animator2D.SetAnimation(PlayerStateManager.Animations.DuckRun);
-                }
-                else
-                {
-                    manager.animator2D.SetAnimation(PlayerStateManager.Animations.DuckIdle);
-                }
-                break;
-            case SubStates.CloneStruggle:
-                if (Input.GetKeyUp(KeyCode.Z))
-                {
-                    currentSubState = SubStates.Carry;
-                    manager.carryBox.SetCollisionBox(manager.boxCollider);
-                    manager.Clone();
-                }
-                manager.animator2D.SetAnimation(PlayerStateManager.Animations.CloneStruggleIdle + (int)movementState);
-                break;
-            case SubStates.ThrowStruggle:
-                if (Input.GetKeyUp(KeyCode.Z))
-                {
-                    manager.normalBox.SetCollisionBox(manager.boxCollider);
-                    currentSubState = SubStates.Normal;
-                    manager.ThrowHeldObject();
-                }
-                manager.animator2D.SetAnimation(PlayerStateManager.Animations.ThrowStruggleIdle + (int)movementState);
-                break;
-            case SubStates.Wall:
-                if (!IsAgainstWall(manager))
-                {
-                    currentSubState = SubStates.Normal;
-                }
-                if (movementState == MovementState.Idle)
-                {
-                    currentSubState = SubStates.Normal;
-                }
-                else
-                {
-                    manager.animator2D.SetAnimation(PlayerStateManager.Animations.WallRun + (manager.IsGrounded() ? 0 : 1));
-                }
-                break;
-            case SubStates.LookUp:
-                if (joyInput.y <= 0 || movementState != MovementState.Idle)
-                {
-                    currentSubState = SubStates.Normal;
-                }
-                manager.animator2D.SetAnimation(PlayerStateManager.Animations.IdleLookUp);
-                break;
-            case SubStates.CarryWall:
-                if (!IsAgainstWall(manager))
-                {
-                    currentSubState = SubStates.Carry;
-                }
-                if (movementState == MovementState.Idle)
-                {
-                    manager.animator2D.SetAnimation(PlayerStateManager.Animations.CarryIdle);
-                }
-                else
-                {
-                    manager.animator2D.SetAnimation(PlayerStateManager.Animations.CarryWallRun + (manager.IsGrounded() ? 0 : 1));
-                }
-                break;
-            case SubStates.CarryLookUp:
-                if (joyInput.y <= 0 || movementState != MovementState.Idle)
-                {
-                    currentSubState = SubStates.Carry;
-                }
-                manager.animator2D.SetAnimation(PlayerStateManager.Animations.CarryLookUpIdle);
-                break;
+            coyoteTimeEnable = true;
         }
-    }
-
-    private static bool IsAgainstWall(PlayerStateManager manager)
-    {
-        return (manager.IsTouchingRightWall() && manager.direction) || (manager.IsTouchingLeftWall() && !manager.direction);
-    }
-
-    public void SetAnimation(PlayerStateManager manager, Vector2 joyInput)
-    {
-        switch (currentSubState)
+        if ((coyoteTimeEnable && IsGrounded) || (coyoteTimeEnable && movementState == MovementState.Jumping))
         {
-            case SubStates.Normal when joyInput.y < 0 && manager.IsGrounded():
-            break;
-            case SubStates.Normal when joyInput.x != 0 && IsAgainstWall(manager):
-            break;
+            coyoteTimeEnable = false;
         }
-    }
-    public void ChangeStateLogic()
-    {
-        return;
+
+        //:D
+        currentSubState.UpdateSubstate(manager, this);
     }
 
     // This deals with the physical movement of the player.
@@ -267,6 +159,7 @@ public class DefaultPlayerState : IPlayerState
     {
         Vector2 joyInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 velocity = manager.rigidBody.velocity;
+
         // Horizontal Movement
         if (joyInput.x != 0)
         {
@@ -284,10 +177,31 @@ public class DefaultPlayerState : IPlayerState
         // Horizontal Speed Capping
         if (Mathf.Abs(velocity.x) > maxSpeed || Mathf.Abs(velocity.y) > maxSpeed)
         {
-            manager.rigidBody.velocity  = new Vector2(
+            manager.rigidBody.velocity = new Vector2(
                 Mathf.Clamp(manager.rigidBody.velocity.x, -maxSpeed, maxSpeed),
                 Mathf.Clamp(manager.rigidBody.velocity.y, -maxSpeed, maxSpeed)
                 );
         }
+
+        /* if (manager.IsGrounded() && manager.SnapToGround(out float result))
+        {
+            manager.rigidBody.position = new Vector2(manager.rigidBody.position.x, result);
+        } */
     }
+    public void SetAnimation(int animation, int animationCarry, PlayerStateManager manager)
+    {
+        //set animation depending on if carrying object or not
+        if(!manager.carryingObj)
+        {
+            manager.animator2D.SetAnimation(animation + (int)movementState);
+        }
+        else
+        {
+            manager.animator2D.SetAnimation(animationCarry + (int)movementState);
+        }
+    }
+}
+public interface IPlayerSubstate
+{
+    public void UpdateSubstate(PlayerStateManager manager, DefaultPlayerState substateManager);
 }
