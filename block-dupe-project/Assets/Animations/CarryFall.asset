@@ -16,8 +16,7 @@ MonoBehaviour:
   AnimationFrames:
   - SpriteShown: {fileID: -1438550283, guid: 8a9a80047443704468538252b34c4daa, type: 3}
     HoldForTicks: 8
-  - SpriteShown: {fileID: -1887000500, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 4
   Looping: 0
   LoopStart: 0
   LoopEnd: 0
+  HeldItemPosition: {x: 0, y: 1.2}
