@@ -11,5 +11,6 @@ public class AnimationData: ScriptableObject
     public bool Looping;
     public int LoopStart;
     public int LoopEnd;
+    public Vector2 HeldItemPosition;
 }
 
