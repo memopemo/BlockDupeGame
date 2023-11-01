@@ -49,8 +49,8 @@ public class CameraFocus : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, target.position + (Vector3)offset + Vector3.right * playerLookAhead, Time.deltaTime * followSpeed);
 
         transform.position = new Vector3(isVerticalScroller ? 0 : transform.position.x, isSideScroller ? 0 : transform.position.y, hasParralax ? distance * -1.75f : -ORTHO_CAMERA_DISTANCE);
-
-        if(!bounds.bounds.Contains(transform.position))
+        
+        if(bounds != null && !bounds.bounds.Contains(transform.position))
         {
             Vector2 _closest = bounds.ClosestPoint(transform.position);
             transform.position = new Vector3(_closest.x, _closest.y, transform.position.z);
