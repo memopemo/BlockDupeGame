@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Animator2D;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
@@ -37,7 +33,8 @@ public class PlayerStateManager : MonoBehaviour
      public CollisionBox carryBox;
      public CollisionBox carryDuckBox;
      public CollisionBox unaliveBox;
-     float maxLedgeHeight;
+     float distanceCheckForCollision = 0.1f;
+     float wallCollisionScale = 0.8f;
 
      public Liftable nearestLiftableObj; //May be null.
      public Liftable carryingObj;
@@ -138,8 +135,10 @@ public class PlayerStateManager : MonoBehaviour
           return new Vector2(flip, 1)*15;
           
      }
+     
 
-     //Good gravy!
+
+     //Good gravy! Lotta boxes!
      public bool IsGrounded()
      {
           ContactFilter2D contactFilter2D = new ContactFilter2D
@@ -150,7 +149,15 @@ public class PlayerStateManager : MonoBehaviour
                //Other settings that may come up later
           };
           List<RaycastHit2D> results = new(); //dont care
-          return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size, 0, Vector2.down, contactFilter2D, results, 0.01f) > 0;
+          return Physics2D.BoxCast(
+               (Vector2)transform.position + boxCollider.offset, 
+               boxCollider.bounds.size, 
+               0,
+               Vector2.down, 
+               contactFilter2D, 
+               results, 
+               distanceCheckForCollision) 
+               > 0;
      }
      public bool IsTouchingLeftWall()
      {
@@ -162,7 +169,7 @@ public class PlayerStateManager : MonoBehaviour
                //Other settings that may come up later
           };
           List<RaycastHit2D> results = new(); //dont care
-          return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size * Vector2.one * 0.8f, 0, Vector2.left, contactFilter2D, results, 0.05f) > 0;
+          return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size - Vector3.up * wallCollisionScale, 0, Vector2.left, contactFilter2D, results, distanceCheckForCollision) > 0;
      }
      public bool IsTouchingRightWall()
      {
@@ -173,8 +180,18 @@ public class PlayerStateManager : MonoBehaviour
                useLayerMask = true
                //Other settings that may come up later
           };
-          List<RaycastHit2D> results = new(); //dont care
-          return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size * Vector2.one * 0.8f, 0, Vector2.right, contactFilter2D, results, 0.05f) > 0;
+          List<RaycastHit2D> results = new(); //dont care about results
+
+          int numberOfHits = Physics2D.BoxCast(
+               (Vector2)transform.position + boxCollider.offset,           //origin
+               boxCollider.bounds.size - Vector3.one * wallCollisionScale, //boxsize
+               0,                                                          //angle
+               Vector2.right,                                              //direction
+               contactFilter2D,                                            //filter
+               results,                                                    //each hit's details
+               distanceCheckForCollision);                                 //distance
+               
+          return numberOfHits > 0;
      }
      public bool IsTouchingCeiling()
      {
@@ -186,7 +203,17 @@ public class PlayerStateManager : MonoBehaviour
                //Other settings that may come up later
           };
           List<RaycastHit2D> results = new(); //dont care
-          return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size, 0, Vector2.up, contactFilter2D, results, 0.1f) > 0;
+          
+          int numberOfHits = Physics2D.BoxCast(
+               (Vector2)transform.position + boxCollider.offset, //origin     
+               boxCollider.bounds.size,                          //boxsize
+               0,                                                //angle
+               Vector2.up,                                       //direction
+               contactFilter2D,                                  //filter
+               results,                                          //each hit's details
+               distanceCheckForCollision);                       //distance
+
+          return numberOfHits > 0;
      }
      public bool HasSpaceToLift(BoxCollider2D collider)
      {
@@ -199,66 +226,6 @@ public class PlayerStateManager : MonoBehaviour
           };
           List<RaycastHit2D> results = new(); //dont care
           return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset  + Vector2.up, collider.bounds.size, 0, Vector2.zero, contactFilter2D, results, 0) > 0;
-     }
-     public bool SnapToGround(out float amount)
-     {
-          ContactFilter2D contactFilter2D = new()
-          {
-               layerMask = ground,
-               useTriggers = false,
-               useLayerMask = true
-               //Other settings that may come up later
-          };
-          List<RaycastHit2D> resultsl = new(); //dont care
-          List<RaycastHit2D> resultsr = new(); //dont care
-          Vector2 pos = (Vector2)transform.position;
-          float length = boxCollider.bounds.max.y;
-          float minLedgeHeight = boxCollider.offset.y;
-
-          Vector2 originr = new Vector2(
-               boxCollider.bounds.extents.x + Input.GetAxis("Horizontal") *  8 / 23, 
-               boxCollider.bounds.extents.y
-               );
-
-          Vector2 originl = new Vector2(
-               -boxCollider.bounds.extents.x + Input.GetAxis("Horizontal") * 8 / 23, 
-               boxCollider.bounds.extents.y
-               );
-
-          var groundr = Physics2D.Raycast(
-               pos + originr, 
-               Vector2.down, 
-               contactFilter2D, 
-               resultsl, 
-               length
-               );
-
-          var groundl = Physics2D.Raycast(
-               pos + originl, 
-               Vector2.down, 
-               contactFilter2D, 
-               resultsr, 
-               length
-               );
-          
-          Debug.DrawRay(pos+originl, Vector2.down * length);
-          Debug.DrawRay(pos+originr, Vector2.down * length);
-
-          bool isTooHigh(float y) => y > minLedgeHeight;
-
-          amount = 0;
-
-          if(resultsr.Count != 0 && !isTooHigh(resultsr[0].point.y))
-          {
-               amount = resultsr[0].point.y + boxCollider.bounds.extents.y - boxCollider.offset.y;
-               return true;
-          }
-          else if(resultsl.Count != 0 && !isTooHigh(resultsl[0].point.y))
-          {
-               amount = resultsl[0].point.y + boxCollider.bounds.extents.y - boxCollider.offset.y;
-               return true;
-          }
-          return false;
      }
 
      [SerializeField]
@@ -284,20 +251,28 @@ public class PlayerStateManager : MonoBehaviour
           CarryLookUpIdle = 90;
      }
 
-    public void OnDrawGizmos()
-    {
-          //Vector2 pos = (Vector2)transform.position + GetComponent<Collider2D>().offset;
-          /*Gizmos.color = Color.magenta;
-          Gizmos.DrawWireCube(pos + Vector2.down * 0.5f, GetComponent<Collider2D>().bounds.size);
-          Gizmos.color = Color.red;
-          Gizmos.DrawWireCube(pos + Vector2.left * 0.1f, GetComponent<Collider2D>().bounds.size);
-          Gizmos.color = Color.green;
-          Gizmos.DrawWireCube(pos + Vector2.right * 0.1f, GetComponent<Collider2D>().bounds.size);
-          Gizmos.color = Color.blue;
-          Gizmos.DrawWireCube(pos + Vector2.up * 0.1f, GetComponent<Collider2D>().bounds.size);
-          Gizmos.DrawWireCube(pos + Vector2.up, GetComponent<Collider2D>().bounds.size);
-          Gizmos.DrawWireCube(pos, GetComponent<Collider2D>().bounds.size*2f); */
+     //Debug Box Collision Drawing
+     public void OnDrawGizmos()
+     {
+          if(boxCollider == null) return;
 
-    }
+          Vector2 pos = (Vector2)transform.position + boxCollider.offset; // get position shorthand
+
+          //Ground
+          Gizmos.color = Color.magenta * 0.5f;
+          Gizmos.DrawWireCube(pos + Vector2.down * distanceCheckForCollision, boxCollider.bounds.size);
+
+          // Left Wall
+          Gizmos.color = Color.red * 0.5f;
+          Gizmos.DrawWireCube(pos + Vector2.left * distanceCheckForCollision, boxCollider.bounds.size - Vector3.up *wallCollisionScale);
+
+          //Right Wall
+          Gizmos.color = Color.green * 0.5f;
+          Gizmos.DrawWireCube(pos + Vector2.right * distanceCheckForCollision, boxCollider.bounds.size - Vector3.up *wallCollisionScale);
+
+          //Ceiling
+          Gizmos.color = Color.blue * 0.5f;
+          Gizmos.DrawWireCube(pos + Vector2.up * distanceCheckForCollision, boxCollider.bounds.size);
+     }
 
 }

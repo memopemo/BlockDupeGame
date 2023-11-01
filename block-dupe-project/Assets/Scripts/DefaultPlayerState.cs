@@ -108,7 +108,7 @@ public class DefaultPlayerState : IPlayerState
         if (IsGrounded)
         {
             movementState = joyInput.x != 0 ? MovementState.Running : MovementState.Idle;
-
+            
             //Detect if landing timer is negative, then set landing timer to 1, causing it to increment for 10 frames while being in the landing state. 
             if (landingTimer != 0)
             {
@@ -139,6 +139,8 @@ public class DefaultPlayerState : IPlayerState
                 landingTimer--;
             }
         }
+        //Debug.Log(landingTimer);
+        //Debug.Log(IsGrounded);
 
         //if we switch from running to falling or coyoteTime is already enabled...
         if ((previousMovementState == MovementState.Running && movementState == MovementState.Falling) || coyoteTimeEnable)

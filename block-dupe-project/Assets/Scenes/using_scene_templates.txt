@@ -1,0 +1,3 @@
+To create a new scene with a template:
+- CTRL-N or File>New Scene
+Select Template.
