@@ -23,8 +23,8 @@ public class MainMenu : MonoBehaviour
         
     }
 
-    public GameObject options;
-        void start(){
-            options.SetActive(false);
+    public GameObject option;
+        void Start(){
+            option.SetActive(false);
         }
 }
