@@ -155,10 +155,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 593339871}
+<<<<<<< Updated upstream
   - {fileID: 1391104810}
   - {fileID: 1922056324}
   - {fileID: 170684118}
   - {fileID: 1007235663}
+=======
+>>>>>>> Stashed changes
   - {fileID: 1579519062}
   m_Father: {fileID: 1583833161}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -193,14 +196,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
+<<<<<<< Updated upstream
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+=======
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+>>>>>>> Stashed changes
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< Updated upstream
   m_Sprite: {fileID: 5364504914723561358, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
+=======
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+>>>>>>> Stashed changes
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -209,7 +220,11 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+<<<<<<< Updated upstream
   m_PixelsPerUnitMultiplier: 0.25
+=======
+  m_PixelsPerUnitMultiplier: 1
+>>>>>>> Stashed changes
 --- !u!222 &24188602
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -256,6 +271,7 @@ Transform:
   - {fileID: 1351387035}
   m_Father: {fileID: 1583833161}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!1 &42505445
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +429,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 114972143}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &154962262
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,8 +490,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: BLOCK DUPE
   m_isRightToLeft: 0
+<<<<<<< Updated upstream
   m_fontAsset: {fileID: 11400000, guid: cca277195b54cf144948d2f48164e3be, type: 2}
   m_sharedMaterial: {fileID: 8253968134865973670, guid: cca277195b54cf144948d2f48164e3be, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: 8735b7e258ec1cc4d86ffb9fe92e2c21, type: 2}
+  m_sharedMaterial: {fileID: 9191073602895780714, guid: 8735b7e258ec1cc4d86ffb9fe92e2c21, type: 2}
+>>>>>>> Stashed changes
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -547,6 +570,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154962262}
   m_CullTransparentMesh: 1
+<<<<<<< Updated upstream
 --- !u!1 &170684117
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,6 +707,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170684117}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &202900082
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,6 +945,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< Updated upstream
 --- !u!1 &221323659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,6 +1485,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 338495796}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &361942610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1542,6 +1571,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< Updated upstream
 --- !u!1 &451721486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,6 +1647,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451721486}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,10 +1798,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< Updated upstream
   m_text: Options
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cca277195b54cf144948d2f48164e3be, type: 2}
   m_sharedMaterial: {fileID: 8253968134865973670, guid: cca277195b54cf144948d2f48164e3be, type: 2}
+=======
+  m_text: Settings
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8735b7e258ec1cc4d86ffb9fe92e2c21, type: 2}
+  m_sharedMaterial: {fileID: 9191073602895780714, guid: 8735b7e258ec1cc4d86ffb9fe92e2c21, type: 2}
+>>>>>>> Stashed changes
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1777,7 +1816,11 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+<<<<<<< Updated upstream
   m_enableVertexGradient: 1
+=======
+  m_enableVertexGradient: 0
+>>>>>>> Stashed changes
   m_colorMode: 3
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -1793,8 +1836,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
+<<<<<<< Updated upstream
   m_fontSize: 65.4
   m_fontSizeBase: 65.4
+=======
+  m_fontSize: 55.4
+  m_fontSizeBase: 55.4
+>>>>>>> Stashed changes
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1843,6 +1891,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523495940}
   m_CullTransparentMesh: 1
+<<<<<<< Updated upstream
 --- !u!1 &538367802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2052,6 +2101,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579704714}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &593339870
 GameObject:
   m_ObjectHideFlags: 0
@@ -2064,7 +2115,11 @@ GameObject:
   - component: {fileID: 593339873}
   - component: {fileID: 593339872}
   m_Layer: 5
+<<<<<<< Updated upstream
   m_Name: Settings Text
+=======
+  m_Name: Text (TMP)
+>>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2086,8 +2141,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 0, y: 435.4}
   m_SizeDelta: {x: 565.2, y: 50}
+=======
+  m_AnchoredPosition: {x: 0, y: 397.5}
+  m_SizeDelta: {x: 391.33, y: 50}
+>>>>>>> Stashed changes
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &593339872
 MonoBehaviour:
@@ -2111,8 +2171,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Settings:'
   m_isRightToLeft: 0
+<<<<<<< Updated upstream
   m_fontAsset: {fileID: 11400000, guid: cca277195b54cf144948d2f48164e3be, type: 2}
   m_sharedMaterial: {fileID: 8253968134865973670, guid: cca277195b54cf144948d2f48164e3be, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: 8735b7e258ec1cc4d86ffb9fe92e2c21, type: 2}
+  m_sharedMaterial: {fileID: 9191073602895780714, guid: 8735b7e258ec1cc4d86ffb9fe92e2c21, type: 2}
+>>>>>>> Stashed changes
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2136,8 +2201,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
+<<<<<<< Updated upstream
   m_fontSize: 114.3
   m_fontSizeBase: 114.3
+=======
+  m_fontSize: 90
+  m_fontSizeBase: 90
+>>>>>>> Stashed changes
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2270,6 +2340,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< Updated upstream
 --- !u!1 &633600204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2360,6 +2431,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+=======
+>>>>>>> Stashed changes
 --- !u!1 &666312678
 GameObject:
   m_ObjectHideFlags: 0
@@ -2396,8 +2469,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 0, y: -338.2}
   m_SizeDelta: {x: 323.8, y: 147.9}
+=======
+  m_AnchoredPosition: {x: 0, y: -309.4}
+  m_SizeDelta: {x: 302.37, y: 128.2}
+>>>>>>> Stashed changes
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &666312680
 MonoBehaviour:
@@ -2418,20 +2496,36 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
+<<<<<<< Updated upstream
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.30980393, g: 0.6431373, b: 0.72156864, a: 1}
     m_PressedColor: {r: 0.29803923, g: 0.40784317, b: 0.52156866, a: 1}
     m_SelectedColor: {r: 0.8745099, g: 0.87843144, b: 0.909804, a: 1}
+=======
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 1, g: 0, b: 0, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 1, g: 0, b: 0, a: 1}
+>>>>>>> Stashed changes
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
+<<<<<<< Updated upstream
     m_HighlightedSprite: {fileID: -7315267628683563636, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
     m_PressedSprite: {fileID: 4423297817012073287, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
     m_SelectedSprite: {fileID: 3482809133076360259, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
     m_DisabledSprite: {fileID: -4117148379991401085, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
+=======
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+>>>>>>> Stashed changes
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -2475,7 +2569,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< Updated upstream
   m_Sprite: {fileID: 6521014070298623788, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
+=======
+  m_Sprite: {fileID: 21300000, guid: 87a5c900027e15741845ecdb0134e805, type: 3}
+>>>>>>> Stashed changes
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2484,7 +2582,11 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+<<<<<<< Updated upstream
   m_PixelsPerUnitMultiplier: 0.5
+=======
+  m_PixelsPerUnitMultiplier: 3.86
+>>>>>>> Stashed changes
 --- !u!222 &666312682
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2695,8 +2797,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 0, y: -5.3500004}
   m_SizeDelta: {x: 0, y: 1.3000016}
+=======
+  m_AnchoredPosition: {x: 0, y: -5}
+  m_SizeDelta: {x: 0, y: 10}
+>>>>>>> Stashed changes
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &804281560
 MonoBehaviour:
@@ -2720,8 +2827,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quit
   m_isRightToLeft: 0
+<<<<<<< Updated upstream
   m_fontAsset: {fileID: 11400000, guid: cca277195b54cf144948d2f48164e3be, type: 2}
   m_sharedMaterial: {fileID: 8253968134865973670, guid: cca277195b54cf144948d2f48164e3be, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: 8735b7e258ec1cc4d86ffb9fe92e2c21, type: 2}
+  m_sharedMaterial: {fileID: 9191073602895780714, guid: 8735b7e258ec1cc4d86ffb9fe92e2c21, type: 2}
+>>>>>>> Stashed changes
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2745,10 +2857,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
+<<<<<<< Updated upstream
   m_fontSize: 80.9
   m_fontSizeBase: 80.9
   m_fontWeight: 400
   m_enableAutoSizing: 0
+=======
+  m_fontSize: 72
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+>>>>>>> Stashed changes
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -2795,6 +2914,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804281558}
   m_CullTransparentMesh: 1
+<<<<<<< Updated upstream
 --- !u!1 &870676357
 GameObject:
   m_ObjectHideFlags: 0
@@ -3004,6 +3124,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916087841}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &941421628
 GameObject:
   m_ObjectHideFlags: 0
@@ -3088,6 +3210,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< Updated upstream
 --- !u!1 &1007235662
 GameObject:
   m_ObjectHideFlags: 0
@@ -3224,6 +3347,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007235662}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &1043495605
 GameObject:
   m_ObjectHideFlags: 0
@@ -3548,8 +3673,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 0, y: 34.7}
   m_SizeDelta: {x: 323.8, y: 147.9}
+=======
+  m_AnchoredPosition: {x: 0, y: 25}
+  m_SizeDelta: {x: 302.37, y: 128.2}
+>>>>>>> Stashed changes
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1214209213
 MonoBehaviour:
@@ -3570,20 +3700,36 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
+<<<<<<< Updated upstream
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.30980393, g: 0.6431373, b: 0.72156864, a: 1}
     m_PressedColor: {r: 0.29803923, g: 0.40784317, b: 0.52156866, a: 1}
     m_SelectedColor: {r: 0.8745099, g: 0.87843144, b: 0.909804, a: 1}
+=======
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.13333334, g: 1, b: 0, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.13231826, g: 1, b: 0, a: 1}
+>>>>>>> Stashed changes
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
+<<<<<<< Updated upstream
     m_HighlightedSprite: {fileID: -7315267628683563636, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
     m_PressedSprite: {fileID: 4423297817012073287, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
     m_SelectedSprite: {fileID: 3482809133076360259, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
     m_DisabledSprite: {fileID: -4117148379991401085, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
+=======
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+>>>>>>> Stashed changes
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -3627,7 +3773,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< Updated upstream
   m_Sprite: {fileID: 6521014070298623788, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
+=======
+  m_Sprite: {fileID: 21300000, guid: 87a5c900027e15741845ecdb0134e805, type: 3}
+>>>>>>> Stashed changes
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3636,7 +3786,11 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+<<<<<<< Updated upstream
   m_PixelsPerUnitMultiplier: 0.5
+=======
+  m_PixelsPerUnitMultiplier: 3.86
+>>>>>>> Stashed changes
 --- !u!222 &1214209215
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3645,6 +3799,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214209211}
   m_CullTransparentMesh: 1
+<<<<<<< Updated upstream
 --- !u!1 &1317199777
 GameObject:
   m_ObjectHideFlags: 0
@@ -3681,6 +3836,8 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+=======
+>>>>>>> Stashed changes
 --- !u!1 &1351387034
 GameObject:
   m_ObjectHideFlags: 0
@@ -3717,6 +3874,7 @@ Transform:
   - {fileID: 1096249778}
   m_Father: {fileID: 34418687}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!1 &1391104809
 GameObject:
   m_ObjectHideFlags: 0
@@ -3852,6 +4010,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391104809}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &1393459558
 GameObject:
   m_ObjectHideFlags: 0
@@ -3936,6 +4096,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< Updated upstream
 --- !u!1 &1420563441
 GameObject:
   m_ObjectHideFlags: 0
@@ -4057,6 +4218,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420563441}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &1468539267
 GameObject:
   m_ObjectHideFlags: 0
@@ -4116,8 +4279,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play
   m_isRightToLeft: 0
+<<<<<<< Updated upstream
   m_fontAsset: {fileID: 11400000, guid: cca277195b54cf144948d2f48164e3be, type: 2}
   m_sharedMaterial: {fileID: 8253968134865973670, guid: cca277195b54cf144948d2f48164e3be, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: 8735b7e258ec1cc4d86ffb9fe92e2c21, type: 2}
+  m_sharedMaterial: {fileID: 9191073602895780714, guid: 8735b7e258ec1cc4d86ffb9fe92e2c21, type: 2}
+>>>>>>> Stashed changes
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4141,10 +4309,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
+<<<<<<< Updated upstream
   m_fontSize: 81.6
   m_fontSizeBase: 81.6
   m_fontWeight: 400
   m_enableAutoSizing: 0
+=======
+  m_fontSize: 72
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+>>>>>>> Stashed changes
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -4228,8 +4403,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 0.000030517578, y: -407.8}
   m_SizeDelta: {x: 314.1, y: 157.1}
+=======
+  m_AnchoredPosition: {x: 0.000030517578, y: -309.21}
+  m_SizeDelta: {x: 302.37, y: 128.2}
+>>>>>>> Stashed changes
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1579519063
 MonoBehaviour:
@@ -4263,9 +4443,15 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
+<<<<<<< Updated upstream
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+=======
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
+>>>>>>> Stashed changes
     m_HighlightedColor: {r: 0, g: 0.19576454, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0, g: 0.15447235, b: 1, a: 1}
@@ -4273,10 +4459,17 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
+<<<<<<< Updated upstream
     m_HighlightedSprite: {fileID: -7315267628683563636, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
     m_PressedSprite: {fileID: 4423297817012073287, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
     m_SelectedSprite: {fileID: 3482809133076360259, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
     m_DisabledSprite: {fileID: -4117148379991401085, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
+=======
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+>>>>>>> Stashed changes
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -4320,7 +4513,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< Updated upstream
   m_Sprite: {fileID: 6521014070298623788, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
+=======
+  m_Sprite: {fileID: 21300000, guid: 87a5c900027e15741845ecdb0134e805, type: 3}
+>>>>>>> Stashed changes
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4329,7 +4526,11 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+<<<<<<< Updated upstream
   m_PixelsPerUnitMultiplier: 0.5
+=======
+  m_PixelsPerUnitMultiplier: 3.86
+>>>>>>> Stashed changes
 --- !u!222 &1579519066
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4434,7 +4635,10 @@ RectTransform:
   m_Children:
   - {fileID: 34418687}
   - {fileID: 154962263}
+<<<<<<< Updated upstream
   - {fileID: 870676358}
+=======
+>>>>>>> Stashed changes
   - {fileID: 2011905455}
   - {fileID: 24188599}
   m_Father: {fileID: 0}
@@ -4444,6 +4648,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+<<<<<<< Updated upstream
 --- !u!1 &1607278852
 GameObject:
   m_ObjectHideFlags: 0
@@ -4591,6 +4796,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672116192}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &1673955034
 GameObject:
   m_ObjectHideFlags: 0
@@ -4625,7 +4832,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 0, y: -2.5}
+=======
+  m_AnchoredPosition: {x: 0, y: -2.4999924}
+>>>>>>> Stashed changes
   m_SizeDelta: {x: 0, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1673955036
@@ -4650,8 +4861,13 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back
   m_isRightToLeft: 0
+<<<<<<< Updated upstream
   m_fontAsset: {fileID: 11400000, guid: cca277195b54cf144948d2f48164e3be, type: 2}
   m_sharedMaterial: {fileID: 8253968134865973670, guid: cca277195b54cf144948d2f48164e3be, type: 2}
+=======
+  m_fontAsset: {fileID: 11400000, guid: 8735b7e258ec1cc4d86ffb9fe92e2c21, type: 2}
+  m_sharedMaterial: {fileID: 9191073602895780714, guid: 8735b7e258ec1cc4d86ffb9fe92e2c21, type: 2}
+>>>>>>> Stashed changes
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4675,8 +4891,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
+<<<<<<< Updated upstream
   m_fontSize: 77.86
   m_fontSizeBase: 77.86
+=======
+  m_fontSize: 55.4
+  m_fontSizeBase: 55.4
+>>>>>>> Stashed changes
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4725,6 +4946,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1673955034}
   m_CullTransparentMesh: 1
+<<<<<<< Updated upstream
 --- !u!1 &1687209175
 GameObject:
   m_ObjectHideFlags: 0
@@ -4859,6 +5081,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687209175}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &1708409715
 GameObject:
   m_ObjectHideFlags: 0
@@ -5027,6 +5251,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< Updated upstream
 --- !u!1 &1922056323
 GameObject:
   m_ObjectHideFlags: 0
@@ -5162,6 +5387,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922056323}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &2005237942
 GameObject:
   m_ObjectHideFlags: 0
@@ -5396,6 +5623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   options: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!1 &2024897358
 GameObject:
   m_ObjectHideFlags: 0
@@ -5607,6 +5835,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046645378}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 --- !u!1 &2058601711
 GameObject:
   m_ObjectHideFlags: 0
@@ -5644,8 +5874,13 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
+<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 0, y: -148.3}
   m_SizeDelta: {x: 323.8, y: 147.9}
+=======
+  m_AnchoredPosition: {x: 0, y: -138.8}
+  m_SizeDelta: {x: 302.37, y: 128.2}
+>>>>>>> Stashed changes
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2058601713
 MonoBehaviour:
@@ -5666,20 +5901,36 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
+<<<<<<< Updated upstream
   m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.30980393, g: 0.6431373, b: 0.72156864, a: 1}
     m_PressedColor: {r: 0.29803923, g: 0.40784317, b: 0.52156866, a: 1}
     m_SelectedColor: {r: 0.8745099, g: 0.87843144, b: 0.909804, a: 1}
+=======
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.19576454, b: 1, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0, g: 0.15447235, b: 1, a: 1}
+>>>>>>> Stashed changes
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
+<<<<<<< Updated upstream
     m_HighlightedSprite: {fileID: -7315267628683563636, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
     m_PressedSprite: {fileID: 4423297817012073287, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
     m_SelectedSprite: {fileID: 3482809133076360259, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
     m_DisabledSprite: {fileID: -4117148379991401085, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
+=======
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+>>>>>>> Stashed changes
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -5723,7 +5974,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< Updated upstream
   m_Sprite: {fileID: 6521014070298623788, guid: 8fb3a763a1abb0541a1f73dad087a30a, type: 3}
+=======
+  m_Sprite: {fileID: 21300000, guid: 87a5c900027e15741845ecdb0134e805, type: 3}
+>>>>>>> Stashed changes
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5732,7 +5987,11 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+<<<<<<< Updated upstream
   m_PixelsPerUnitMultiplier: 0.5
+=======
+  m_PixelsPerUnitMultiplier: 3.86
+>>>>>>> Stashed changes
 --- !u!222 &2058601715
 CanvasRenderer:
   m_ObjectHideFlags: 0

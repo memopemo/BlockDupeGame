@@ -4,6 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
+<<<<<<< Updated upstream
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Testing/Test.unity
@@ -11,4 +12,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Testing/StressTest.unity
     guid: 73ece945c65842746bf867f6e994aabf
+=======
+  m_Scenes: []
+>>>>>>> Stashed changes
   m_configObjects: {}
