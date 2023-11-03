@@ -35,7 +35,6 @@ public class CameraFocus : MonoBehaviour
         _camera.orthographic = !hasParralax;
 
         _camera.orthographicSize = Mathf.Lerp(_camera.orthographicSize, distance, Time.deltaTime * followSpeed);
-        
 
         if(target.gameObject == cloneManager.currentlyControlledPlayer.gameObject)
         {

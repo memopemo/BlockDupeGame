@@ -7,6 +7,8 @@ using UnityEngine.Events;
 
 public class Trigger : MonoBehaviour
 {
+
+    //TODO: make it so that this only checks if its of a type, because we will have many different player clone gameobjects.
     [SerializeField] GameObject[] listenFor;
     [SerializeField] UnityEvent onEnter;
     [SerializeField] UnityEvent onExit;
