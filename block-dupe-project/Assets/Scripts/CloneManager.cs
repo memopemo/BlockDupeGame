@@ -43,11 +43,11 @@ public class CloneManager : MonoBehaviour
         }
     }
 
+    //Find a Player that is alive
     void FindDefaultPlayer()
     {
         foreach (PlayerStateManager canidate in FindObjectsOfType<PlayerStateManager>())
         {
-            print(canidate.currentState);
             if (canidate.currentState is DefaultPlayerState)
             {
                 currentlyControlledPlayer = canidate;

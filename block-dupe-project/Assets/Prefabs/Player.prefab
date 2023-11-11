@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84aa7294b659bc247a1072d3d1d14a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
+  rigidBody: {fileID: 1977104281864670061}
   ground:
     serializedVersion: 2
     m_Bits: 192
@@ -59,7 +59,7 @@ MonoBehaviour:
     m_Bits: 64
   direction: 0
   animator2D: {fileID: 0}
-  boxCollider: {fileID: 0}
+  boxCollider: {fileID: 5793899884649347283}
   normalBox:
     size: {x: 0.95, y: 1.31}
     offset: {x: 0, y: -0.25}
@@ -77,6 +77,8 @@ MonoBehaviour:
     offset: {x: 0, y: 0}
   nearestLiftableObj: {fileID: 0}
   carryingObj: {fileID: 0}
+  NormalPlayer: {fileID: 4512551625694812686}
+  MetalPlayer: {fileID: 4512551625694812686, guid: c207b35876b7ebc479e0c2cb462b6741, type: 3}
 --- !u!50 &1977104281864670061
 Rigidbody2D:
   serializedVersion: 4

@@ -5,3 +5,4 @@ public interface IPlayerState
     public void FixedUpdateState(PlayerStateManager manager);
     public void OnExit(PlayerStateManager manager);
 }
+

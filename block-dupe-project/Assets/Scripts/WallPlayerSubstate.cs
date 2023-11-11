@@ -1,5 +1,9 @@
 public class WallPlayerSubstate : IPlayerSubstate
 {
+    public void EnterSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
+    {
+    }
+
     public void UpdateSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
     {
         DefaultPlayerState.MovementState movementState = substateManager.movementState;

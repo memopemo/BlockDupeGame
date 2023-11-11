@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
@@ -36,13 +35,21 @@ public class PlayerStateManager : MonoBehaviour
      float distanceCheckForCollision = 0.1f;
      float wallCollisionScale = 0.8f;
 
+     public float timeForActivatingPowerup = 0.5f;
+
      public Liftable nearestLiftableObj; //May be null.
      public Liftable carryingObj;
+
+     public GameObject NormalPlayer;
+     public GameObject MetalPlayer;
      
      public DefaultPlayerState defaultPlayerState = new();
+
      public DeadPlayerState deadPlayerState = new();
 
      public HeldPlayerState heldPlayerState = new();
+
+     public ThrownPlayerState thrownPlayerState = new();
      //... add more states here.
      
 
@@ -60,10 +67,12 @@ public class PlayerStateManager : MonoBehaviour
      {
           currentState.UpdateState(this);
      }
+
      void FixedUpdate()
      {
           currentState.FixedUpdateState(this);
      }
+
      public void ChangeState(IPlayerState newState)
      {
           currentState.OnExit(this);
@@ -80,12 +89,15 @@ public class PlayerStateManager : MonoBehaviour
                carryingObj = nearestLiftableObj;
           }
      }
-     public void Clone()
-     {
-          // create the clone at the "lift point"
-          var newClone = Instantiate(gameObject, transform.GetChild(0).position, transform.rotation, transform.GetChild(0));
-          newClone.GetComponent<PlayerStateManager>().Init(); // init clone
 
+     public void Clone(bool metal)
+     {
+          // create the clone at the "lift point" the single line that makes magic
+
+          var newClone = Instantiate(metal ? MetalPlayer : NormalPlayer, Vector2.zero, transform.rotation);
+
+          newClone.GetComponent<PlayerStateManager>().Init(); // init clone
+          
           //lift clone, set nearestLiftableObject so the function knows who to lift.
           nearestLiftableObj = newClone.GetComponent<Liftable>(); 
           Lift();
@@ -95,6 +107,7 @@ public class PlayerStateManager : MonoBehaviour
           
           FindAnyObjectByType<CloneManager>().CreateClone(newClone.GetComponent<PlayerStateManager>());
      }
+
      public void Init()
      {
           //it has not been initialized, so we need to override the state ourself.
@@ -102,38 +115,56 @@ public class PlayerStateManager : MonoBehaviour
           heldPlayerState.OnEnter(this);     
           transform.name = "Player";
      }
-     public void ThrowHeldObject()
+
+     public void ThrowHeldObject(bool straight)
      {
           if(carryingObj.TryGetComponent(out PlayerStateManager a) && a.currentState == a.heldPlayerState)
           {
                //we die, clone lives!
                ChangeState(deadPlayerState);
-               carryingObj.GetComponent<PlayerStateManager>().ChangeState(defaultPlayerState);
+               carryingObj.GetComponent<PlayerStateManager>().ChangeState(thrownPlayerState);
           }
+
+          //Throw vector
+          Vector2 ThrowVector = GetThrowVector();
+
+          if(Input.GetAxis("Vertical") < 0) //down
+          {
+               carryingObj.transform.localPosition = Vector3.down*1;
+          }
+
           //Set velocity
           if(carryingObj.TryGetComponent(out Rigidbody2D rb))
           {
-               rb.velocity = GetThrowVector();
+               if(straight)
+               {
+                    carryingObj.StraightThrow(ThrowVector);
+               }
+               else
+               {
+                    rb.velocity = ThrowVector;
+               }
           }
 
-          carryingObj.OnBeingThrown();
+          //Send object being thrown that we are throwing
+          carryingObj.OnBeingThrown(gameObject);
           carryingObj.transform.parent = null; //get rid of our parent
           carryingObj = null;
-     }
+     }    
+
      public Vector2 GetThrowVector()
      {
           float flip = transform.localScale.x; // this is so it matches the direction of the player. ([<-] -1 or 1 [->])
           if(Input.GetAxis("Vertical") > 0) // is holding up
           {
-               return Vector2.up * 20;
+
+               return Vector2.up * 20 + 20 * Input.GetAxis("Horizontal") * Vector2.right;
           }
           else if(Input.GetAxis("Vertical") < 0) // is holding down
           {
-               return Vector2.up * 20;
+               return Vector2.down * 20;
           }
-          //TODO: add throw direction change based on holding up, or down.
-          return new Vector2(flip, 1)*15;
-          
+          return new Vector2(flip, 1)*15;      
      }
      
 
@@ -159,6 +190,7 @@ public class PlayerStateManager : MonoBehaviour
                distanceCheckForCollision) 
                > 0;
      }
+     
      public bool IsTouchingLeftWall()
      {
           ContactFilter2D contactFilter2D = new ContactFilter2D
@@ -171,6 +203,7 @@ public class PlayerStateManager : MonoBehaviour
           List<RaycastHit2D> results = new(); //dont care
           return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size - Vector3.up * wallCollisionScale, 0, Vector2.left, contactFilter2D, results, distanceCheckForCollision) > 0;
      }
+     
      public bool IsTouchingRightWall()
      {
           ContactFilter2D contactFilter2D = new ContactFilter2D
@@ -193,6 +226,7 @@ public class PlayerStateManager : MonoBehaviour
                
           return numberOfHits > 0;
      }
+     
      public bool IsTouchingCeiling()
      {
           ContactFilter2D contactFilter2D = new ContactFilter2D
@@ -215,6 +249,7 @@ public class PlayerStateManager : MonoBehaviour
 
           return numberOfHits > 0;
      }
+     
      public bool HasSpaceToLift(BoxCollider2D collider)
      {
           ContactFilter2D contactFilter2D = new ContactFilter2D
@@ -225,7 +260,15 @@ public class PlayerStateManager : MonoBehaviour
                //Other settings that may come up later
           };
           List<RaycastHit2D> results = new(); //dont care
-          return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset  + Vector2.up, collider.bounds.size, 0, Vector2.zero, contactFilter2D, results, 0) > 0;
+          int amount = Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset  + Vector2.up, collider.bounds.size, 0, Vector2.zero, contactFilter2D, results, 0);
+          foreach (var item in results)
+          {
+               if(item.collider.gameObject == nearestLiftableObj.gameObject)
+               {
+                    amount--;
+               }
+          }
+          return amount > 0;
      }
 
      [SerializeField]
@@ -274,5 +317,4 @@ public class PlayerStateManager : MonoBehaviour
           Gizmos.color = Color.blue * 0.5f;
           Gizmos.DrawWireCube(pos + Vector2.up * distanceCheckForCollision, boxCollider.bounds.size);
      }
-
 }

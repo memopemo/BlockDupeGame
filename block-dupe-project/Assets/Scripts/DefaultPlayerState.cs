@@ -74,7 +74,7 @@ public class DefaultPlayerState : IPlayerState
         // Cloning / Throwing
         if (Input.GetKeyDown(KeyCode.Z) && ((!manager.carryingObj && !manager.HasSpaceToLift(manager.boxCollider)) || manager.carryingObj))
         {
-            ChangeSubstate(cloneStruggleSubstate);
+            ChangeSubstate(cloneStruggleSubstate);  
         }
 
         //direction
@@ -206,4 +206,5 @@ public class DefaultPlayerState : IPlayerState
 public interface IPlayerSubstate
 {
     public void UpdateSubstate(PlayerStateManager manager, DefaultPlayerState substateManager);
+    public void EnterSubstate(PlayerStateManager manager, DefaultPlayerState substateManager);
 }
