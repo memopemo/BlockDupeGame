@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ExitScene : MonoBehaviour
 {
-    public SceneAsset sceneToLoad;
+    public string sceneToLoad;
     public int exitNum;
     
     //Todo: make it only allow the currently controlled player and share code with the "Trigger" Object.
@@ -15,6 +14,6 @@ public class ExitScene : MonoBehaviour
         PersistentExitData exitdata = new GameObject("ExitData").AddComponent<PersistentExitData>();
         //exitdata.Awake();
         PersistentExitData.Instance.exitNum = exitNum;
-        SceneManager.LoadScene(sceneToLoad.name);
+        SceneManager.LoadScene(sceneToLoad);
 }
 }

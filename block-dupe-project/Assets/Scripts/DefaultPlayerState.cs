@@ -159,7 +159,7 @@ public class DefaultPlayerState : IPlayerState
     // This deals with the physical movement of the player.
     public void FixedUpdateState(PlayerStateManager manager)
     {
-        Vector2 joyInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 joyInput = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 velocity = manager.rigidBody.velocity;
 
         // Horizontal Movement
@@ -167,6 +167,7 @@ public class DefaultPlayerState : IPlayerState
         {
             if (Mathf.Abs(velocity.x) < runSpeed)
             {
+                Debug.Log(joyInput.x);
                 manager.rigidBody.AddForce(10 * joyInput.x * runSpeed * Vector2.right);
             }
         }

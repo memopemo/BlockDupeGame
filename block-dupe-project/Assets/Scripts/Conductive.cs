@@ -23,7 +23,9 @@ public class Conductive : MonoBehaviour
     void CheckForElectricity()
     {
         Collider2D myCollider = GetComponent<Collider2D>();
-        Collider2D[] AllTouchingObjects = Physics2D.OverlapBoxAll((Vector2)transform.position + myCollider.offset, Vector2.one * 1.3f, 0);
+        Vector2 scale = new(Mathf.Abs(transform.lossyScale.x), Mathf.Abs(transform.lossyScale.y));
+        scale *= 1.3f;
+        Collider2D[] AllTouchingObjects = Physics2D.OverlapBoxAll((Vector2)transform.position + myCollider.offset, scale , 0);
 
         List<Collider2D> TouchingElectricObjects = new();
 
@@ -50,7 +52,8 @@ public class Conductive : MonoBehaviour
             if (!Electrified)
             {
                 StartElectrified.Invoke();
-                Instantiate(sparks, transform).name = sparks.name;
+                GameObject spark = Instantiate(sparks, transform);
+                spark.name = sparks.name;
             }
             Electrified = true;
             UpdateElectrified.Invoke();

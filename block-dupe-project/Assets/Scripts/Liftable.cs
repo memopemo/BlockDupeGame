@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(TrailRenderer))]
 public class Liftable : MonoBehaviour 
 {
     bool lifted;
@@ -10,12 +11,15 @@ public class Liftable : MonoBehaviour
     float originalGravity;
     GameObject throwerObject; //this is so we dont collide with our thrower
     Collider2D col;
+    TrailRenderer straightShotTrail;
 
     public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         originalGravity = rb.gravityScale;
         col = GetComponent<Collider2D>();
+        straightShotTrail = GetComponent<TrailRenderer>();
+        straightShotTrail.enabled = false;
     }
     public virtual void Update()
     {
@@ -24,7 +28,7 @@ public class Liftable : MonoBehaviour
     }
     public virtual void UpdateStraight()
     {
-        float distancePerStep = 20 * Time.deltaTime;
+        float distancePerStep = 30 * Time.deltaTime;
         Vector2 nextPosition = distancePerStep * StraightVector;
 
         ContactFilter2D contactFilter2D = new()
@@ -37,7 +41,7 @@ public class Liftable : MonoBehaviour
         
         Collider2D[] AllColliders = Physics2D.OverlapBoxAll(transform.position, Vector2.one, 0);
 
-        
+        //check if hitting something
         foreach (var collision in AllColliders)
         {
             
@@ -55,11 +59,13 @@ public class Liftable : MonoBehaviour
                 //stop moving
                 StraightVector = Vector2.zero;
                 rb.gravityScale = originalGravity;
+                straightShotTrail.enabled = false;
                 return;
             }
         }
         transform.position += (Vector3)nextPosition;
-        //check if hitting something
+        
+        
     }
 
     public virtual void OnBeingLifted()
@@ -83,8 +89,11 @@ public class Liftable : MonoBehaviour
     public virtual void StraightThrow(Vector2 StraightThrowVector)
     {
         StraightVector = StraightThrowVector.normalized;
+        rb.velocity = Vector2.zero;
         rb.gravityScale = 0;
         rb.position += Vector2.up;
+        straightShotTrail.Clear();
+        straightShotTrail.enabled = true;
     }
     public virtual void UpdateLifted()
     {

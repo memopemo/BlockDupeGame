@@ -11,6 +11,9 @@ public class PlayerStateManager : MonoBehaviour
 
      [SerializeField] LayerMask wall;
 
+     private enum DebugState{Default, Thrown, Dead, Held}
+     [SerializeField] private DebugState debugState;
+
      public bool direction;
      public Animator2D.Animator2D animator2D;
      public BoxCollider2D boxCollider;
@@ -66,6 +69,22 @@ public class PlayerStateManager : MonoBehaviour
      void Update()
      {
           currentState.UpdateState(this);
+
+          switch (currentState)
+          {
+               case DeadPlayerState:
+                    debugState = DebugState.Dead;
+                    break;
+               case DefaultPlayerState:
+                    debugState = DebugState.Default;
+                    break;
+               case ThrownPlayerState:
+                    debugState = DebugState.Thrown;
+                    break;
+               case HeldPlayerState:       
+                    debugState = DebugState.Held;        
+                    break;
+          }         
      }
 
      void FixedUpdate()
@@ -118,41 +137,48 @@ public class PlayerStateManager : MonoBehaviour
 
      public void ThrowHeldObject(bool straight)
      {
-          if(carryingObj.TryGetComponent(out PlayerStateManager a) && a.currentState == a.heldPlayerState)
-          {
-               //we die, clone lives!
-               ChangeState(deadPlayerState);
-               carryingObj.GetComponent<PlayerStateManager>().ChangeState(thrownPlayerState);
-          }
-
           //Throw vector
-          Vector2 ThrowVector = GetThrowVector();
+          Vector2 ThrowVector = GetThrowVector(straight);
+
+          bool isHeldPlayer = carryingObj.TryGetComponent(out PlayerStateManager a) && a.currentState == a.heldPlayerState;
 
           if(Input.GetAxis("Vertical") < 0) //down
           {
                carryingObj.transform.localPosition = Vector3.down*1;
           }
 
+          //SPECIFIC ORDER TIME
+
+          //This NEEDS to be BEFORE changing to thrown player state because thrown relies on checking if we are straight thrown.
+          if(straight && !(IsGrounded() && Input.GetAxisRaw("Vertical") < 0))
+          {
+               carryingObj.StraightThrow(ThrowVector);    
+          }
+
+          if(isHeldPlayer)
+          {
+               //we die, clone lives!
+               ChangeState(deadPlayerState);
+               a.ChangeState(thrownPlayerState);
+               FindFirstObjectByType<CloneManager>().currentlyControlledPlayer = a;
+          }
+          
+          //This NEEDS to be AFTER changing to thrown state because exiting held state sets our rigidbody type back to dynamic from static.
           //Set velocity
           if(carryingObj.TryGetComponent(out Rigidbody2D rb))
           {
-               if(straight)
-               {
-                    carryingObj.StraightThrow(ThrowVector);
-               }
-               else
-               {
-                    rb.velocity = ThrowVector;
-               }
+               rb.velocity = ThrowVector;   
           }
 
           //Send object being thrown that we are throwing
           carryingObj.OnBeingThrown(gameObject);
+
+          //Done with object.
           carryingObj.transform.parent = null; //get rid of our parent
           carryingObj = null;
      }    
 
-     public Vector2 GetThrowVector()
+     public Vector2 GetThrowVector(bool straight)
      {
           float flip = transform.localScale.x; // this is so it matches the direction of the player. ([<-] -1 or 1 [->])
           if(Input.GetAxis("Vertical") > 0) // is holding up
@@ -162,7 +188,15 @@ public class PlayerStateManager : MonoBehaviour
           }
           else if(Input.GetAxis("Vertical") < 0) // is holding down
           {
+               if(IsGrounded())
+               {
+                    return Vector2.down;
+               }
                return Vector2.down * 20;
+          }
+          if(straight)
+          {
+               return new Vector2(flip, 0)*15;
           }
           return new Vector2(flip, 1)*15;      
      }
