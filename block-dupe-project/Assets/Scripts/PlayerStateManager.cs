@@ -40,6 +40,11 @@ public class PlayerStateManager : MonoBehaviour
 
      public float timeForActivatingPowerup = 0.5f;
 
+     public int health;
+     public int maxHealth;
+     private float secDamageCooldown;
+     public float secDamageTime;
+
      public Liftable nearestLiftableObj; //May be null.
      public Liftable carryingObj;
 
@@ -85,6 +90,7 @@ public class PlayerStateManager : MonoBehaviour
                     debugState = DebugState.Held;        
                     break;
           }         
+          
      }
 
      void FixedUpdate()
@@ -115,7 +121,9 @@ public class PlayerStateManager : MonoBehaviour
 
           var newClone = Instantiate(metal ? MetalPlayer : NormalPlayer, Vector2.zero, transform.rotation);
 
-          newClone.GetComponent<PlayerStateManager>().Init(); // init clone
+          PlayerStateManager newClonePlayer = newClone.GetComponent<PlayerStateManager>();
+          newClonePlayer.Init(); // init clone
+          newClonePlayer.health = health;
           
           //lift clone, set nearestLiftableObject so the function knows who to lift.
           nearestLiftableObj = newClone.GetComponent<Liftable>(); 
@@ -201,7 +209,47 @@ public class PlayerStateManager : MonoBehaviour
           return new Vector2(flip, 1)*15;      
      }
      
+     public void UpdateHealth()
+     {
+          if(health > maxHealth)
+          {
+               health = maxHealth;
+          }
+          if(health <= 0)
+          {
+               Die();
+          }
+          if(secDamageCooldown > 0)
+          {
+               secDamageCooldown -= Time.deltaTime;
+          }
+     }
 
+     // Called by enemies and hazards.
+     public void TakeDamage(int amount, bool hitDirection)
+     {
+          if(secDamageCooldown <= 0)
+          {
+               health -= amount;
+                //knockback jump
+               rigidBody.AddForce((hitDirection?1:-1) * 40f * Vector2.one , ForceMode2D.Impulse);
+               secDamageCooldown = secDamageTime;
+          }
+
+     }
+     public void RegainHealth(int amount)
+     {
+          health += amount;
+     }
+     public void MaxOutHealth()
+     {
+          health = maxHealth;
+     }
+     public void Die()
+     {
+          rigidBody.AddForce(40f * Vector2.up , ForceMode2D.Impulse);
+          ChangeState(new DeadPlayerState());
+     }
 
      //Good gravy! Lotta boxes!
      public bool IsGrounded()

@@ -59,6 +59,7 @@ MonoBehaviour:
   wall:
     serializedVersion: 2
     m_Bits: 64
+  debugState: 0
   direction: 0
   animator2D: {fileID: 8355953015283227150}
   boxCollider: {fileID: 5793899884649347283}
@@ -78,6 +79,9 @@ MonoBehaviour:
     size: {x: 0.01, y: 0.01}
     offset: {x: 0, y: 0}
   timeForActivatingPowerup: 0.5
+  health: 10
+  maxHealth: 10
+  secDamageTime: 1.5
   nearestLiftableObj: {fileID: 0}
   carryingObj: {fileID: 0}
   NormalPlayer: {fileID: 4512551625694812686, guid: 1439bc9df4281b34c879337dc86e2294, type: 3}
@@ -323,7 +327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81929f8355381b74ea1774ee886337be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  straightParticle: {fileID: 8603919192346459877, guid: 68022d9daf23136458d16b31159f5c47, type: 3}
 --- !u!114 &5830136743392652498
 MonoBehaviour:
   m_ObjectHideFlags: 0

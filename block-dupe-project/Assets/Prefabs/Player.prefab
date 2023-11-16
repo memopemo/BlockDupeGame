@@ -58,6 +58,7 @@ MonoBehaviour:
   wall:
     serializedVersion: 2
     m_Bits: 64
+  debugState: 0
   direction: 0
   animator2D: {fileID: 0}
   boxCollider: {fileID: 5793899884649347283}
@@ -77,6 +78,9 @@ MonoBehaviour:
     size: {x: 0.01, y: 0.01}
     offset: {x: 0, y: 0}
   timeForActivatingPowerup: 0.5
+  health: 10
+  maxHealth: 10
+  secDamageTime: 1.5
   nearestLiftableObj: {fileID: 0}
   carryingObj: {fileID: 0}
   NormalPlayer: {fileID: 4512551625694812686}

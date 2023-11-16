@@ -154,6 +154,7 @@ public class DefaultPlayerState : IPlayerState
 
         //:D
         currentSubState.UpdateSubstate(manager, this);
+        manager.UpdateHealth();
     }
 
     // This deals with the physical movement of the player.
