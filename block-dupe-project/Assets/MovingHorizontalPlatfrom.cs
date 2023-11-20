@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingHorizontalPlatform : MonoBehaviour
 {
     public float speed;         // Speed of the platform
     public int startingPoint;   // Starting index (position of the platform)
@@ -21,26 +21,25 @@ public class MovingPlatform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      
-             // Check distance of platform and point
-            if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
+
+        // Check distance of platform and point
+        if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
+        {
+            i++;
+
+            // Check if platform was on the last point after index increase
+            if (i == points.Length)
             {
-                i++;
-
-                // Check if platform was on the last point after index increase
-                if (i == points.Length)
-                {
-                    i = 0;
-                }
+                i = 0;
             }
+        }
 
-            // Move platform to point position i
-            transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
+        // Move platform to point position i
+        transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
 
-        
+
     }
 
-    /*
         //Used for horizontally moving platforms
         private void OnCollisionEnter2D(Collision2D collision)
         {
@@ -51,5 +50,5 @@ public class MovingPlatform : MonoBehaviour
         {
             collision.transform.SetParent(null);
         }
-    */
+    
 }
