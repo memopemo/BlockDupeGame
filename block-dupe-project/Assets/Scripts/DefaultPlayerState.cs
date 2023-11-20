@@ -74,7 +74,7 @@ public class DefaultPlayerState : IPlayerState
         // Cloning / Throwing
         if (Input.GetKeyDown(KeyCode.Z) && ((!manager.carryingObj && !manager.HasSpaceToLift(manager.boxCollider)) || manager.carryingObj))
         {
-            ChangeSubstate(cloneStruggleSubstate);
+            ChangeSubstate(cloneStruggleSubstate);  
         }
 
         //direction
@@ -108,7 +108,7 @@ public class DefaultPlayerState : IPlayerState
         if (IsGrounded)
         {
             movementState = joyInput.x != 0 ? MovementState.Running : MovementState.Idle;
-
+            
             //Detect if landing timer is negative, then set landing timer to 1, causing it to increment for 10 frames while being in the landing state. 
             if (landingTimer != 0)
             {
@@ -139,6 +139,8 @@ public class DefaultPlayerState : IPlayerState
                 landingTimer--;
             }
         }
+        //Debug.Log(landingTimer);
+        //Debug.Log(IsGrounded);
 
         //if we switch from running to falling or coyoteTime is already enabled...
         if ((previousMovementState == MovementState.Running && movementState == MovementState.Falling) || coyoteTimeEnable)
@@ -152,12 +154,13 @@ public class DefaultPlayerState : IPlayerState
 
         //:D
         currentSubState.UpdateSubstate(manager, this);
+        manager.UpdateHealth();
     }
 
     // This deals with the physical movement of the player.
     public void FixedUpdateState(PlayerStateManager manager)
     {
-        Vector2 joyInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 joyInput = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 velocity = manager.rigidBody.velocity;
 
         // Horizontal Movement
@@ -165,6 +168,7 @@ public class DefaultPlayerState : IPlayerState
         {
             if (Mathf.Abs(velocity.x) < runSpeed)
             {
+                Debug.Log(joyInput.x);
                 manager.rigidBody.AddForce(10 * joyInput.x * runSpeed * Vector2.right);
             }
         }
@@ -204,4 +208,5 @@ public class DefaultPlayerState : IPlayerState
 public interface IPlayerSubstate
 {
     public void UpdateSubstate(PlayerStateManager manager, DefaultPlayerState substateManager);
+    public void EnterSubstate(PlayerStateManager manager, DefaultPlayerState substateManager);
 }

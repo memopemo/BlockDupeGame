@@ -1,5 +1,3 @@
-using UnityEngine;
-
 //Library of conditions that many states check with
 public static class SubstateConditions
 {

@@ -1,10 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Animator2D;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
@@ -15,6 +10,9 @@ public class PlayerStateManager : MonoBehaviour
      [SerializeField] LayerMask ground;
 
      [SerializeField] LayerMask wall;
+
+     private enum DebugState{Default, Thrown, Dead, Held}
+     [SerializeField] private DebugState debugState;
 
      public bool direction;
      public Animator2D.Animator2D animator2D;
@@ -37,15 +35,29 @@ public class PlayerStateManager : MonoBehaviour
      public CollisionBox carryBox;
      public CollisionBox carryDuckBox;
      public CollisionBox unaliveBox;
-     float maxLedgeHeight;
+     float distanceCheckForCollision = 0.1f;
+     float wallCollisionScale = 0.8f;
+
+     public float timeForActivatingPowerup = 0.5f;
+
+     public int health;
+     public int maxHealth;
+     private float secDamageCooldown;
+     public float secDamageTime;
 
      public Liftable nearestLiftableObj; //May be null.
      public Liftable carryingObj;
+
+     public GameObject NormalPlayer;
+     public GameObject MetalPlayer;
      
      public DefaultPlayerState defaultPlayerState = new();
+
      public DeadPlayerState deadPlayerState = new();
 
      public HeldPlayerState heldPlayerState = new();
+
+     public ThrownPlayerState thrownPlayerState = new();
      //... add more states here.
      
 
@@ -62,11 +74,30 @@ public class PlayerStateManager : MonoBehaviour
      void Update()
      {
           currentState.UpdateState(this);
+
+          switch (currentState)
+          {
+               case DeadPlayerState:
+                    debugState = DebugState.Dead;
+                    break;
+               case DefaultPlayerState:
+                    debugState = DebugState.Default;
+                    break;
+               case ThrownPlayerState:
+                    debugState = DebugState.Thrown;
+                    break;
+               case HeldPlayerState:       
+                    debugState = DebugState.Held;        
+                    break;
+          }         
+          
      }
+
      void FixedUpdate()
      {
           currentState.FixedUpdateState(this);
      }
+
      public void ChangeState(IPlayerState newState)
      {
           currentState.OnExit(this);
@@ -83,12 +114,17 @@ public class PlayerStateManager : MonoBehaviour
                carryingObj = nearestLiftableObj;
           }
      }
-     public void Clone()
-     {
-          // create the clone at the "lift point"
-          var newClone = Instantiate(gameObject, transform.GetChild(0).position, transform.rotation, transform.GetChild(0));
-          newClone.GetComponent<PlayerStateManager>().Init(); // init clone
 
+     public void Clone(bool metal)
+     {
+          // create the clone at the "lift point" the single line that makes magic
+
+          var newClone = Instantiate(metal ? MetalPlayer : NormalPlayer, Vector2.zero, transform.rotation);
+
+          PlayerStateManager newClonePlayer = newClone.GetComponent<PlayerStateManager>();
+          newClonePlayer.Init(); // init clone
+          newClonePlayer.health = health;
+          
           //lift clone, set nearestLiftableObject so the function knows who to lift.
           nearestLiftableObj = newClone.GetComponent<Liftable>(); 
           Lift();
@@ -98,6 +134,7 @@ public class PlayerStateManager : MonoBehaviour
           
           FindAnyObjectByType<CloneManager>().CreateClone(newClone.GetComponent<PlayerStateManager>());
      }
+
      public void Init()
      {
           //it has not been initialized, so we need to override the state ourself.
@@ -105,41 +142,116 @@ public class PlayerStateManager : MonoBehaviour
           heldPlayerState.OnEnter(this);     
           transform.name = "Player";
      }
-     public void ThrowHeldObject()
+
+     public void ThrowHeldObject(bool straight)
      {
-          if(carryingObj.TryGetComponent(out PlayerStateManager a) && a.currentState == a.heldPlayerState)
+          //Throw vector
+          Vector2 ThrowVector = GetThrowVector(straight);
+
+          bool isHeldPlayer = carryingObj.TryGetComponent(out PlayerStateManager a) && a.currentState == a.heldPlayerState;
+
+          if(Input.GetAxis("Vertical") < 0) //down
+          {
+               carryingObj.transform.localPosition = Vector3.down*1;
+          }
+
+          //SPECIFIC ORDER TIME
+
+          //This NEEDS to be BEFORE changing to thrown player state because thrown relies on checking if we are straight thrown.
+          if(straight && !(IsGrounded() && Input.GetAxisRaw("Vertical") < 0))
+          {
+               carryingObj.StraightThrow(ThrowVector);    
+          }
+
+          if(isHeldPlayer)
           {
                //we die, clone lives!
                ChangeState(deadPlayerState);
-               carryingObj.GetComponent<PlayerStateManager>().ChangeState(defaultPlayerState);
+               a.ChangeState(thrownPlayerState);
+               FindFirstObjectByType<CloneManager>().currentlyControlledPlayer = a;
           }
+          
+          //This NEEDS to be AFTER changing to thrown state because exiting held state sets our rigidbody type back to dynamic from static.
           //Set velocity
           if(carryingObj.TryGetComponent(out Rigidbody2D rb))
           {
-               rb.velocity = GetThrowVector();
+               rb.velocity = ThrowVector;   
           }
 
-          carryingObj.OnBeingThrown();
+          //Send object being thrown that we are throwing
+          carryingObj.OnBeingThrown(gameObject);
+
+          //Done with object.
           carryingObj.transform.parent = null; //get rid of our parent
           carryingObj = null;
-     }
-     public Vector2 GetThrowVector()
+     }    
+
+     public Vector2 GetThrowVector(bool straight)
      {
           float flip = transform.localScale.x; // this is so it matches the direction of the player. ([<-] -1 or 1 [->])
           if(Input.GetAxis("Vertical") > 0) // is holding up
           {
-               return Vector2.up * 20;
+
+               return Vector2.up * 20 + 20 * Input.GetAxis("Horizontal") * Vector2.right;
           }
           else if(Input.GetAxis("Vertical") < 0) // is holding down
           {
-               return Vector2.up * 20;
+               if(IsGrounded())
+               {
+                    return Vector2.down;
+               }
+               return Vector2.down * 20;
           }
-          //TODO: add throw direction change based on holding up, or down.
-          return new Vector2(flip, 1)*15;
-          
+          if(straight)
+          {
+               return new Vector2(flip, 0)*15;
+          }
+          return new Vector2(flip, 1)*15;      
+     }
+     
+     public void UpdateHealth()
+     {
+          if(health > maxHealth)
+          {
+               health = maxHealth;
+          }
+          if(health <= 0)
+          {
+               Die();
+          }
+          if(secDamageCooldown > 0)
+          {
+               secDamageCooldown -= Time.deltaTime;
+          }
      }
 
-     //Good gravy!
+     // Called by enemies and hazards.
+     public void TakeDamage(int amount, bool hitDirection)
+     {
+          if(secDamageCooldown <= 0)
+          {
+               health -= amount;
+                //knockback jump
+               rigidBody.AddForce((hitDirection?1:-1) * 40f * Vector2.one , ForceMode2D.Impulse);
+               secDamageCooldown = secDamageTime;
+          }
+
+     }
+     public void RegainHealth(int amount)
+     {
+          health += amount;
+     }
+     public void MaxOutHealth()
+     {
+          health = maxHealth;
+     }
+     public void Die()
+     {
+          rigidBody.AddForce(40f * Vector2.up , ForceMode2D.Impulse);
+          ChangeState(new DeadPlayerState());
+     }
+
+     //Good gravy! Lotta boxes!
      public bool IsGrounded()
      {
           ContactFilter2D contactFilter2D = new ContactFilter2D
@@ -150,8 +262,17 @@ public class PlayerStateManager : MonoBehaviour
                //Other settings that may come up later
           };
           List<RaycastHit2D> results = new(); //dont care
-          return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size, 0, Vector2.down, contactFilter2D, results, 0.01f) > 0;
+          return Physics2D.BoxCast(
+               (Vector2)transform.position + boxCollider.offset, 
+               boxCollider.bounds.size, 
+               0,
+               Vector2.down, 
+               contactFilter2D, 
+               results, 
+               distanceCheckForCollision) 
+               > 0;
      }
+     
      public bool IsTouchingLeftWall()
      {
           ContactFilter2D contactFilter2D = new ContactFilter2D
@@ -162,8 +283,9 @@ public class PlayerStateManager : MonoBehaviour
                //Other settings that may come up later
           };
           List<RaycastHit2D> results = new(); //dont care
-          return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size * Vector2.one * 0.8f, 0, Vector2.left, contactFilter2D, results, 0.05f) > 0;
+          return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size - Vector3.up * wallCollisionScale, 0, Vector2.left, contactFilter2D, results, distanceCheckForCollision) > 0;
      }
+     
      public bool IsTouchingRightWall()
      {
           ContactFilter2D contactFilter2D = new ContactFilter2D
@@ -173,9 +295,20 @@ public class PlayerStateManager : MonoBehaviour
                useLayerMask = true
                //Other settings that may come up later
           };
-          List<RaycastHit2D> results = new(); //dont care
-          return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size * Vector2.one * 0.8f, 0, Vector2.right, contactFilter2D, results, 0.05f) > 0;
+          List<RaycastHit2D> results = new(); //dont care about results
+
+          int numberOfHits = Physics2D.BoxCast(
+               (Vector2)transform.position + boxCollider.offset,           //origin
+               boxCollider.bounds.size - Vector3.one * wallCollisionScale, //boxsize
+               0,                                                          //angle
+               Vector2.right,                                              //direction
+               contactFilter2D,                                            //filter
+               results,                                                    //each hit's details
+               distanceCheckForCollision);                                 //distance
+               
+          return numberOfHits > 0;
      }
+     
      public bool IsTouchingCeiling()
      {
           ContactFilter2D contactFilter2D = new ContactFilter2D
@@ -186,8 +319,19 @@ public class PlayerStateManager : MonoBehaviour
                //Other settings that may come up later
           };
           List<RaycastHit2D> results = new(); //dont care
-          return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset, boxCollider.bounds.size, 0, Vector2.up, contactFilter2D, results, 0.1f) > 0;
+          
+          int numberOfHits = Physics2D.BoxCast(
+               (Vector2)transform.position + boxCollider.offset, //origin     
+               boxCollider.bounds.size,                          //boxsize
+               0,                                                //angle
+               Vector2.up,                                       //direction
+               contactFilter2D,                                  //filter
+               results,                                          //each hit's details
+               distanceCheckForCollision);                       //distance
+
+          return numberOfHits > 0;
      }
+     
      public bool HasSpaceToLift(BoxCollider2D collider)
      {
           ContactFilter2D contactFilter2D = new ContactFilter2D
@@ -198,67 +342,15 @@ public class PlayerStateManager : MonoBehaviour
                //Other settings that may come up later
           };
           List<RaycastHit2D> results = new(); //dont care
-          return Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset  + Vector2.up, collider.bounds.size, 0, Vector2.zero, contactFilter2D, results, 0) > 0;
-     }
-     public bool SnapToGround(out float amount)
-     {
-          ContactFilter2D contactFilter2D = new()
+          int amount = Physics2D.BoxCast((Vector2)transform.position + boxCollider.offset  + Vector2.up, collider.bounds.size, 0, Vector2.zero, contactFilter2D, results, 0);
+          foreach (var item in results)
           {
-               layerMask = ground,
-               useTriggers = false,
-               useLayerMask = true
-               //Other settings that may come up later
-          };
-          List<RaycastHit2D> resultsl = new(); //dont care
-          List<RaycastHit2D> resultsr = new(); //dont care
-          Vector2 pos = (Vector2)transform.position;
-          float length = boxCollider.bounds.max.y;
-          float minLedgeHeight = boxCollider.offset.y;
-
-          Vector2 originr = new Vector2(
-               boxCollider.bounds.extents.x + Input.GetAxis("Horizontal") *  8 / 23, 
-               boxCollider.bounds.extents.y
-               );
-
-          Vector2 originl = new Vector2(
-               -boxCollider.bounds.extents.x + Input.GetAxis("Horizontal") * 8 / 23, 
-               boxCollider.bounds.extents.y
-               );
-
-          var groundr = Physics2D.Raycast(
-               pos + originr, 
-               Vector2.down, 
-               contactFilter2D, 
-               resultsl, 
-               length
-               );
-
-          var groundl = Physics2D.Raycast(
-               pos + originl, 
-               Vector2.down, 
-               contactFilter2D, 
-               resultsr, 
-               length
-               );
-          
-          Debug.DrawRay(pos+originl, Vector2.down * length);
-          Debug.DrawRay(pos+originr, Vector2.down * length);
-
-          bool isTooHigh(float y) => y > minLedgeHeight;
-
-          amount = 0;
-
-          if(resultsr.Count != 0 && !isTooHigh(resultsr[0].point.y))
-          {
-               amount = resultsr[0].point.y + boxCollider.bounds.extents.y - boxCollider.offset.y;
-               return true;
+               if(item.collider.gameObject == nearestLiftableObj.gameObject)
+               {
+                    amount--;
+               }
           }
-          else if(resultsl.Count != 0 && !isTooHigh(resultsl[0].point.y))
-          {
-               amount = resultsl[0].point.y + boxCollider.bounds.extents.y - boxCollider.offset.y;
-               return true;
-          }
-          return false;
+          return amount > 0;
      }
 
      [SerializeField]
@@ -284,20 +376,27 @@ public class PlayerStateManager : MonoBehaviour
           CarryLookUpIdle = 90;
      }
 
-    public void OnDrawGizmos()
-    {
-          //Vector2 pos = (Vector2)transform.position + GetComponent<Collider2D>().offset;
-          /*Gizmos.color = Color.magenta;
-          Gizmos.DrawWireCube(pos + Vector2.down * 0.5f, GetComponent<Collider2D>().bounds.size);
-          Gizmos.color = Color.red;
-          Gizmos.DrawWireCube(pos + Vector2.left * 0.1f, GetComponent<Collider2D>().bounds.size);
-          Gizmos.color = Color.green;
-          Gizmos.DrawWireCube(pos + Vector2.right * 0.1f, GetComponent<Collider2D>().bounds.size);
-          Gizmos.color = Color.blue;
-          Gizmos.DrawWireCube(pos + Vector2.up * 0.1f, GetComponent<Collider2D>().bounds.size);
-          Gizmos.DrawWireCube(pos + Vector2.up, GetComponent<Collider2D>().bounds.size);
-          Gizmos.DrawWireCube(pos, GetComponent<Collider2D>().bounds.size*2f); */
+     //Debug Box Collision Drawing
+     public void OnDrawGizmos()
+     {
+          if(boxCollider == null) return;
 
-    }
+          Vector2 pos = (Vector2)transform.position + boxCollider.offset; // get position shorthand
 
+          //Ground
+          Gizmos.color = Color.magenta * 0.5f;
+          Gizmos.DrawWireCube(pos + Vector2.down * distanceCheckForCollision, boxCollider.bounds.size);
+
+          // Left Wall
+          Gizmos.color = Color.red * 0.5f;
+          Gizmos.DrawWireCube(pos + Vector2.left * distanceCheckForCollision, boxCollider.bounds.size - Vector3.up *wallCollisionScale);
+
+          //Right Wall
+          Gizmos.color = Color.green * 0.5f;
+          Gizmos.DrawWireCube(pos + Vector2.right * distanceCheckForCollision, boxCollider.bounds.size - Vector3.up *wallCollisionScale);
+
+          //Ceiling
+          Gizmos.color = Color.blue * 0.5f;
+          Gizmos.DrawWireCube(pos + Vector2.up * distanceCheckForCollision, boxCollider.bounds.size);
+     }
 }

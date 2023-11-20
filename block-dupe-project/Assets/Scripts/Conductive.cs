@@ -1,19 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Conductive : MonoBehaviour
 {
-    bool isActive;
-    // Start is called before the first frame update
-    void Start()
+    public bool Electrified { get; private set; }
+    public UnityEvent UpdateElectrified;
+    public UnityEvent StartElectrified;
+    public UnityEvent EndElectrified;
+    public GameObject sparks;
+
+    public void Start()
     {
-        
+        InvokeRepeating(nameof(CheckForElectricity), 0.25f, 0.25f);
     }
 
-    // Update is called once per frame
-    void Update()
+    // Updates every 1/4th of a second because its not frame-important
+    void CheckForElectricity()
     {
-        
+        Collider2D myCollider = GetComponent<Collider2D>();
+        Vector2 scale = new(Mathf.Abs(transform.lossyScale.x), Mathf.Abs(transform.lossyScale.y));
+        scale *= 1.3f;
+        Collider2D[] AllTouchingObjects = Physics2D.OverlapBoxAll((Vector2)transform.position + myCollider.offset, scale , 0);
+
+        List<Collider2D> TouchingElectricObjects = new();
+
+        foreach (var collider in AllTouchingObjects)
+        {
+            if (collider == myCollider) continue;
+            if (collider.TryGetComponent(out Conductive metal) && metal.Electrified ||
+                collider.TryGetComponent(out Electric _))
+            {
+                TouchingElectricObjects.Add(collider);
+            }
+        }
+        if (TouchingElectricObjects.Count == 0)
+        {
+            if (Electrified)
+            {
+                Electrified = false;
+                EndElectrified.Invoke();
+                Destroy(transform.Find(sparks.name).gameObject);
+            }
+        }
+        else
+        {
+            if (!Electrified)
+            {
+                StartElectrified.Invoke();
+                GameObject spark = Instantiate(sparks, transform);
+                spark.name = sparks.name;
+            }
+            Electrified = true;
+            UpdateElectrified.Invoke();
+        }
     }
 }

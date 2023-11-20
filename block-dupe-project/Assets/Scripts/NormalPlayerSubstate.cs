@@ -1,11 +1,13 @@
 using UnityEngine;
 public class NormalPlayerSubstate : IPlayerSubstate
 {
+    public void EnterSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
+    {
+    }
+
     public void UpdateSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
     {
         Vector2 joyInput = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-        DefaultPlayerState.MovementState movementState = substateManager.movementState;
 
         //ducking check
         if (SubstateConditions.IsDucking(joyInput.y, manager))
@@ -28,7 +30,7 @@ public class NormalPlayerSubstate : IPlayerSubstate
         }
 
         //looking up check
-        if (SubstateConditions.IsLookingUp(joyInput.y, movementState))
+        if (SubstateConditions.IsLookingUp(joyInput.y, substateManager.movementState))
         {
             substateManager.ChangeSubstate(substateManager.lookUpPlayerSubstate);
         }
