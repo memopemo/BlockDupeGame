@@ -17,13 +17,12 @@ public class CloneManager : MonoBehaviour
         if(AllowedClones < 3) AllowedClones = 3;
         AllClones = new Queue<PlayerStateManager>(AllowedClones);
         AllClones.Enqueue(currentlyControlledPlayer);
-        InvokeRepeating(nameof(CheckExcessClones), 0.1f, 0.1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(currentlyControlledPlayer == null || currentlyControlledPlayer.currentState is not DefaultPlayerState)
+        if(currentlyControlledPlayer == null || currentlyControlledPlayer.currentState is not DefaultPlayerState or ThrownPlayerState)
         {
             FindDefaultPlayer();
         }
@@ -32,22 +31,18 @@ public class CloneManager : MonoBehaviour
         {
             cameraFocus.SetTarget(currentlyControlledPlayer.transform);
         }
-    }
-    void CheckExcessClones()
-    {
         if(!CanCreateClone())
         {
-            
             //could play a poof animation here
             Destroy(AllClones.Dequeue().gameObject);
         }
     }
 
+    //Find a Player that is alive
     void FindDefaultPlayer()
     {
         foreach (PlayerStateManager canidate in FindObjectsOfType<PlayerStateManager>())
         {
-            print(canidate.currentState);
             if (canidate.currentState is DefaultPlayerState)
             {
                 currentlyControlledPlayer = canidate;

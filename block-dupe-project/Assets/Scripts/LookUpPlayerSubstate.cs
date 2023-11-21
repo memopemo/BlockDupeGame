@@ -1,6 +1,10 @@
 using UnityEngine;
 public class LookUpPlayerSubstate : IPlayerSubstate
 {
+    public void EnterSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
+    {
+    }
+
     public void UpdateSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
     {
         Vector2 input = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
