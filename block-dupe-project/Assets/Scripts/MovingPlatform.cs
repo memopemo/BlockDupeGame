@@ -9,20 +9,21 @@ public class MovingPlatform : MonoBehaviour
     public Transform[] points;  // An array of transform points (position where the platform needs to move)
 
     private int i;              // Index of the array
-
+    private Conductive conductive;
 
     // Start is called before the first frame update
     void Start()
     {
         transform.position = points[startingPoint].position;    // Setting the position of the platform to
-                                                                // the position of one of the points using index "startingPoint"
+        conductive = GetComponent<Conductive>();                                                        // the position of one of the points using index "startingPoint"
     }
 
     // Update is called once per frame
     void Update()
     {
-      
-             // Check distance of platform and point
+        if (conductive.Electrified == true)
+        {
+            // Check distance of platform and point
             if (Vector2.Distance(transform.position, points[i].position) < 0.02f)
             {
                 i++;
@@ -36,9 +37,10 @@ public class MovingPlatform : MonoBehaviour
 
             // Move platform to point position i
             transform.position = Vector2.MoveTowards(transform.position, points[i].position, speed * Time.deltaTime);
-
+        }
         
     }
+    
 
     /*
         //Used for horizontally moving platforms
