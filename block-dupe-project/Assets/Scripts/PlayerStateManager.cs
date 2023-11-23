@@ -118,6 +118,7 @@ public class PlayerStateManager : MonoBehaviour
 
      public void Clone(bool metal)
      {
+          print(metal);
           // create the clone at the "lift point" the single line that makes magic
           var newClone = Instantiate(metal ? MetalPlayer : NormalPlayer, transform.GetChild(0).position, transform.rotation);
 
@@ -171,6 +172,9 @@ public class PlayerStateManager : MonoBehaviour
                a.direction = direction;
                FindFirstObjectByType<CloneManager>().currentlyControlledPlayer = a;
           }
+
+          //Send object being thrown that we are throwing
+          carryingObj.OnBeingThrown(gameObject);
           
           //This NEEDS to be AFTER changing to thrown state because exiting held state sets our rigidbody type back to dynamic from static.
           //Set velocity
@@ -179,8 +183,7 @@ public class PlayerStateManager : MonoBehaviour
                rb.velocity = ThrowVector;   
           }
 
-          //Send object being thrown that we are throwing
-          carryingObj.OnBeingThrown(gameObject);
+          
 
           //Done with object.
           carryingObj.transform.parent = null; //get rid of our parent
