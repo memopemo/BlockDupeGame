@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
@@ -118,8 +119,7 @@ public class PlayerStateManager : MonoBehaviour
      public void Clone(bool metal)
      {
           // create the clone at the "lift point" the single line that makes magic
-
-          var newClone = Instantiate(metal ? MetalPlayer : NormalPlayer, Vector2.zero, transform.rotation);
+          var newClone = Instantiate(metal ? MetalPlayer : NormalPlayer, transform.GetChild(0).position, transform.rotation);
 
           PlayerStateManager newClonePlayer = newClone.GetComponent<PlayerStateManager>();
           newClonePlayer.Init(); // init clone
@@ -139,7 +139,7 @@ public class PlayerStateManager : MonoBehaviour
      {
           //it has not been initialized, so we need to override the state ourself.
           currentState = heldPlayerState;
-          heldPlayerState.OnEnter(this);     
+          heldPlayerState.OnEnter(this);
           transform.name = "Player";
      }
 
@@ -168,6 +168,7 @@ public class PlayerStateManager : MonoBehaviour
                //we die, clone lives!
                ChangeState(deadPlayerState);
                a.ChangeState(thrownPlayerState);
+               a.direction = direction;
                FindFirstObjectByType<CloneManager>().currentlyControlledPlayer = a;
           }
           

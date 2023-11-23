@@ -43,12 +43,12 @@ public class MovingHorizontalPlatform : MonoBehaviour
         //Used for horizontally moving platforms
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            collision.transform.SetParent(transform);
+            collision.transform.SetParent(transform, true);
         }
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            collision.transform.SetParent(null);
+            collision.transform.SetParent(null,true);
         }
     
 }

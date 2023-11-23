@@ -13,3 +13,11 @@ PresetManager:
     - m_Preset: {fileID: 2655988077585873504, guid: ecd997be870923b4cae2b3ae4a18e355, type: 2}
       m_Filter: 
       m_Disabled: 0
+  - first:
+      m_NativeTypeID: 114
+      m_ManagedTypePPtr: {fileID: 11500000, guid: d1038cf43f8d2a647a9d4779167b2593, type: 3}
+      m_ManagedTypeFallback: 
+    second:
+    - m_Preset: {fileID: 2655988077585873504, guid: a8d57d664507b8d48bc775be739996c3, type: 2}
+      m_Filter: 
+      m_Disabled: 0

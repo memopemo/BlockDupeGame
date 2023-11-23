@@ -24,7 +24,11 @@ public class CloneManager : MonoBehaviour
     {
         if(currentlyControlledPlayer == null || currentlyControlledPlayer.currentState is not DefaultPlayerState or ThrownPlayerState)
         {
-            FindDefaultPlayer();
+            if(!FindDefaultPlayer())
+            {
+                //restart at save point
+            }
+            
         }
 
         if(cameraFocus.target != currentlyControlledPlayer.transform)
@@ -39,15 +43,17 @@ public class CloneManager : MonoBehaviour
     }
 
     //Find a Player that is alive
-    void FindDefaultPlayer()
+    bool FindDefaultPlayer()
     {
         foreach (PlayerStateManager canidate in FindObjectsOfType<PlayerStateManager>())
         {
             if (canidate.currentState is DefaultPlayerState)
             {
                 currentlyControlledPlayer = canidate;
+                return true;
             }
         }
+        return false;
     }
     
     public bool CanCreateClone()
