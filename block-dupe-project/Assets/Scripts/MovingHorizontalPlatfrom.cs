@@ -14,7 +14,7 @@ public class MovingHorizontalPlatform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = points[startingPoint].position;    // Setting the position of the platform to
+        transform.position = points[startingPoint-1].position;    // Setting the position of the platform to
                                                                 // the position of one of the points using index "startingPoint"
     }
 
@@ -50,5 +50,5 @@ public class MovingHorizontalPlatform : MonoBehaviour
         {
             collision.transform.SetParent(null,true);
         }
-    
+        
 }
