@@ -14,12 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StateName: 
   AnimationFrames:
-  - SpriteShown: {fileID: -1023789597, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 3
-  - SpriteShown: {fileID: -691338235, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 3
   - SpriteShown: {fileID: -91362092, guid: 8a9a80047443704468538252b34c4daa, type: 3}
     HoldForTicks: 3
   Looping: 0
   LoopStart: 0
   LoopEnd: 0
+  HeldItemPosition: {x: 0, y: 0}

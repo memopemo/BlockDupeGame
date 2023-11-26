@@ -10,7 +10,7 @@ public class WallPlayerSubstate : IPlayerSubstate
 
         if (!SubstateConditions.IsAgainstWall(manager) || movementState == DefaultPlayerState.MovementState.Idle )
         {
-            substateManager.ChangeSubstate(substateManager.normalPlayerSubstate);
+            substateManager.ChangeSubstate(substateManager.normalPlayerSubstate, manager);
         }
 
         substateManager.SetAnimation(PlayerStateManager.Animations.Wall, PlayerStateManager.Animations.CarryWall, manager);

@@ -18,7 +18,7 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
         {
             if(manager.carryingObj)
             {
-                substateManager.ChangeSubstate(substateManager.normalPlayerSubstate);
+                substateManager.ChangeSubstate(substateManager.normalPlayerSubstate,manager);
                 manager.normalBox.SetCollisionBox(manager.boxCollider);
                 manager.ThrowHeldObject(straightShotActivated);
                 secsHoldingCloneButton = 0;
@@ -36,13 +36,13 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
                     secsHoldingCloneButton = 0;
                 }
                 manager.carryBox.SetCollisionBox(manager.boxCollider);
-                substateManager.ChangeSubstate(substateManager.normalPlayerSubstate);
+                substateManager.ChangeSubstate(substateManager.normalPlayerSubstate, manager);
             }
         }
 
         if(!Input.GetKey(KeyCode.Z))
         {
-            substateManager.ChangeSubstate(substateManager.normalPlayerSubstate);
+            substateManager.ChangeSubstate(substateManager.normalPlayerSubstate,manager);
         }
 
         metalCloneActivated = PowerupStatus.Metal && secsHoldingCloneButton > manager.timeForActivatingPowerup;

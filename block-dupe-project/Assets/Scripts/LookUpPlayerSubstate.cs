@@ -12,7 +12,7 @@ public class LookUpPlayerSubstate : IPlayerSubstate
 
         if (!SubstateConditions.IsLookingUp(input.y, movementState))
         {
-            substateManager.ChangeSubstate(substateManager.normalPlayerSubstate);
+            substateManager.ChangeSubstate(substateManager.normalPlayerSubstate, manager);
         }
         substateManager.SetAnimation(PlayerStateManager.Animations.LookUpIdle, PlayerStateManager.Animations.CarryLookUpIdle, manager);
     }

@@ -2159,6 +2159,90 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Player_Normal_97
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 87
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a5926e23159ad3469581f786135b224
+      internalID: -1785905893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Normal_98
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 87
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a785763c8278ac46adbe0fd15af4b4c
+      internalID: -271835306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Normal_99
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 87
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c172d3fc2a2762f46909149d843ee4db
+      internalID: 931901736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Normal_100
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 87
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7de57435deab9b64c9f6d1ae25d2094e
+      internalID: 1006904184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2173,6 +2257,7 @@ TextureImporter:
       Player_Normal_0: -640597711
       Player_Normal_1: -1319364957
       Player_Normal_10: 2072351434
+      Player_Normal_100: 1006904184
       Player_Normal_11: -1959282907
       Player_Normal_12: 757087713
       Player_Normal_13: -8172451
@@ -2267,6 +2352,9 @@ TextureImporter:
       Player_Normal_94: 1331909755
       Player_Normal_95: -1811928628
       Player_Normal_96: -1869831209
+      Player_Normal_97: -1785905893
+      Player_Normal_98: -271835306
+      Player_Normal_99: 931901736
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

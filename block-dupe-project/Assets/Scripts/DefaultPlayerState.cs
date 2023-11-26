@@ -21,9 +21,10 @@ public class DefaultPlayerState : IPlayerState
 
     public bool isThrowStruggleForStraightShot;
 
-    public void ChangeSubstate(IPlayerSubstate newSubstate)
+    public void ChangeSubstate(IPlayerSubstate newSubstate, PlayerStateManager manager)
     {
         currentSubState = newSubstate;
+        currentSubState.EnterSubstate(manager, this);
     }
     public void OnEnter(PlayerStateManager manager)
     {
@@ -74,7 +75,7 @@ public class DefaultPlayerState : IPlayerState
         // Cloning / Throwing
         if (Input.GetKeyDown(KeyCode.Z) && ((!manager.carryingObj && !manager.HasSpaceToLift(manager.boxCollider)) || manager.carryingObj))
         {
-            ChangeSubstate(cloneStruggleSubstate);  
+            ChangeSubstate(cloneStruggleSubstate, manager);  
         }
 
         //direction

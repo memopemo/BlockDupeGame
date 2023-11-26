@@ -20,19 +20,19 @@ public class NormalPlayerSubstate : IPlayerSubstate
             {
                 manager.duckBox?.SetCollisionBox(manager.boxCollider);
             }
-            substateManager.ChangeSubstate(substateManager.duckPlayerSubstate);
+            substateManager.ChangeSubstate(substateManager.duckPlayerSubstate, manager);
         }
 
         //wall check
         if (SubstateConditions.IsRunningAgainstWall(joyInput.x, manager))
         {    
-            substateManager.ChangeSubstate(substateManager.wallPlayerSubstate);
+            substateManager.ChangeSubstate(substateManager.wallPlayerSubstate, manager);
         }
 
         //looking up check
         if (SubstateConditions.IsLookingUp(joyInput.y, substateManager.movementState))
         {
-            substateManager.ChangeSubstate(substateManager.lookUpPlayerSubstate);
+            substateManager.ChangeSubstate(substateManager.lookUpPlayerSubstate,manager);
         }
 
         substateManager.SetAnimation(PlayerStateManager.Animations.Idle, PlayerStateManager.Animations.CarryIdle, manager);

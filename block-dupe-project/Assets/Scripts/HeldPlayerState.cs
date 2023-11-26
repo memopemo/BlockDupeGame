@@ -14,6 +14,7 @@ public class HeldPlayerState : IPlayerState
     {
         manager.unaliveBox.SetCollisionBox(manager.boxCollider);
         manager.animator2D.SetAnimation(HELD);   
+        Debug.Log(manager.animator2D);
     }
 
     public void OnExit(PlayerStateManager manager)

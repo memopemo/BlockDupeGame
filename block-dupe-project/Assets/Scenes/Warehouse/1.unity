@@ -3043,7 +3043,8 @@ GameObject:
   - component: {fileID: 612847907}
   - component: {fileID: 612847906}
   - component: {fileID: 612847910}
-  m_Layer: 0
+  - component: {fileID: 612847911}
+  m_Layer: 6
   m_Name: Battery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3091,8 +3092,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -8193979467854525967, guid: cd2b6775e771d90408aaa9258e50c736, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3111,7 +3112,7 @@ Transform:
   m_GameObject: {fileID: 612847903}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.61, y: -3.36, z: 0}
+  m_LocalPosition: {x: -13.584, y: -3.461, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3137,7 +3138,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 612847903}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3281,7 +3282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26abe29bafc11e44cb33165f721ee44e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sparks: {fileID: -2253911629886400664, guid: 339c54aec814d644d9e7ceb5c49c1f83, type: 3}
+  sparks: {fileID: 8756543920035956111, guid: 7824dda1f75be084da12436ac03f777b, type: 3}
 --- !u!61 &612847910
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3317,8 +3318,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.47}
+    oldSize: {x: 1, y: 1.0625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3327,6 +3328,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &612847911
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612847903}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 5810406485007475231, guid: cd2b6775e771d90408aaa9258e50c736, type: 3}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &638543365
 GameObject:
   m_ObjectHideFlags: 0
@@ -4995,7 +5017,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 1.5}
   m_EdgeRadius: 0
 --- !u!114 &1009437125
 MonoBehaviour:

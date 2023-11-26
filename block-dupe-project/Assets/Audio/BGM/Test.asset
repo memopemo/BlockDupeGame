@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb620beec2b4934cb069adc833e93cc, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  song: {fileID: 8300000, guid: 8f165913ccfbce3408e868ea43b7de95, type: 3}
+  LoopStartSample: 8901823

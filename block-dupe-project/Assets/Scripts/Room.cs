@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class Room : MonoBehaviour
 {
     public EntranceScene[] entrances;
+    public int BGMusicID;
     // Start is called before the first frame update
     void Start()
     {
