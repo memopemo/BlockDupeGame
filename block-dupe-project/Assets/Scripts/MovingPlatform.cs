@@ -41,7 +41,6 @@ public class MovingPlatform : MonoBehaviour
         
     }
     
-
     /*
         //Used for horizontally moving platforms
         private void OnCollisionEnter2D(Collision2D collision)
