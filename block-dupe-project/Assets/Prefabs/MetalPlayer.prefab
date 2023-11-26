@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4717585080870553449}
   - component: {fileID: 5830136743392652498}
   - component: {fileID: 3269235689108347339}
+  - component: {fileID: 2436337611204713824}
   m_Layer: 0
   m_Name: MetalPlayer
   m_TagString: Player
@@ -462,6 +463,19 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &2436337611204713824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4512551625694812686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1038cf43f8d2a647a9d4779167b2593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poofObject: {fileID: 4742963051133304809, guid: 8f05dc8505a8bc443b8e40fe5ba0029f, type: 3}
 --- !u!1 &6463810680085754111
 GameObject:
   m_ObjectHideFlags: 0

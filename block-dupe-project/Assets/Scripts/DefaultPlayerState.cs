@@ -168,7 +168,6 @@ public class DefaultPlayerState : IPlayerState
         {
             if (Mathf.Abs(velocity.x) < runSpeed)
             {
-                Debug.Log(joyInput.x);
                 manager.rigidBody.AddForce(10 * joyInput.x * runSpeed * Vector2.right);
             }
         }

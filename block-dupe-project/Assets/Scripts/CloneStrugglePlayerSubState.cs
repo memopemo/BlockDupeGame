@@ -13,6 +13,7 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
     public void UpdateSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
     {
         secsHoldingCloneButton += Time.deltaTime;
+        
         if (Input.GetKeyUp(KeyCode.Z))
         {
             if(manager.carryingObj)
@@ -30,6 +31,7 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
                 }
                 else
                 {
+                    Debug.Log(secsHoldingCloneButton);
                     manager.Clone(metalCloneActivated);
                     secsHoldingCloneButton = 0;
                 }

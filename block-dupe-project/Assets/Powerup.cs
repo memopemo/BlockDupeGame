@@ -4,17 +4,9 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public enum PowerupType {Clone, Metal, Straight, Midair}
+    public PowerupType powerupType;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void OnCollisionEnter2D(Collision2D col)
     {
         if(col.gameObject.TryGetComponent(out PlayerStateManager player) && player.currentState is DefaultPlayerState )
@@ -25,7 +17,29 @@ public class Powerup : MonoBehaviour
     public void Collect()
     {
         //Trigger UI
-        //Switch Powerup ON
+        SetPowerup();
         //Close UI
+        Destroy(gameObject);
+    }
+    void SetPowerup()
+    {
+        switch (powerupType)
+        {
+            case PowerupType.Clone:
+                PowerupStatus.Clone = true;
+                break;
+            case PowerupType.Metal:
+                PowerupStatus.Metal = true;
+                break;
+            case PowerupType.Straight:
+                PowerupStatus.Straight = true;
+                break;
+            case PowerupType.Midair:
+                PowerupStatus.Midair = true;
+                break;
+            default:
+                PowerupStatus.Clone = true;
+                break;
+        }
     }
 }

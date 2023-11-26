@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
@@ -117,9 +118,9 @@ public class PlayerStateManager : MonoBehaviour
 
      public void Clone(bool metal)
      {
+          print(metal);
           // create the clone at the "lift point" the single line that makes magic
-
-          var newClone = Instantiate(metal ? MetalPlayer : NormalPlayer, Vector2.zero, transform.rotation);
+          var newClone = Instantiate(metal ? MetalPlayer : NormalPlayer, transform.GetChild(0).position, transform.rotation);
 
           PlayerStateManager newClonePlayer = newClone.GetComponent<PlayerStateManager>();
           newClonePlayer.Init(); // init clone
@@ -139,7 +140,7 @@ public class PlayerStateManager : MonoBehaviour
      {
           //it has not been initialized, so we need to override the state ourself.
           currentState = heldPlayerState;
-          heldPlayerState.OnEnter(this);     
+          heldPlayerState.OnEnter(this);
           transform.name = "Player";
      }
 
@@ -168,8 +169,12 @@ public class PlayerStateManager : MonoBehaviour
                //we die, clone lives!
                ChangeState(deadPlayerState);
                a.ChangeState(thrownPlayerState);
+               a.direction = direction;
                FindFirstObjectByType<CloneManager>().currentlyControlledPlayer = a;
           }
+
+          //Send object being thrown that we are throwing
+          carryingObj.OnBeingThrown(gameObject);
           
           //This NEEDS to be AFTER changing to thrown state because exiting held state sets our rigidbody type back to dynamic from static.
           //Set velocity
@@ -178,8 +183,7 @@ public class PlayerStateManager : MonoBehaviour
                rb.velocity = ThrowVector;   
           }
 
-          //Send object being thrown that we are throwing
-          carryingObj.OnBeingThrown(gameObject);
+          
 
           //Done with object.
           carryingObj.transform.parent = null; //get rid of our parent

@@ -71,6 +71,7 @@ public class Liftable : MonoBehaviour
     public virtual void OnBeingLifted()
     {
         lifted = true;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         foreach(var c in GetComponents<Collider2D>())
         {
             c.isTrigger = true;
@@ -79,6 +80,7 @@ public class Liftable : MonoBehaviour
     public virtual void OnBeingThrown(GameObject thrower)
     {
         lifted = false;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         foreach(var c in GetComponents<Collider2D>())
         {
             c.isTrigger = false;
