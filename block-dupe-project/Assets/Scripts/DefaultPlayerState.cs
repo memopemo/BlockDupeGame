@@ -74,7 +74,7 @@ public class DefaultPlayerState : IPlayerState
         }
 
         // Cloning / Throwing
-        if (Input.GetButtonDown("Fire1") && ((!manager.carryingObj && !manager.HasSpaceToLift(manager.boxCollider)) || manager.carryingObj))
+        if (Input.GetButton("Fire1") && ((!manager.carryingObj && !manager.HasSpaceToLift(manager.boxCollider)) || manager.carryingObj))
         {
             if(!PowerupStatus.Midair && !manager.IsGrounded()) return;
             ChangeSubstate(cloneStruggleSubstate, manager);  

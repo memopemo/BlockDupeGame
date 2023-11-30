@@ -40,7 +40,7 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
             }
         }
 
-        if(!Input.GetKey(KeyCode.Z))
+        if(!Input.GetButton("Fire1"))
         {
             substateManager.ChangeSubstate(substateManager.normalPlayerSubstate,manager);
         }
