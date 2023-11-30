@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour
 {
-    public enum PowerupType {Clone, Metal, Straight, Midair}
+    public enum PowerupType {Clone, Metal, Straight, Midair, JumpHold}
     public PowerupType powerupType;
 
     void OnCollisionEnter2D(Collision2D col)
@@ -36,6 +36,9 @@ public class Powerup : MonoBehaviour
                 break;
             case PowerupType.Midair:
                 PowerupStatus.Midair = true;
+                break;
+            case PowerupType.JumpHold:
+                PowerupStatus.JumpHold = true;
                 break;
             default:
                 PowerupStatus.Clone = true;

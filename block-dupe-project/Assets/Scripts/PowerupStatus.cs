@@ -6,9 +6,10 @@ using UnityEngine;
 public class PowerupStatus : MonoBehaviour
 {
     public static bool Clone = true;
-    public static bool Metal = true;
-    public static bool Straight = true;
-    public static bool Midair = true;
+    public static bool Metal = false;
+    public static bool Straight = false;
+    public static bool Midair = false;
+    public static bool JumpHold = false;
     public static bool isLoaded = true;
 
     public static void LoadPowerups()

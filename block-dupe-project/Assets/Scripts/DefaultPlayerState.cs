@@ -65,16 +65,18 @@ public class DefaultPlayerState : IPlayerState
         }
 
         // Jump
-        if (Input.GetKeyDown(KeyCode.Space) && (IsGrounded || (coyoteTime > 0 && coyoteTime <= 15)))
+        if (Input.GetButtonDown("Jump") && (IsGrounded || (coyoteTime > 0 && coyoteTime <= 15)))
         {
+            if(!PowerupStatus.JumpHold && manager.carryingObj) return;
             //Debug.Log("Jump!");
             manager.rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
             manager.rigidBody.AddForce(20f * jumpHeight * Vector2.up, ForceMode2D.Impulse);
         }
 
         // Cloning / Throwing
-        if (Input.GetKeyDown(KeyCode.Z) && ((!manager.carryingObj && !manager.HasSpaceToLift(manager.boxCollider)) || manager.carryingObj))
+        if (Input.GetButtonDown("Fire1") && ((!manager.carryingObj && !manager.HasSpaceToLift(manager.boxCollider)) || manager.carryingObj))
         {
+            if(!PowerupStatus.Midair && !manager.IsGrounded()) return;
             ChangeSubstate(cloneStruggleSubstate, manager);  
         }
 
