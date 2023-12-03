@@ -12,6 +12,15 @@ public static class SaveManager
     public static bool HasStraightCollected;
     public static int NumOfClonePacks;
     public static int NumOfHealthPacks;
+    public static int CurrentSaveNum;
+
+    public static void Save(string saveScene)
+    {
+        SaveScene = saveScene;
+        PowerupStatus.SavePowerups();
+        CurrentSaveNum = 1; //Temp
+        SaveToFile(CurrentSaveNum);
+    }
 
     public static void SaveToFile(int number)
     {
@@ -35,6 +44,8 @@ public static class SaveManager
         streamWriter.WriteLine(HasStraightCollected);
         streamWriter.WriteLine(NumOfClonePacks);
         streamWriter.WriteLine(NumOfHealthPacks);
+        streamWriter.Close();
+        fileStream.Close();
     }
 
     public static void LoadSaveFromFile(int number)
@@ -72,6 +83,8 @@ public static class SaveManager
         HasStraightCollected    = GetBool(streamReader.ReadLine());
         NumOfClonePacks         = GetInt(streamReader.ReadLine());
         NumOfHealthPacks        = GetInt(streamReader.ReadLine());
+        
+        CurrentSaveNum = number;
         
         static bool GetBool(string str)
         {

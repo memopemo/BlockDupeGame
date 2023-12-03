@@ -19,4 +19,11 @@ public class PowerupStatus : MonoBehaviour
         Midair = SaveManager.HasMidairCollected;
         isLoaded = true;
     }
+    public static void SavePowerups()
+    {
+        SaveManager.HasCloneCollected = Clone;
+        SaveManager.HasMetalCollected = Metal;
+        SaveManager.HasStraightCollected = Straight;
+        SaveManager.HasMidairCollected = Midair;
+    }
 }

@@ -306,7 +306,7 @@ BoxCollider2D:
   m_Offset: {x: 0.0048828125, y: 0.25385857}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 0.5}
     newSize: {x: 2, y: 0.5}
     adaptiveTilingThreshold: 0.5
@@ -1233,7 +1233,7 @@ BoxCollider2D:
   m_Offset: {x: 0.0053215027, y: 0.2527241}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 0.5}
     newSize: {x: 2, y: 0.5}
     adaptiveTilingThreshold: 0.5
@@ -2911,7 +2911,7 @@ BoxCollider2D:
   m_Offset: {x: 0.0037822723, y: 0.24583441}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 0.5}
     newSize: {x: 2, y: 0.5}
     adaptiveTilingThreshold: 0.5
@@ -41944,7 +41944,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.25034714}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 0.5}
     newSize: {x: 2, y: 0.5}
     adaptiveTilingThreshold: 0.5
@@ -43060,7 +43060,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f4f1d0e43c76c3f48a9cf5d3d9e00737, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 0b4a418a4f6039d4b9a6377421ce6295, type: 3}
 --- !u!1 &1971618801
 GameObject:
   m_ObjectHideFlags: 0
@@ -43188,7 +43188,7 @@ BoxCollider2D:
   m_Offset: {x: -0.004924774, y: 0.24626172}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 0.5}
     newSize: {x: 2, y: 0.5}
     adaptiveTilingThreshold: 0.5

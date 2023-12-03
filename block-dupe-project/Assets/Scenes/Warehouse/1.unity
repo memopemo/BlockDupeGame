@@ -1351,7 +1351,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 111a38cb8159aa647a3e3bfeb3bb4ed7, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: bb9b885ad70ee5544a1d5a1cf2920737, type: 3}
 --- !u!1 &329616594
 GameObject:
   m_ObjectHideFlags: 0
@@ -4070,7 +4070,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 0.5}
     newSize: {x: 2, y: 0.5}
     adaptiveTilingThreshold: 0.5
@@ -5009,7 +5009,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 0.5}
     newSize: {x: 0.32, y: 0.08}
     adaptiveTilingThreshold: 0.5
@@ -5992,35 +5992,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4110031412111947147, guid: f4f1d0e43c76c3f48a9cf5d3d9e00737, type: 3}
+    - target: {fileID: 838596270449227156, guid: 0b4a418a4f6039d4b9a6377421ce6295, type: 3}
       propertyPath: listenFor.Array.data[0]
       value: 
       objectReference: {fileID: 1148422175}
-    - target: {fileID: 4110031412111947147, guid: f4f1d0e43c76c3f48a9cf5d3d9e00737, type: 3}
+    - target: {fileID: 838596270449227156, guid: 0b4a418a4f6039d4b9a6377421ce6295, type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4110031412111947147, guid: f4f1d0e43c76c3f48a9cf5d3d9e00737, type: 3}
+    - target: {fileID: 838596270449227156, guid: 0b4a418a4f6039d4b9a6377421ce6295, type: 3}
       propertyPath: onExit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1871695185}
-    - target: {fileID: 4110031412111947147, guid: f4f1d0e43c76c3f48a9cf5d3d9e00737, type: 3}
+    - target: {fileID: 838596270449227156, guid: 0b4a418a4f6039d4b9a6377421ce6295, type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1871695185}
-    - target: {fileID: 4110031412111947147, guid: f4f1d0e43c76c3f48a9cf5d3d9e00737, type: 3}
+    - target: {fileID: 838596270449227156, guid: 0b4a418a4f6039d4b9a6377421ce6295, type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetTarget
       objectReference: {fileID: 0}
-    - target: {fileID: 4110031412111947147, guid: f4f1d0e43c76c3f48a9cf5d3d9e00737, type: 3}
+    - target: {fileID: 838596270449227156, guid: 0b4a418a4f6039d4b9a6377421ce6295, type: 3}
       propertyPath: onExit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 582647983}
-    - target: {fileID: 4408549968982279711, guid: f4f1d0e43c76c3f48a9cf5d3d9e00737, type: 3}
+    - target: {fileID: 6921005842843032406, guid: 0b4a418a4f6039d4b9a6377421ce6295, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.8
       objectReference: {fileID: 0}
-    - target: {fileID: 4408549968982279711, guid: f4f1d0e43c76c3f48a9cf5d3d9e00737, type: 3}
+    - target: {fileID: 6921005842843032406, guid: 0b4a418a4f6039d4b9a6377421ce6295, type: 3}
       propertyPath: m_LocalPosition.y
       value: -2.4
       objectReference: {fileID: 0}
@@ -6072,7 +6072,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f4f1d0e43c76c3f48a9cf5d3d9e00737, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 0b4a418a4f6039d4b9a6377421ce6295, type: 3}
 --- !u!1 &1210312315
 GameObject:
   m_ObjectHideFlags: 0
@@ -56417,7 +56417,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 0.5}
     newSize: {x: 2, y: 0.5}
     adaptiveTilingThreshold: 0.5
@@ -56630,7 +56630,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 0.5}
     newSize: {x: 2, y: 0.5}
     adaptiveTilingThreshold: 0.5
@@ -57036,7 +57036,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 0.5}
     newSize: {x: 2, y: 0.5}
     adaptiveTilingThreshold: 0.5

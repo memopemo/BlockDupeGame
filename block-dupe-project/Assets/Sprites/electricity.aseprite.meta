@@ -128,7 +128,7 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 14
+      width: 16
       height: 16
     spriteID: b051fddac1ed50542bb237a68f06510b
     spriteBone: []
@@ -139,6 +139,66 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: electricity_Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 28
+      width: 16
+      height: 16
+    spriteID: 387dceb0e9566874ba9b4c9464eef9d8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 28}
+  - name: electricity_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 4
+      width: 16
+      height: 16
+    spriteID: cd11c5e630f83c74880f0df0166e7ac6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 4}
+  - name: electricity_Frame_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 28
+      y: 28
+      width: 16
+      height: 16
+    spriteID: 84231a1f55d44864c91dcfbd36d945c7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 28, y: 28}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -148,14 +208,38 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: electricity
+    - name: electricity_Frame_0
       frameIndex: 0
       cellRect:
-        x: 1
+        x: 0
         y: 0
-        width: 14
+        width: 16
         height: 16
       spriteId: b051fddac1ed50542bb237a68f06510b
+    - name: electricity_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      spriteId: 387dceb0e9566874ba9b4c9464eef9d8
+    - name: electricity_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      spriteId: cd11c5e630f83c74880f0df0166e7ac6
+    - name: electricity_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      spriteId: 84231a1f55d44864c91dcfbd36d945c7
     linkedCells: []
     parentIndex: -1
   platformSettings:
