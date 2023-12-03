@@ -46,10 +46,11 @@ public class Liftable : MonoBehaviour
         {
             
             //this is for when we get to 
-            /* if(collision.transform.TryGetComponent(out new Breakable breakable))
+            if(collision.transform.TryGetComponent(out MetalBreakable breakable) && TryGetComponent(out Conductive _))
             {
-                breakable.OnBreak();
-            }*/
+                Destroy(breakable.gameObject);
+                continue;
+            }
             
             if(collision.gameObject == col.gameObject){continue;}
             if(collision.isTrigger){continue;}

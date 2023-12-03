@@ -90,6 +90,10 @@ public class PlayerStateManager : MonoBehaviour
                case HeldPlayerState:       
                     debugState = DebugState.Held;        
                     break;
+          }
+          if(CanBreakBelow(out MetalBreakable breakable))
+          {
+               Destroy(breakable.gameObject);
           }         
           
      }
@@ -276,7 +280,40 @@ public class PlayerStateManager : MonoBehaviour
                distanceCheckForCollision) 
                > 0;
      }
+     public bool CanBreakBelow(out MetalBreakable breakable)
+     {
+          breakable = null;
+          if(currentState != defaultPlayerState) return false;
+          if(!TryGetComponent(out Conductive _)) return false;
+          ContactFilter2D contactFilter2D = new ContactFilter2D
+          {
+               layerMask = ground,
+               useTriggers = false,
+               useLayerMask = true
+               //Other settings that may come up later
+          };
+          List<RaycastHit2D> results = new(); //dont care
+          var a = Physics2D.BoxCast(
+               (Vector2)transform.position + boxCollider.offset, 
+               boxCollider.bounds.size, 
+               0,
+               Vector2.down, 
+               contactFilter2D, 
+               results, 
+               distanceCheckForCollision) 
+               > 0;
+          foreach (var item in results)
+          {
+               if(item.collider.TryGetComponent(out MetalBreakable b))
+               {
+                    breakable = b;
+                    return true;
+               }
+          }
+          return false;
+     }
      
+
      public bool IsTouchingLeftWall()
      {
           ContactFilter2D contactFilter2D = new ContactFilter2D
