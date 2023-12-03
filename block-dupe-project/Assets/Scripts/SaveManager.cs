@@ -10,6 +10,7 @@ public static class SaveManager
     public static bool HasMetalCollected;
     public static bool HasMidairCollected;
     public static bool HasStraightCollected;
+    public static bool HasHoldJumpCollected;
     public static int NumOfClonePacks;
     public static int NumOfHealthPacks;
     public static int CurrentSaveNum;
@@ -42,6 +43,7 @@ public static class SaveManager
         streamWriter.WriteLine(HasMetalCollected);
         streamWriter.WriteLine(HasMidairCollected);
         streamWriter.WriteLine(HasStraightCollected);
+        streamWriter.WriteLine(HasHoldJumpCollected);
         streamWriter.WriteLine(NumOfClonePacks);
         streamWriter.WriteLine(NumOfHealthPacks);
         streamWriter.Close();
@@ -71,6 +73,7 @@ public static class SaveManager
             streamWriter.WriteLine(false);
             streamWriter.WriteLine(false);
             streamWriter.WriteLine(false);
+            streamWriter.WriteLine(false);
             streamWriter.WriteLine(0);
             streamWriter.WriteLine(0);
         }
@@ -81,6 +84,7 @@ public static class SaveManager
         HasMetalCollected       = GetBool(streamReader.ReadLine());
         HasMidairCollected      = GetBool(streamReader.ReadLine());
         HasStraightCollected    = GetBool(streamReader.ReadLine());
+        HasHoldJumpCollected    = GetBool(streamReader.ReadLine());
         NumOfClonePacks         = GetInt(streamReader.ReadLine());
         NumOfHealthPacks        = GetInt(streamReader.ReadLine());
         

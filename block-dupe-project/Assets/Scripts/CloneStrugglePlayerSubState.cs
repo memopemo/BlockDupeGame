@@ -14,7 +14,7 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
     {
         secsHoldingCloneButton += Time.deltaTime;
         
-        if (Input.GetKeyUp(KeyCode.Z))
+        if (Input.GetButtonUp("Fire1"))
         {
             if(manager.carryingObj)
             {
@@ -40,7 +40,7 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
             }
         }
 
-        if(!Input.GetKey(KeyCode.Z))
+        if(!Input.GetButton("Fire1"))
         {
             substateManager.ChangeSubstate(substateManager.normalPlayerSubstate,manager);
         }
