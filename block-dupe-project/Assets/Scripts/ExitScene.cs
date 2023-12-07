@@ -11,9 +11,37 @@ public class ExitScene : MonoBehaviour
     
     //Todo: make it only allow the currently controlled player and share code with the "Trigger" Object.
     private void OnTriggerEnter2D(Collider2D collider){
-        PersistentExitData exitdata = new GameObject("ExitData").AddComponent<PersistentExitData>();
+        UIFading fader = FindFirstObjectByType<UIFading>();
+        if(fader)
+        {
+            StartCoroutine(nameof(FadeOutAndWait)); 
+        }
+        else
+        {
+            print("No Fadeout Found, not fading out.");
+            SwitchSceneWhenFadeOutDone();
+        }
+        
+    }
+
+    private IEnumerator FadeOutAndWait()
+    {
+        UIFading fader = FindFirstObjectByType<UIFading>();
+        Time.timeScale = 0;
+        fader.StartCoroutine(nameof(fader.FadeOut));
+        while(!fader.done)
+        {
+            yield return null;
+        }
+        SwitchSceneWhenFadeOutDone();
+    }
+    private void SwitchSceneWhenFadeOutDone()
+    {
+        PersistentExitData _ = new GameObject("ExitData").AddComponent<PersistentExitData>();
         //exitdata.Awake();
         PersistentExitData.Instance.exitNum = exitNum;
+        Time.timeScale = 1;
         SceneManager.LoadScene(sceneToLoad);
-}
+        
+    }
 }
