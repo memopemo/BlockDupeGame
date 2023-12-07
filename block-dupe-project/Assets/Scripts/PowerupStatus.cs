@@ -9,7 +9,7 @@ public class PowerupStatus : MonoBehaviour
     public static bool Metal = true;
     public static bool Straight = true;
     public static bool Midair = false;
-    public static bool JumpHold = false;
+    public static bool JumpHold = true;
     public static bool isLoaded = true;
 
     public static void LoadPowerups()

@@ -13,4 +13,11 @@ public class HurtPlayer : MonoBehaviour
             player.TakeDamage(damageAmount, (player.transform.position - transform.position).x > 0);
         }
     }
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.gameObject.TryGetComponent(out PlayerStateManager player) && player.currentState is DefaultPlayerState)
+        {
+            player.TakeDamage(damageAmount, (player.transform.position - transform.position).x > 0);
+        }
+    }
 }

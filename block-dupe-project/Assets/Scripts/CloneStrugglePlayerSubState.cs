@@ -16,6 +16,7 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
         
         if (Input.GetButtonUp("Fire1"))
         {
+            
             if(manager.carryingObj)
             {
                 substateManager.ChangeSubstate(substateManager.normalPlayerSubstate,manager);
@@ -25,6 +26,7 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
             }
             else
             {
+                
                 if(manager.nearestLiftableObj)
                 {
                     manager.Lift();

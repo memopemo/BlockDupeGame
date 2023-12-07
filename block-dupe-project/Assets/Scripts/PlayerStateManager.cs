@@ -239,10 +239,10 @@ public class PlayerStateManager : MonoBehaviour
           if(secDamageCooldown <= 0)
           {
                health -= amount;
-                //knockback jump
-               rigidBody.AddForce((hitDirection?1:-1) * 40f * Vector2.one , ForceMode2D.Impulse);
+                //knockback jump       
                secDamageCooldown = secDamageTime;
           }
+          rigidBody.AddForce(40f * Vector2.up, ForceMode2D.Impulse);
 
      }
      public void RegainHealth(int amount)
@@ -256,7 +256,42 @@ public class PlayerStateManager : MonoBehaviour
      public void Die()
      {
           rigidBody.AddForce(40f * Vector2.up , ForceMode2D.Impulse);
+          if(carryingObj)
+               ReleaseCuzDead();
           ChangeState(new DeadPlayerState());
+     }
+     public void ReleaseCuzDead()
+     {
+          print("hello!");
+          bool isHeldPlayer = carryingObj.TryGetComponent(out PlayerStateManager a) && a.currentState == a.heldPlayerState;
+
+          if(Input.GetAxis("Vertical") < 0) //down
+          {
+               carryingObj.transform.localPosition = Vector3.down*1;
+          }
+
+          if(isHeldPlayer)
+          {
+               //we die, clone lives!
+               ChangeState(deadPlayerState);
+               a.ChangeState(thrownPlayerState);
+               a.direction = direction;
+               FindFirstObjectByType<CloneManager>().currentlyControlledPlayer = a;
+          }
+
+          //Send object being thrown that we are throwing
+          carryingObj.OnBeingThrown(gameObject);
+          
+          //This NEEDS to be AFTER changing to thrown state because exiting held state sets our rigidbody type back to dynamic from static.
+          //Set velocity
+          if(carryingObj.TryGetComponent(out Rigidbody2D rb))
+          {
+               rb.velocity = Vector2.zero;
+          }
+
+          //Done with object.
+          carryingObj.transform.parent = null; //get rid of our parent
+          carryingObj = null;
      }
 
      //Good gravy! Lotta boxes!
