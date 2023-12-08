@@ -15,6 +15,7 @@ public class CloneManager : MonoBehaviour
         cameraFocus = FindFirstObjectByType<CameraFocus>();
         FindDefaultPlayer();
         if(AllowedClones < 3) AllowedClones = 3;
+        
         AllClones = new Queue<PlayerStateManager>(AllowedClones);
         AllClones.Enqueue(currentlyControlledPlayer);
     }
@@ -22,6 +23,7 @@ public class CloneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        AllowedClones = 3 * (SaveManager.NumOfClonePacks  + 1);
         if(currentlyControlledPlayer == null || currentlyControlledPlayer.currentState is not DefaultPlayerState or ThrownPlayerState)
         {
             if(!FindDefaultPlayer())

@@ -14,10 +14,26 @@ PresetManager:
       m_Filter: 
       m_Disabled: 0
   - first:
+      m_NativeTypeID: 1006
+      m_ManagedTypePPtr: {fileID: 0}
+      m_ManagedTypeFallback: 
+    second:
+    - m_Preset: {fileID: 2655988077585873504, guid: f7707caa30affb94cbb8c8edf2452733, type: 2}
+      m_Filter: 
+      m_Disabled: 0
+  - first:
       m_NativeTypeID: 114
       m_ManagedTypePPtr: {fileID: 11500000, guid: d1038cf43f8d2a647a9d4779167b2593, type: 3}
       m_ManagedTypeFallback: 
     second:
     - m_Preset: {fileID: 2655988077585873504, guid: a8d57d664507b8d48bc775be739996c3, type: 2}
+      m_Filter: 
+      m_Disabled: 0
+  - first:
+      m_NativeTypeID: 2089858483
+      m_ManagedTypePPtr: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+      m_ManagedTypeFallback: 
+    second:
+    - m_Preset: {fileID: 2655988077585873504, guid: 231cc8b62c6dd9c4891b49908ff693a1, type: 2}
       m_Filter: 
       m_Disabled: 0

@@ -69,6 +69,8 @@ public class PlayerStateManager : MonoBehaviour
           boxCollider = GetComponent<BoxCollider2D>();
           currentState ??= defaultPlayerState;
           currentState.OnEnter(this);
+          maxHealth = 3 * (SaveManager.NumOfHealthPacks + 1);
+          health = maxHealth;
           //can also be simplified to the weird statement: currentState ??= defaultPlayerState;
      }
 
