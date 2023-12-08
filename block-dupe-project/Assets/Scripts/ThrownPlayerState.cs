@@ -23,7 +23,7 @@ public class ThrownPlayerState : IPlayerState
 
         yield return new WaitForSeconds(time);
         manager.ChangeState(manager.defaultPlayerState);
-        Debug.Log("alive");
+        //Debug.Log("alive");
     }
 
     public void OnExit(PlayerStateManager manager)

@@ -33,7 +33,7 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
                 }
                 else
                 {
-                    Debug.Log(secsHoldingCloneButton);
+                    //Debug.Log(secsHoldingCloneButton);
                     manager.Clone(metalCloneActivated);
                     secsHoldingCloneButton = 0;
                 }

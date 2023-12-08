@@ -13,7 +13,7 @@ public class DuckPlayerSubstate : IPlayerSubstate
     public void UpdateSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
     {   if(BeginDuckAnimationFrames != 0 && substateManager.movementState == DefaultPlayerState.MovementState.Idle)
         {
-            Debug.Log(BeginDuckAnimationFrames);
+            //Debug.Log(BeginDuckAnimationFrames);
             manager.animator2D.SetAnimation((!manager.carryingObj?PlayerStateManager.Animations.DuckIdle:PlayerStateManager.Animations.CarryDuckIdle)+5);
             BeginDuckAnimationFrames--;
             return;

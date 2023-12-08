@@ -69,8 +69,7 @@ public class PlayerStateManager : MonoBehaviour
           boxCollider = GetComponent<BoxCollider2D>();
           currentState ??= defaultPlayerState;
           currentState.OnEnter(this);
-          maxHealth = 3 * (SaveManager.NumOfHealthPacks + 1);
-          health = maxHealth;
+          
           //can also be simplified to the weird statement: currentState ??= defaultPlayerState;
      }
 
@@ -124,7 +123,6 @@ public class PlayerStateManager : MonoBehaviour
 
      public void Clone(bool metal)
      {
-          print(metal);
           // create the clone at the "lift point" the single line that makes magic
           var newClone = Instantiate(metal ? MetalPlayer : NormalPlayer, transform.GetChild(0).position, transform.rotation);
 
@@ -148,6 +146,8 @@ public class PlayerStateManager : MonoBehaviour
           currentState = heldPlayerState;
           heldPlayerState.OnEnter(this);
           transform.name = "Player";
+          maxHealth = 2 * (SaveManager.NumOfHealthPacks + 3);
+          health = maxHealth;
      }
 
      public void ThrowHeldObject(bool straight)
@@ -264,7 +264,6 @@ public class PlayerStateManager : MonoBehaviour
      }
      public void ReleaseCuzDead()
      {
-          print("hello!");
           bool isHeldPlayer = carryingObj.TryGetComponent(out PlayerStateManager a) && a.currentState == a.heldPlayerState;
 
           if(Input.GetAxis("Vertical") < 0) //down
