@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Furnace/Furnace4.unity
     guid: ad8c97108789d1f40b7c1486cdac2235
+  - enabled: 1
+    path: Assets/Scenes/Factory/FactorySave1.unity
+    guid: 5a7013edb332fd945b563cf8e61bdfd5
   m_configObjects: {}
