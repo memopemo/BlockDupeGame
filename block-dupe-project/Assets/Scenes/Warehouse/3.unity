@@ -977,6 +977,10 @@ PrefabInstance:
       propertyPath: points.Array.data[3]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 245948742439039460, guid: 6572ec300f0ddc8498c1aebde40aa625, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7617957138553876650, guid: 6572ec300f0ddc8498c1aebde40aa625, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.2
@@ -1394,6 +1398,26 @@ PrefabInstance:
     - target: {fileID: 117633256180362323, guid: 6572ec300f0ddc8498c1aebde40aa625, type: 3}
       propertyPath: points.Array.data[3]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 245948742439039460, guid: 6572ec300f0ddc8498c1aebde40aa625, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 245948742439039460, guid: 6572ec300f0ddc8498c1aebde40aa625, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 245948742439039460, guid: 6572ec300f0ddc8498c1aebde40aa625, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 245948742439039460, guid: 6572ec300f0ddc8498c1aebde40aa625, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 245948742439039460, guid: 6572ec300f0ddc8498c1aebde40aa625, type: 3}
+      propertyPath: m_UseFullKinematicContacts
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7617957138553876650, guid: 6572ec300f0ddc8498c1aebde40aa625, type: 3}
       propertyPath: m_LocalPosition.x
