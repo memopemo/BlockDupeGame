@@ -608,6 +608,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2334238031829344308, guid: cbe01337955be4c4aafa7c686287fa3c, type: 3}
+      propertyPath: m_Size.x
+      value: 17.576202
+      objectReference: {fileID: 0}
+    - target: {fileID: 2334238031829344308, guid: cbe01337955be4c4aafa7c686287fa3c, type: 3}
+      propertyPath: m_Size.y
+      value: 13.137251
+      objectReference: {fileID: 0}
+    - target: {fileID: 2334238031829344308, guid: cbe01337955be4c4aafa7c686287fa3c, type: 3}
+      propertyPath: m_Offset.x
+      value: 1.3908501
+      objectReference: {fileID: 0}
+    - target: {fileID: 2334238031829344308, guid: cbe01337955be4c4aafa7c686287fa3c, type: 3}
+      propertyPath: m_Offset.y
+      value: 10.261905
+      objectReference: {fileID: 0}
     - target: {fileID: 6283771191634071114, guid: cbe01337955be4c4aafa7c686287fa3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5757,6 +5773,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1085016072 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2334238031829344308, guid: cbe01337955be4c4aafa7c686287fa3c, type: 3}
+  m_PrefabInstance: {fileID: 121750502}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1098545448
 GameObject:
   m_ObjectHideFlags: 0
@@ -57379,6 +57400,10 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.r
       value: 0.6226415
       objectReference: {fileID: 0}
+    - target: {fileID: 4530216885566905483, guid: f85d128798e53b74ebc7e1a9611297e3, type: 3}
+      propertyPath: bounds
+      value: 
+      objectReference: {fileID: 1085016072}
     - target: {fileID: 4808368670810399601, guid: edda81c6d9fa8614091c9f1f82bee450, type: 3}
       propertyPath: m_Name
       value: Main Camera_001

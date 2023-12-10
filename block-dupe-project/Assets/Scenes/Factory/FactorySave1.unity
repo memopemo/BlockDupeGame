@@ -451,6 +451,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4530216885566905483, guid: f85d128798e53b74ebc7e1a9611297e3, type: 3}
+      propertyPath: isSideScroller
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530216885566905483, guid: f85d128798e53b74ebc7e1a9611297e3, type: 3}
+      propertyPath: isVerticalScroller
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5793712429129634319, guid: f85d128798e53b74ebc7e1a9611297e3, type: 3}
       propertyPath: m_Name
       value: Main Camera
