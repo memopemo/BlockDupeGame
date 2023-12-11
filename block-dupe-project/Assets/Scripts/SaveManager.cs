@@ -68,16 +68,17 @@ public static class SaveManager
         {
             fileStream = File.Create(Application.persistentDataPath + Path.DirectorySeparatorChar + number + ".sav");
             StreamWriter streamWriter = new(fileStream);
-            streamWriter.WriteLine("Starting Area"); //replace with actual starting area scene name later on
-            streamWriter.WriteLine(false);
-            streamWriter.WriteLine(false);
-            streamWriter.WriteLine(false);
-            streamWriter.WriteLine(false);
-            streamWriter.WriteLine(false);
-            streamWriter.WriteLine(0);
-            streamWriter.WriteLine(0);
+            streamWriter.WriteLine("Factory1"); //replace with actual starting area scene name later on
+            streamWriter.WriteLine(false.ToString());
+            streamWriter.WriteLine(false.ToString());
+            streamWriter.WriteLine(false.ToString());
+            streamWriter.WriteLine(false.ToString());
+            streamWriter.WriteLine(false.ToString());
+            streamWriter.WriteLine(0.ToString());
+            streamWriter.WriteLine(0.ToString());
+            streamWriter.Close();
         }
-
+        fileStream = File.OpenRead(Application.persistentDataPath + Path.DirectorySeparatorChar + number + ".sav");
         StreamReader streamReader = new(fileStream);
         SaveScene               = streamReader.ReadLine();
         HasCloneCollected       = GetBool(streamReader.ReadLine());
@@ -89,6 +90,7 @@ public static class SaveManager
         NumOfHealthPacks        = GetInt(streamReader.ReadLine());
         
         CurrentSaveNum = number;
+        fileStream.Close();
         
         static bool GetBool(string str)
         {

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb620beec2b4934cb069adc833e93cc, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  song: {fileID: 8300000, guid: 8f165913ccfbce3408e868ea43b7de95, type: 3}
-  LoopStartSample: 8901823
+  song: {fileID: 8300000, guid: 2e4d6bdaf8690294fae2c06a51c6cfe3, type: 3}
+  LoopStartSample: 382141
