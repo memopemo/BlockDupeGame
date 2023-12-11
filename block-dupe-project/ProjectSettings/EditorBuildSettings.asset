@@ -47,4 +47,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Preload3.unity
     guid: 08fc68f5b6e3b8943854cafe29889a95
+  - enabled: 1
+    path: Assets/Scenes/Factory/Factory3.unity
+    guid: 7634f47949fe0c74ca1272007b5f91b9
+  - enabled: 1
+    path: Assets/Scenes/Factory/Factory4.unity
+    guid: c7d2eb5c27a0dc440b60f37a6134b6d5
   m_configObjects: {}
