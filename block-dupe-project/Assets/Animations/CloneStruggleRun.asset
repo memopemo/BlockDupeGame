@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 202b6f55e7c40294b923d7103e469216, type: 3}
+  m_Name: CloneStruggleRun
+  m_EditorClassIdentifier: 
+  StateName: 
+  AnimationFrames:
+  - SpriteShown: {fileID: -1391467278, guid: 8a9a80047443704468538252b34c4daa, type: 3}
+    HoldForTicks: 4
+  - SpriteShown: {fileID: -319370395, guid: 8a9a80047443704468538252b34c4daa, type: 3}
+    HoldForTicks: 4
+  - SpriteShown: {fileID: -586919270, guid: 8a9a80047443704468538252b34c4daa, type: 3}
+    HoldForTicks: 4
+  Looping: 1
+  LoopStart: 0
+  LoopEnd: 2
+  HeldItemPosition: {x: 0, y: 0}

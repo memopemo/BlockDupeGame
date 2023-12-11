@@ -203,10 +203,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: cf8631a543a9f534c89993e65454def1, type: 2}
   - {fileID: 11400000, guid: 94b49ff4a12eae04dbc27e06fd10ba32, type: 2}
-  - {fileID: 11400000, guid: 94b49ff4a12eae04dbc27e06fd10ba32, type: 2}
-  - {fileID: 11400000, guid: 94b49ff4a12eae04dbc27e06fd10ba32, type: 2}
-  - {fileID: 11400000, guid: 94b49ff4a12eae04dbc27e06fd10ba32, type: 2}
-  - {fileID: 11400000, guid: 94b49ff4a12eae04dbc27e06fd10ba32, type: 2}
+  - {fileID: 11400000, guid: 51e4fcd070f21d84fb8d87a20413e7ac, type: 2}
+  - {fileID: 11400000, guid: 2cdaf9fdb681aed44b236e84ad4341c9, type: 2}
+  - {fileID: 11400000, guid: 4c95c7d0895133640a2c659469f7d38a, type: 2}
+  - {fileID: 11400000, guid: a57f1d79b4b1486449a0eb44f24b7a81, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
@@ -214,9 +214,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 4f365ac5057cf6c4fa8bed54a9573c73, type: 2}
   - {fileID: 11400000, guid: 4f365ac5057cf6c4fa8bed54a9573c73, type: 2}
-  - {fileID: 11400000, guid: 4f365ac5057cf6c4fa8bed54a9573c73, type: 2}
-  - {fileID: 11400000, guid: 4f365ac5057cf6c4fa8bed54a9573c73, type: 2}
-  - {fileID: 11400000, guid: 4f365ac5057cf6c4fa8bed54a9573c73, type: 2}
+  - {fileID: 11400000, guid: 17066f7dbbb82924fa8c8178c0593c47, type: 2}
+  - {fileID: 11400000, guid: c41b4eeb43141d548a8603ec2068bc7e, type: 2}
+  - {fileID: 11400000, guid: c41b4eeb43141d548a8603ec2068bc7e, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
@@ -262,7 +262,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
   - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
-  - {fileID: 11400000, guid: 71c6664996301604081ec9eaad4cf273, type: 2}
+  - {fileID: 11400000, guid: ddeaff7b97b8a504c90721adddc48258, type: 2}
   currentAnimation: 0
 --- !u!212 &8304231585070712309
 SpriteRenderer:
