@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public void PlayGame(int num) {
+        if(num==0)return;
         SceneManager.LoadScene("Preload"+num.ToString());
     }
 
