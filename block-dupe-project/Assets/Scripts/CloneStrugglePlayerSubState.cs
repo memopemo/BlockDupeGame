@@ -8,6 +8,7 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
     {
         metalCloneActivated = false;
         secsHoldingCloneButton = 0;
+        manager.playerSounds.PlayStruggle();
     }
     
     public void UpdateSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
@@ -16,7 +17,7 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
         
         if (Input.GetButtonUp("Fire1"))
         {
-            
+            manager.GetComponent<AudioSource>().Stop();
             if(manager.carryingObj)
             {
                 substateManager.ChangeSubstate(substateManager.normalPlayerSubstate,manager);
@@ -33,12 +34,14 @@ public class CloneStrugglePlayerSubstate : IPlayerSubstate
                 }
                 else
                 {
+                    
                     //Debug.Log(secsHoldingCloneButton);
                     manager.Clone(metalCloneActivated);
                     secsHoldingCloneButton = 0;
                 }
                 manager.carryBox.SetCollisionBox(manager.boxCollider);
                 substateManager.ChangeSubstate(substateManager.normalPlayerSubstate, manager);
+                
             }
         }
 

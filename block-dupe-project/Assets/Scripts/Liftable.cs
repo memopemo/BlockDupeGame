@@ -12,6 +12,10 @@ public class Liftable : MonoBehaviour
     GameObject throwerObject; //this is so we dont collide with our thrower
     Collider2D col;
     TrailRenderer straightShotTrail;
+    AudioSource audioSource;
+    public AudioClip Thrown;
+    public AudioClip StraightThrown;
+    public AudioClip Smash;
 
     public void Start()
     {
@@ -20,6 +24,7 @@ public class Liftable : MonoBehaviour
         col = GetComponent<Collider2D>();
         straightShotTrail = GetComponent<TrailRenderer>();
         straightShotTrail.enabled = false;
+        audioSource = GetComponent<AudioSource>();
     }
     public virtual void Update()
     {
@@ -49,6 +54,7 @@ public class Liftable : MonoBehaviour
             if(collision.transform.TryGetComponent(out MetalBreakable breakable) && TryGetComponent(out Conductive _))
             {
                 Destroy(breakable.gameObject);
+                audioSource.PlayOneShot(Smash);
                 continue;
             }
             
@@ -61,6 +67,11 @@ public class Liftable : MonoBehaviour
                 StraightVector = Vector2.zero;
                 rb.gravityScale = originalGravity;
                 straightShotTrail.enabled = false;
+                if(audioSource.isPlaying)
+                {
+                    audioSource.Stop();
+                    audioSource.PlayOneShot(Smash);
+                }
                 return;
             }
         }
@@ -87,6 +98,7 @@ public class Liftable : MonoBehaviour
             c.isTrigger = false;
         }
         throwerObject = thrower;
+        audioSource.PlayOneShot(Thrown);
     }
     // Disables Gravity.
     public virtual void StraightThrow(Vector2 StraightThrowVector)
@@ -97,6 +109,7 @@ public class Liftable : MonoBehaviour
         rb.position += Vector2.up;
         straightShotTrail.Clear();
         straightShotTrail.enabled = true;
+        audioSource.PlayOneShot(StraightThrown);
     }
     public virtual void UpdateLifted()
     {

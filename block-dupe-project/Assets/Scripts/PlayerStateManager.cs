@@ -18,6 +18,7 @@ public class PlayerStateManager : MonoBehaviour
      public bool direction;
      public Animator2D.Animator2D animator2D;
      public BoxCollider2D boxCollider;
+     public PlayerSounds playerSounds;
 
      [Serializable]
      public class CollisionBox
@@ -67,6 +68,7 @@ public class PlayerStateManager : MonoBehaviour
           rigidBody = GetComponent<Rigidbody2D>();
           animator2D = GetComponent<Animator2D.Animator2D>();
           boxCollider = GetComponent<BoxCollider2D>();
+          playerSounds = GetComponent<PlayerSounds>();
           currentState ??= defaultPlayerState;
           currentState.OnEnter(this);
           
@@ -118,6 +120,7 @@ public class PlayerStateManager : MonoBehaviour
                nearestLiftableObj.OnBeingLifted();
                nearestLiftableObj.transform.SetParent(transform.GetChild(0));
                carryingObj = nearestLiftableObj;
+               playerSounds.PlayJump();
           }
      }
 
@@ -138,6 +141,10 @@ public class PlayerStateManager : MonoBehaviour
           rigidBody.AddForce(40f * Vector2.up, ForceMode2D.Impulse);
           
           FindAnyObjectByType<CloneManager>().CreateClone(newClone.GetComponent<PlayerStateManager>());
+
+          playerSounds.PlayClone();
+          if(metal) 
+               playerSounds.PlayCloneMetal();
      }
 
      public void Init()
@@ -188,8 +195,6 @@ public class PlayerStateManager : MonoBehaviour
           {
                rb.velocity = ThrowVector;   
           }
-
-          
 
           //Done with object.
           carryingObj.transform.parent = null; //get rid of our parent
@@ -245,6 +250,7 @@ public class PlayerStateManager : MonoBehaviour
                secDamageCooldown = secDamageTime;
           }
           rigidBody.AddForce(40f * Vector2.up, ForceMode2D.Impulse);
+          playerSounds.PlayGeneric();
 
      }
      public void RegainHealth(int amount)
@@ -376,7 +382,7 @@ public class PlayerStateManager : MonoBehaviour
 
           int numberOfHits = Physics2D.BoxCast(
                (Vector2)transform.position + boxCollider.offset,           //origin
-               boxCollider.bounds.size - Vector3.one * wallCollisionScale, //boxsize
+               boxCollider.bounds.size - Vector3.up * wallCollisionScale, //boxsize
                0,                                                          //angle
                Vector2.right,                                              //direction
                contactFilter2D,                                            //filter

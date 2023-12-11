@@ -8,6 +8,8 @@ public class DefaultPlayerState : IPlayerState
     int coyoteTime;
     bool coyoteTimeEnable;
     int landingTimer; //negative = falling, positive = landing, 0 = not used.
+    int runTime;
+    int stepRate = 13;
 
     public IPlayerSubstate currentSubState;
     public NormalPlayerSubstate normalPlayerSubstate;
@@ -71,6 +73,7 @@ public class DefaultPlayerState : IPlayerState
             //Debug.Log("Jump!");
             manager.rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
             manager.rigidBody.AddForce(20f * jumpHeight * Vector2.up, ForceMode2D.Impulse);
+            manager.playerSounds.PlayJump();
         }
 
         // Cloning / Throwing
@@ -158,6 +161,11 @@ public class DefaultPlayerState : IPlayerState
         //:D
         currentSubState.UpdateSubstate(manager, this);
         manager.UpdateHealth();
+
+        if(landingTimer == 1)
+        {
+            manager.playerSounds.PlayLand();
+        }
     }
 
     // This deals with the physical movement of the player.
@@ -173,11 +181,13 @@ public class DefaultPlayerState : IPlayerState
             {
                 manager.rigidBody.AddForce(10 * joyInput.x * runSpeed * Vector2.right);
             }
+            runTime++;
         }
         else if (velocity.x != 0)
         {
             // add opposing force to our velocity until its zero.
             manager.rigidBody.AddForce(10 * velocity.x * Vector2.left);
+            runTime = 0;
         }
 
         // Horizontal Speed Capping
@@ -187,6 +197,12 @@ public class DefaultPlayerState : IPlayerState
                 Mathf.Clamp(manager.rigidBody.velocity.x, -maxSpeed, maxSpeed),
                 Mathf.Clamp(manager.rigidBody.velocity.y, -maxSpeed, maxSpeed)
                 );
+        }
+
+        
+        if(runTime % stepRate == stepRate-1 && manager.IsGrounded() && (currentSubState == normalPlayerSubstate || currentSubState == wallPlayerSubstate))
+        {
+            manager.playerSounds.PlayStep();
         }
 
         /* if (manager.IsGrounded() && manager.SnapToGround(out float result))

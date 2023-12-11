@@ -8,6 +8,7 @@ public class DuckPlayerSubstate : IPlayerSubstate
     public void EnterSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
     {
         BeginDuckAnimationFrames = 10;
+        manager.playerSounds.PlayDuck();
     }
 
     public void UpdateSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
@@ -22,6 +23,7 @@ public class DuckPlayerSubstate : IPlayerSubstate
 
         if (SubstateConditions.CanUnDuck(input.y, manager))
         {
+            //Unduck
             if(manager.carryingObj)
             {
                 manager.carryBox.SetCollisionBox(manager.boxCollider);
@@ -32,6 +34,7 @@ public class DuckPlayerSubstate : IPlayerSubstate
             }
             
             substateManager.ChangeSubstate(substateManager.normalPlayerSubstate, manager);
+            manager.playerSounds.PlayUnduck();
         }
 
         //play depending on if we are carrying or running (4 possibilities)

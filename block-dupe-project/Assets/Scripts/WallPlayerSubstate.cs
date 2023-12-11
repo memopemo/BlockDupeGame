@@ -2,6 +2,7 @@ public class WallPlayerSubstate : IPlayerSubstate
 {
     public void EnterSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
     {
+        manager.playerSounds.PlayGeneric();
     }
 
     public void UpdateSubstate(PlayerStateManager manager, DefaultPlayerState substateManager)
