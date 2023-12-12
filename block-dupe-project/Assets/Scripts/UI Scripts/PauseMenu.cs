@@ -35,7 +35,11 @@ public class PauseMenu : MonoBehaviour
     public void GoToMainMenu(){
         
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        foreach (var x in FindObjectsOfType<BGMusicController>())
+        {
+            Destroy(x.gameObject);
+        }
+        SceneManager.LoadScene("ContinueMenuTest");
     }
     public void GoToSettingsMenu(){
         SceneManager.LoadScene("SettingsMenu");

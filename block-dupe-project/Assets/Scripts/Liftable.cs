@@ -28,6 +28,7 @@ public class Liftable : MonoBehaviour
     }
     public virtual void Update()
     {
+        GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("GameVolume",1);
         if(lifted) UpdateLifted();
         if(IsStraightThrown()) UpdateStraight();
     }

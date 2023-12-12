@@ -179,6 +179,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit1_002
       objectReference: {fileID: 0}
+    - target: {fileID: 1956155330411146640, guid: ebf9638799532ec4588c713bf7ec9851, type: 3}
+      propertyPath: exitNum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1956155330411146640, guid: ebf9638799532ec4588c713bf7ec9851, type: 3}
+      propertyPath: sceneToLoad
+      value: Factory8
+      objectReference: {fileID: 0}
     - target: {fileID: 4102025623059658426, guid: ebf9638799532ec4588c713bf7ec9851, type: 3}
       propertyPath: m_Enabled
       value: 0

@@ -77,7 +77,8 @@ public class PlayerStateManager : MonoBehaviour
 
      void Update()
      {
-          currentState.UpdateState(this);
+          if(Time.timeScale != 0)
+               currentState.UpdateState(this);
 
           switch (currentState)
           {
@@ -98,12 +99,13 @@ public class PlayerStateManager : MonoBehaviour
           {
                Destroy(breakable.gameObject);
           }         
-          
+          GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("GameVolume",1);
      }
 
      void FixedUpdate()
      {
-          currentState.FixedUpdateState(this);
+          if(Time.timeScale != 0)
+               currentState.FixedUpdateState(this);
      }
 
      public void ChangeState(IPlayerState newState)

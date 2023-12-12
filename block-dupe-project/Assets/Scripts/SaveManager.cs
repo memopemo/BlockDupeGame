@@ -19,7 +19,6 @@ public static class SaveManager
     {
         SaveScene = saveScene;
         PowerupStatus.SavePowerups();
-        CurrentSaveNum = 1; //Temp
         SaveToFile(CurrentSaveNum);
     }
 
@@ -90,6 +89,7 @@ public static class SaveManager
         NumOfHealthPacks        = GetInt(streamReader.ReadLine());
         
         CurrentSaveNum = number;
+        streamReader.Close();
         fileStream.Close();
         
         static bool GetBool(string str)

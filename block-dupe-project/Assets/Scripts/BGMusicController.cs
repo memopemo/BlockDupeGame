@@ -24,6 +24,7 @@ public class BGMusicController : MonoBehaviour
             audioSource.timeSamples = BGMs[currentSongID].LoopStartSample;
             audioSource.Play();
         }
+        GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume",1);
     }
     public void FadeOut()
     {

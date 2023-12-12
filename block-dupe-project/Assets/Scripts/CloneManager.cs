@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CloneManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class CloneManager : MonoBehaviour
     private CameraFocus cameraFocus;
     public int AllowedClones;
     public Queue<PlayerStateManager> AllClones;
+    bool restarting;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +26,20 @@ public class CloneManager : MonoBehaviour
     void Update()
     {
         AllowedClones = 3 * (SaveManager.NumOfClonePacks  + 1);
-        if(currentlyControlledPlayer == null || currentlyControlledPlayer.currentState is not DefaultPlayerState or ThrownPlayerState)
+        if(currentlyControlledPlayer == null || (currentlyControlledPlayer.currentState is not DefaultPlayerState &&  currentlyControlledPlayer.currentState is not ThrownPlayerState))
         {
             if(!FindDefaultPlayer())
             {
-                //restart at save point
+                if(!restarting)
+                {
+                    Invoke(nameof(RestartAtSavePoint), 2f);
+                    restarting = true;
+                }
+            }
+            else
+            {
+                CancelInvoke();
+                restarting = false;
             }
             
         }
@@ -65,5 +76,29 @@ public class CloneManager : MonoBehaviour
     public void CreateClone(PlayerStateManager newClone)
     {
         AllClones.Enqueue(newClone);
+    }
+    public void RestartAtSavePoint()
+    {
+        StartCoroutine(nameof(FadeOutAndWait));
+    }
+    private IEnumerator FadeOutAndWait()
+    {
+        UIFading fader = FindFirstObjectByType<UIFading>();
+        Time.timeScale = 0;
+        fader.StartCoroutine(nameof(fader.FadeOut));
+        while(!fader.done)
+        {
+            yield return null;
+        }
+        SwitchSceneWhenFadeOutDone();
+    }
+    private void SwitchSceneWhenFadeOutDone()
+    {
+        PersistentExitData _ = new GameObject("ExitData").AddComponent<PersistentExitData>();
+        //exitdata.Awake();
+        PersistentExitData.Instance.exitNum = 1;
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SaveManager.SaveScene);
+        
     }
 }

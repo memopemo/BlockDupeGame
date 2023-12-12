@@ -17,6 +17,7 @@ public class LoadGamePanel : MonoBehaviour
     {
         string saveFileName = Application.persistentDataPath + Path.DirectorySeparatorChar + number + ".sav";
         File.Delete(saveFileName);
+        
     }
 
     // Update is called once per frame
