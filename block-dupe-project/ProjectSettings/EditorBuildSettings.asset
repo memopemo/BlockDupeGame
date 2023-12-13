@@ -29,13 +29,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Furnace/Furnace3.unity
     guid: 22dea65a7841d16448ad8ad3632bdd92
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Furnace/FurnaceSav1.unity
     guid: 781b14a4ebda5df42a18e07d1e892b7b
   - enabled: 1
     path: Assets/Scenes/Furnace/Furnace4.unity
     guid: ad8c97108789d1f40b7c1486cdac2235
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Factory/FactorySave1.unity
     guid: 5a7013edb332fd945b563cf8e61bdfd5
   - enabled: 1
@@ -89,4 +89,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Warehouse/WarehouseMetalPowerup.unity
     guid: f5c780c0461d08e44ac4bbac58028ee6
+  - enabled: 1
+    path: Assets/Scenes/Factory/Factory6.unity
+    guid: dc4c044fe5183c646a4939b469136849
+  - enabled: 1
+    path: Assets/Scenes/Ending.unity
+    guid: 2f05c77690b3be04c9761feca4bd5e6f
   m_configObjects: {}

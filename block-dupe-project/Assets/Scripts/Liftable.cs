@@ -61,7 +61,7 @@ public class Liftable : MonoBehaviour
             
             if(collision.gameObject == col.gameObject){continue;}
             if(collision.isTrigger){continue;}
-            if(collision.gameObject != throwerObject)//any other type of solid thats not the player
+            if(collision.gameObject != throwerObject && collision.gameObject.layer == LayerMask.NameToLayer("Ground"))//any other type of solid thats not the player
             {
                 print(collision);
                 //stop moving

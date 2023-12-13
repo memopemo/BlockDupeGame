@@ -12,6 +12,7 @@ public class Preload : MonoBehaviour
         PersistentExitData _ = new GameObject("ExitData").AddComponent<PersistentExitData>();
         PersistentExitData.Instance.exitNum = 1;
         SaveManager.LoadSaveFromFile(SaveNumber);
+        PowerupStatus.LoadPowerups();
         SceneManager.LoadScene(SaveManager.SaveScene);
     }
 }

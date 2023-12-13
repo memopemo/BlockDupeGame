@@ -26,6 +26,18 @@ public class CameraFocus : MonoBehaviour
     {
         cloneManager = FindFirstObjectByType<CloneManager>();
     }
+    void OnValidate()
+    {
+        Camera _camera = GetComponent<Camera>();
+        _camera.orthographicSize = distance;
+        _camera.orthographic = !hasParralax;
+        if(bounds != null && !bounds.bounds.Contains(transform.position))
+        {
+            Vector2 _closest = bounds.ClosestPoint(transform.position);
+            transform.position = new Vector3(_closest.x, _closest.y, transform.position.z);
+        }
+
+    }
 
     // Update is called once per frame
     void Update()

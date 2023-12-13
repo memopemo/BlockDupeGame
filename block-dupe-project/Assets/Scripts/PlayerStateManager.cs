@@ -100,6 +100,36 @@ public class PlayerStateManager : MonoBehaviour
                Destroy(breakable.gameObject);
           }         
           GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("GameVolume",1);
+          if(Application.isEditor)
+          {
+               if(Input.GetKeyDown(KeyCode.Keypad0)) PowerupStatus.Clone ^= true;
+               if(Input.GetKeyDown(KeyCode.Keypad1)) PowerupStatus.Metal ^= true;
+               if(Input.GetKeyDown(KeyCode.Keypad2)) PowerupStatus.Midair ^= true;
+               if(Input.GetKeyDown(KeyCode.Keypad3)) PowerupStatus.Straight ^= true;
+               if(Input.GetKeyDown(KeyCode.Keypad4)) PowerupStatus.JumpHold ^= true;
+               if(Input.GetKeyDown(KeyCode.KeypadPlus)) SaveManager.NumOfClonePacks++;
+               if(Input.GetKeyDown(KeyCode.KeypadMinus)) SaveManager.NumOfClonePacks--;
+               if(Input.GetKeyDown(KeyCode.KeypadMultiply))
+               { 
+                    SaveManager.NumOfHealthPacks++;
+                    SaveManager.NumOfHealthPacks %= 5;
+                    maxHealth = maxHealth = 2 * (SaveManager.NumOfHealthPacks + 3);
+                    MaxOutHealth();
+               }
+               if(Input.GetKeyDown(KeyCode.KeypadDivide)) 
+               { 
+                    SaveManager.NumOfHealthPacks--;
+                    SaveManager.NumOfHealthPacks %= 5;
+                    print(SaveManager.NumOfHealthPacks);
+                    maxHealth = maxHealth = 2 * (SaveManager.NumOfHealthPacks + 3);
+                    MaxOutHealth();
+               }
+               if(Input.GetKeyDown(KeyCode.KeypadEnter))
+               {
+                    PowerupStatus.Clone = PowerupStatus.Metal = PowerupStatus.Midair = PowerupStatus.Straight ^= true;
+               }
+
+          }
      }
 
      void FixedUpdate()
@@ -156,7 +186,6 @@ public class PlayerStateManager : MonoBehaviour
           heldPlayerState.OnEnter(this);
           transform.name = "Player";
           maxHealth = 2 * (SaveManager.NumOfHealthPacks + 3);
-          health = maxHealth;
      }
 
      public void ThrowHeldObject(bool straight)
