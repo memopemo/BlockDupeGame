@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BGMs:
   - {fileID: 11400000, guid: 896774a460e875041b224c79a23478fb, type: 2}
-  - {fileID: 11400000, guid: 896774a460e875041b224c79a23478fb, type: 2}
+  - {fileID: 11400000, guid: ecfabfe9556566e4d932f0fc577f50fa, type: 2}
   currentSongID: 0
   nextSongID: 0
 --- !u!82 &572714534

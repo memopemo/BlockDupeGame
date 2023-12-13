@@ -21,7 +21,10 @@ public class ExitScene : MonoBehaviour
             print("No Fadeout Found, not fading out.");
             SwitchSceneWhenFadeOutDone();
         }
-        
+        if(TryGetComponent(out MusicSwitch musicSwitch))
+        {
+            musicSwitch.OnSwitch();
+        }
     }
 
     private IEnumerator FadeOutAndWait()

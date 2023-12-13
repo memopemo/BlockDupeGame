@@ -9,6 +9,7 @@ public class BGMusicController : MonoBehaviour
     AudioSource audioSource;
     public int currentSongID;
     public int nextSongID;
+    public bool canManuallyChangeVolume;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,7 @@ public class BGMusicController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = BGMs[0].song;
         audioSource.Play();
+        canManuallyChangeVolume = true;
     }
     void Update()
     {
@@ -24,20 +26,40 @@ public class BGMusicController : MonoBehaviour
             audioSource.timeSamples = BGMs[currentSongID].LoopStartSample;
             audioSource.Play();
         }
-        GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume",1);
+        if(canManuallyChangeVolume)
+        {
+            GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume",1);
+        }
+        
     }
     public void FadeOut()
     {
+        canManuallyChangeVolume = false;
         StartCoroutine(DecreaseVolume());
     }    
     IEnumerator DecreaseVolume()
     {
-        while (audioSource.volume != 0)
+        for(float i = audioSource.volume; i >= 0; i -= 0.1f)
         {
-            audioSource.volume -= Time.deltaTime;
+            audioSource.volume = i;
+            print("yo");
             yield return null;
         }
         SwitchBGM();
+    }
+    public void FadeIn()
+    {
+       StartCoroutine(IncreaseVolume()); 
+       canManuallyChangeVolume = true;
+    }
+    IEnumerator IncreaseVolume()
+    {
+        for(float i = audioSource.volume; i <= PlayerPrefs.GetFloat("MusicVolume",1); i += 0.1f)
+        {
+            audioSource.volume = i;
+            print("hi");
+            yield return null;
+        }
     }
 
     public void SwitchBGM()
@@ -48,5 +70,6 @@ public class BGMusicController : MonoBehaviour
         }
         audioSource.clip = BGMs[nextSongID].song;
         currentSongID = nextSongID;
+        audioSource.Play();
     }
 }

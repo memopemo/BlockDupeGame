@@ -16,7 +16,7 @@ public class Powerup : MonoBehaviour
     }
     public void Collect()
     {
-        //Trigger UI
+        FindFirstObjectByType<PowerupPanel>(FindObjectsInactive.Include).Show(powerupType);
         SetPowerup();
         //Close UI
         Destroy(gameObject);
