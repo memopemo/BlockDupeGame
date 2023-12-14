@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 36998442}
   - component: {fileID: 36998441}
   m_Layer: 0
-  m_Name: Entrance 1_002
+  m_Name: Entrance 1_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,7 +185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1956155330411146640, guid: ebf9638799532ec4588c713bf7ec9851, type: 3}
       propertyPath: sceneToLoad
-      value: Factory8
+      value: Furnace7
       objectReference: {fileID: 0}
     - target: {fileID: 4102025623059658426, guid: ebf9638799532ec4588c713bf7ec9851, type: 3}
       propertyPath: m_Enabled
@@ -516,6 +516,14 @@ PrefabInstance:
     - target: {fileID: 224977107019635020, guid: ebf9638799532ec4588c713bf7ec9851, type: 3}
       propertyPath: m_Name
       value: Exit1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1956155330411146640, guid: ebf9638799532ec4588c713bf7ec9851, type: 3}
+      propertyPath: exitNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1956155330411146640, guid: ebf9638799532ec4588c713bf7ec9851, type: 3}
+      propertyPath: sceneToLoad
+      value: Factory5
       objectReference: {fileID: 0}
     - target: {fileID: 4102025623059658426, guid: ebf9638799532ec4588c713bf7ec9851, type: 3}
       propertyPath: m_Enabled
@@ -27278,7 +27286,7 @@ GameObject:
   - component: {fileID: 1865977601}
   - component: {fileID: 1865977600}
   m_Layer: 0
-  m_Name: Entrance 1_001
+  m_Name: Entrance 1_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
