@@ -80,6 +80,11 @@ public class CloneManager : MonoBehaviour
     public void RestartAtSavePoint()
     {
         StartCoroutine(nameof(FadeOutAndWait));
+        BGMusicController music = FindFirstObjectByType<BGMusicController>();
+        int nextRoomMusicID = 0;
+        if(SaveManager.SaveScene == "FurnaceSav1") nextRoomMusicID = 1;
+        music.nextSongID = nextRoomMusicID;
+        music.FadeOut();
     }
     private IEnumerator FadeOutAndWait()
     {
@@ -91,6 +96,8 @@ public class CloneManager : MonoBehaviour
             yield return null;
         }
         SwitchSceneWhenFadeOutDone();
+        FindFirstObjectByType<BGMusicController>().FadeOut();
+
     }
     private void SwitchSceneWhenFadeOutDone()
     {
