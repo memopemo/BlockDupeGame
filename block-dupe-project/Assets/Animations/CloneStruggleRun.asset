@@ -15,11 +15,11 @@ MonoBehaviour:
   StateName: 
   AnimationFrames:
   - SpriteShown: {fileID: -1391467278, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 4
+    HoldForTicks: 2
   - SpriteShown: {fileID: -319370395, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 4
+    HoldForTicks: 2
   - SpriteShown: {fileID: -586919270, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 4
+    HoldForTicks: 2
   Looping: 1
   LoopStart: 0
   LoopEnd: 2

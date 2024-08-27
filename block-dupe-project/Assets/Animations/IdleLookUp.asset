@@ -15,25 +15,14 @@ MonoBehaviour:
   StateName: IdleLookUp
   AnimationFrames:
   - SpriteShown: {fileID: -1013901067, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
-    OnFrameReached:
-      m_PersistentCalls:
-        m_Calls: []
+    HoldForTicks: 4
   - SpriteShown: {fileID: -236910914, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
-    OnFrameReached:
-      m_PersistentCalls:
-        m_Calls: []
+    HoldForTicks: 4
   - SpriteShown: {fileID: -1097309673, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
-    OnFrameReached:
-      m_PersistentCalls:
-        m_Calls: []
+    HoldForTicks: 4
   - SpriteShown: {fileID: 885364031, guid: 8a9a80047443704468538252b34c4daa, type: 3}
-    HoldForTicks: 0
-    OnFrameReached:
-      m_PersistentCalls:
-        m_Calls: []
+    HoldForTicks: 4
   Looping: 1
   LoopStart: 0
   LoopEnd: 3
+  HeldItemPosition: {x: 0, y: 0}

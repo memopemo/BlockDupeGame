@@ -17,6 +17,7 @@ public class PlayerSounds : MonoBehaviour
     public AudioClip unduck;
     public AudioClip oof;
     public AudioClip step;
+    public AudioClip skid;
 
 
     public void Start()
@@ -70,5 +71,9 @@ public class PlayerSounds : MonoBehaviour
     public void PlayStep()
     {
         source.PlayOneShot(step);
+    }
+    public void PlaySkid()
+    {
+        source.PlayOneShot(skid);
     }
 }

@@ -1113,7 +1113,7 @@ TextureImporter:
       name: Player_Normal_47
       rect:
         serializedVersion: 2
-        x: 476
+        x: 448
         y: 174
         width: 28
         height: 29
@@ -1134,7 +1134,7 @@ TextureImporter:
       name: Player_Normal_48
       rect:
         serializedVersion: 2
-        x: 504
+        x: 84
         y: 174
         width: 28
         height: 29
@@ -1911,7 +1911,7 @@ TextureImporter:
       name: Player_Normal_85
       rect:
         serializedVersion: 2
-        x: 84
+        x: 56
         y: 87
         width: 28
         height: 29
@@ -1932,7 +1932,7 @@ TextureImporter:
       name: Player_Normal_86
       rect:
         serializedVersion: 2
-        x: 112
+        x: 84
         y: 87
         width: 28
         height: 29
@@ -2252,7 +2252,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2273,7 +2273,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2294,7 +2294,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2315,7 +2315,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2336,7 +2336,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2357,7 +2357,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2378,7 +2378,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2399,7 +2399,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2420,7 +2420,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2441,7 +2441,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2462,7 +2462,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2483,7 +2483,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2504,7 +2504,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2525,7 +2525,7 @@ TextureImporter:
         width: 28
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2533,6 +2533,69 @@ TextureImporter:
       bones: []
       spriteID: 5c4b123ec0859804aac97cfd9a013e3a
       internalID: 1289193230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Normal_115
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 174
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a07a4fcb86c4cc940b16da3741d2ff47
+      internalID: 471198014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Normal_116
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 29
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc6ccbafc75933b4990a616ba543ef55
+      internalID: 915707448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Normal_117
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 29
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a3376152b5050743adcd68bdecc6679
+      internalID: 224845289
       vertices: []
       indices: 
       edges: []
@@ -2567,6 +2630,9 @@ TextureImporter:
       Player_Normal_112: -586919270
       Player_Normal_113: -1523321131
       Player_Normal_114: 1289193230
+      Player_Normal_115: 471198014
+      Player_Normal_116: 915707448
+      Player_Normal_117: 224845289
       Player_Normal_12: 757087713
       Player_Normal_13: -8172451
       Player_Normal_14: -1268020737

@@ -476,7 +476,8 @@ public class PlayerStateManager : MonoBehaviour
           // X2 = Jump,
           // X3 = Fall,
           // X4 = Land,
-          // X5 to 9 = Other (not automatically indexed)
+          // X5 = Skid
+          // X6 to 9 = Other (not automatically indexed)
           public const byte 
           Idle = 0,
           CarryIdle = 10,

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class DefaultPlayerState : IPlayerState
@@ -18,7 +19,7 @@ public class DefaultPlayerState : IPlayerState
     public LookUpPlayerSubstate lookUpPlayerSubstate;
     public CloneStrugglePlayerSubstate cloneStruggleSubstate;
 
-    public enum MovementState { Idle, Running, Jumping, Falling, Landing };
+    public enum MovementState { Idle, Running, Jumping, Falling, Landing, Skidding };
     public MovementState movementState;
 
     public bool isThrowStruggleForStraightShot;
@@ -74,6 +75,8 @@ public class DefaultPlayerState : IPlayerState
             manager.rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
             manager.rigidBody.AddForce(20f * jumpHeight * Vector2.up, ForceMode2D.Impulse);
             manager.playerSounds.PlayJump();
+            IsGrounded = false;
+            landingTimer = 0;
         }
 
         // Cloning / Throwing
@@ -114,6 +117,16 @@ public class DefaultPlayerState : IPlayerState
         //Get Movement State of Player
         if (IsGrounded)
         {
+            //detect skidding
+            if((joyInput.x != 0) && (joyInput.x > 0.1 && velocity.x < -1) || (joyInput.x < -0.1 && velocity.x > 1))
+            {
+                if(movementState != MovementState.Skidding)
+                {
+                    manager.playerSounds.PlaySkid();
+                }
+                movementState = MovementState.Skidding;
+            }
+            else{
             movementState = joyInput.x != 0 ? MovementState.Running : MovementState.Idle;
             
             //Detect if landing timer is negative, then set landing timer to 1, causing it to increment for 10 frames while being in the landing state. 
@@ -124,6 +137,7 @@ public class DefaultPlayerState : IPlayerState
             if (landingTimer < 0)
             {
                 landingTimer = 1;
+                manager.playerSounds.PlayLand();
             }
             else if (landingTimer > 0)
             {
@@ -133,6 +147,8 @@ public class DefaultPlayerState : IPlayerState
             {
                 landingTimer = 0; //setting to 0 allows other movement states to pass through.
             }
+            }
+            
         }
         else // airborn
         {
@@ -162,25 +178,21 @@ public class DefaultPlayerState : IPlayerState
         //:D
         currentSubState.UpdateSubstate(manager, this);
         manager.UpdateHealth();
-
-        if(landingTimer == 1)
-        {
-            manager.playerSounds.PlayLand();
-        }
     }
 
     // This deals with the physical movement of the player.
     public void FixedUpdateState(PlayerStateManager manager)
     {
-        Vector2 joyInput = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 joyInput = new(Input.GetAxis("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 velocity = manager.rigidBody.velocity;
 
         // Horizontal Movement
-        if (joyInput.x != 0)
+        if (Math.Abs(joyInput.x) > 0.1)
         {
             if (Mathf.Abs(velocity.x) < runSpeed)
             {
                 manager.rigidBody.AddForce(10 * joyInput.x * runSpeed * Vector2.right);
+                Debug.Log(joyInput.x);
             }
             runTime++;
         }
@@ -201,11 +213,10 @@ public class DefaultPlayerState : IPlayerState
         }
 
         
-        if(runTime % stepRate == stepRate-1 && manager.IsGrounded() && (currentSubState == normalPlayerSubstate || currentSubState == wallPlayerSubstate))
+        if(runTime % stepRate == stepRate-1 && manager.IsGrounded() && (currentSubState == normalPlayerSubstate || currentSubState == wallPlayerSubstate) && movementState == MovementState.Running)
         {
             manager.playerSounds.PlayStep();
         }
-
         /* if (manager.IsGrounded() && manager.SnapToGround(out float result))
         {
             manager.rigidBody.position = new Vector2(manager.rigidBody.position.x, result);
